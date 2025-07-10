@@ -32,8 +32,8 @@
 - **1.1.5** Definición de APIs necesarias
 
 #### 1.2 Diseño de Arquitectura (6-8 horas)
--**1.2.1** Diagramas de procesos
--**1.2.2** Diagrama uml del software
+- **1.2.1** Diagramas de procesos
+- **1.2.2** Diagrama uml del software
 - **1.2.3** Diseño de arquitectura del sistema
 - **1.2.4** Definición de estructura de carpetas
 - **1.2.5** Planificación de base de datos
