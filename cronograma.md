@@ -46,7 +46,6 @@
 - **1.3.4** Planificación de backup y recuperación
 
 #### 1.4 Wireframes y Mockups (4-6 horas)
-- **1.4.1** Diseño de wireframes principales
 - **1.4.2** Creación de mockups de interfaz
 - **1.4.3** Definición de componentes UI
 - **1.4.4** Diseño responsive
@@ -55,8 +54,8 @@
 
 ## EPIC GFA-2: CONFIGURACIÓN Y INFRAESTRUCTURA
 **Código:** GFA-2  
-**Duración:** 10 julio 2025 (1 día)  
-**Horas estimadas:** 4-6 horas  
+**Duración:** 10-11 julio 2025 (2 días)  
+**Horas estimadas:** 12 horas  
 
 ### �� Tareas Principales:
 
@@ -65,7 +64,6 @@
 - **2.1.2** Setup de entorno de desarrollo
 - **2.1.3** Configuración de Node.js y dependencias
 - **2.1.4** Configuración de SQL Server
-- **2.1.5** Setup de herramientas de desarrollo
 
 #### 2.2 Estructura Base del Proyecto (4-5 horas)
 - **2.2.1** Creación de estructura backend
@@ -78,8 +76,8 @@
 
 ## EPIC GFA-3: SISTEMA DE AUTENTICACIÓN Y USUARIOS
 **Código:** GFA-3  
-**Duración:** 11 julio 2025 (1 día)  
-**Horas estimadas:** 4-6 horas  
+**Duración:** 12-13 julio 2025 (1 días)  
+**Horas estimadas:** 12 horas  
 
 ### �� Tareas Principales:
 
@@ -101,7 +99,7 @@
 
 ## EPIC GFA-4: GESTIÓN DE PERFILES DE ARTESANOS
 **Código:** GFA-4  
-**Duración:** 12 julio 2025 (1 día)  
+**Duración:** 14 julio 2025 (1 día)  
 **Horas estimadas:** 4-6 horas  
 
 ### �� Tareas Principales:
@@ -124,7 +122,7 @@
 
 ## EPIC GFA-5: CATÁLOGO DE PRODUCTOS
 **Código:** GFA-5  
-**Duración:** 13 julio 2025 (1 día)  
+**Duración:** 15 julio 2025 (1 día)  
 **Horas estimadas:** 4-6 horas  
 
 ### �� Tareas Principales:
@@ -148,7 +146,7 @@
 
 ## EPIC GFA-6: SISTEMA DE RESEÑAS Y CALIFICACIONES
 **Código:** GFA-6  
-**Duración:** 14 julio 2025 (1 día)  
+**Duración:** 16 julio 2025 (1 día)  
 **Horas estimadas:** 4-6 horas  
 
 ### �� Tareas Principales:
@@ -171,7 +169,7 @@
 
 ## EPIC GFA-7: SISTEMA DE PAGOS Y ENVÍOS
 **Código:** GFA-7  
-**Duración:** 15 julio 2025 (1 día)  
+**Duración:** 17 julio 2025 (1 día)  
 **Horas estimadas:** 4-6 horas  
 
 ### �� Tareas Principales:
@@ -194,7 +192,7 @@
 
 ## EPIC GFA-8: BLOG Y CONTENIDO
 **Código:** GFA-8  
-**Duración:** 16 julio 2025 (1 día)  
+**Duración:** 18 julio 2025 (1 día)  
 **Horas estimadas:** 4-6 horas  
 
 ### �� Tareas Principales:
@@ -217,7 +215,7 @@
 
 ## EPIC GFA-9: DASHBOARD ADMINISTRATIVO
 **Código:** GFA-9  
-**Duración:** 17 julio 2025 (1 día)  
+**Duración:** 19 julio 2025 (1 día)  
 **Horas estimadas:** 4-6 horas  
 
 ### �� Tareas Principales:
@@ -240,8 +238,8 @@
 
 ## EPIC GFA-10: TESTING Y OPTIMIZACIÓN
 **Código:** GFA-10  
-**Duración:** 18-20 julio 2025 (3 días)  
-**Horas estimadas:** 12-20 horas  
+**Duración:** 20 julio 2025 (1 día)  
+**Horas estimadas:** 8 horas  
 
 ### �� Tareas Principales:
 
@@ -288,20 +286,19 @@
 
 | EPIC | Código | Días | Horas | Fechas |
 |------|--------|------|-------|--------|
-| Análisis y Planificación | GFA-1 | 3 | 24-32 | 6-8 julio |
-| Configuración | GFA-2 | 1 | 8-10 | 9 julio |
-| Autenticación | GFA-3 | 1 | 10-12 | 10 julio |
-| Perfiles Artesanos | GFA-4 | 1 | 10-12 | 11 julio |
-| Catálogo Productos | GFA-5 | 1 | 12-14 | 12 julio |
-| Reseñas | GFA-6 | 1 | 8-10 | 13 julio |
-| Pagos | GFA-7 | 1 | 10-12 | 14 julio |
-| Blog | GFA-8 | 1 | 8-10 | 15 julio |
-| Dashboard Admin | GFA-9 | 1 | 10-12 | 16 julio |
-| Testing | GFA-10 | 2 | 16-20 | 17-18 julio |
-| Documentación | GFA-11 | 2 | 12-16 | 19-20 julio |
-| Presentación | GFA-12 | 1 | 4-6 | 21 julio |
+| Análisis y Planificación | GFA-1 | 4 | 24 | 6-9 julio |
+| Configuración | GFA-2 | 2 | 12 | 10-11 julio |
+| Autenticación | GFA-3 | 2 | 12 |  12-13 julio |
+| Perfiles Artesanos | GFA-4 | 1 | 4-6 | 14 julio |
+| Catálogo Productos | GFA-5 | 1 | 4-6 | 15 julio |
+| Reseñas | GFA-6 | 1 | 4-6 | 16 julio |
+| Pagos | GFA-7 | 1 | 4-6 | 17 julio |
+| Blog | GFA-8 | 1 | 4-6 | 18 julio |
+| Dashboard Admin | GFA-9 | 1 | 4-6 | 19 julio |
+| Testing | GFA-10 | 2 | 8 | 20 julio |
+| Documentación | GFA-11 | 16 | 104~ | 6-21 julio |
 
-**Total:** 16 días, 132-166 horas
+**Total:** 16 días, 104 horas
 
 ---
 
