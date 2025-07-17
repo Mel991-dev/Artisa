@@ -1,7 +1,8 @@
 // backend/app.js
 const express = require('express'); //importa el modulo express.js
 const cors = require('cors'); //permitir que react se comunique con el backend sin errores
-const dotenv = require('dotenv'); //establece comunicación entre las variables de entorno y el servidor para la conexión
+const dotenv = require('dotenv');
+ //establece comunicación entre las variables de entorno y el servidor para la conexión
 const logger = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -29,6 +30,8 @@ app.use(errorHandler);
 app.get('/', (req, res) => {
   res.send('Servidor Artisa corriendo correctamente ✅');
 });
+
+
 
 // Levantar servidor en el puerto definido
 const PORT = process.env.PORT || 3000;

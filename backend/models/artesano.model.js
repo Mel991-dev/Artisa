@@ -1,15 +1,12 @@
 // backend/models/artesano.model.js
-// Modelo de datos para la entidad Artesano y su perfil
-// Aquí se definen las funciones que interactúan con la base de datos SQL Server
-
-const sql = require('mssql');
+const { poolPromise, sql } = require('../db');
 
 /**
  * Crea un nuevo perfil de artesano en la base de datos
  * @param {Object} datos - Datos del perfil (id_usuario, especialidad, biografia, historia, foto)
  */
 async function crearPerfilArtesano(datos) {
-  const pool = await sql.connect();
+  const pool = await poolPromise;
   // Inserta en la tabla Artesano y Perfil
   await pool.request()
     .input('id_usuario', sql.Int, datos.id_usuario)
@@ -28,7 +25,7 @@ async function crearPerfilArtesano(datos) {
  * @param {Object} datos - Datos a actualizar (id_usuario, especialidad, biografia, historia, foto)
  */
 async function actualizarPerfilArtesano(datos) {
-  const pool = await sql.connect();
+  const pool = await poolPromise;
   await pool.request()
     .input('id_usuario', sql.Int, datos.id_usuario)
     .input('especialidad', sql.NVarChar, datos.especialidad)
@@ -47,7 +44,7 @@ async function actualizarPerfilArtesano(datos) {
  * @returns {Object} Perfil del artesano
  */
 async function obtenerPerfilArtesano(id_usuario) {
-  const pool = await sql.connect();
+  const pool = await poolPromise;
   const perfil = await pool.request()
     .input('id_usuario', sql.Int, id_usuario)
     .query('SELECT a.especialidad, p.biografia, p.historia, p.foto FROM Artesano a JOIN Perfil p ON a.id_artesano = p.id_usuario WHERE a.id_artesano = @id_usuario');

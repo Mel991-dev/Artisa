@@ -18,5 +18,6 @@ router.put('/', auth, checkRole(['artesano']), artesanoController.actualizarPerf
 // Ruta para obtener el perfil de un artesano por su id_usuario
 // Accesible para cualquier usuario autenticado
 router.get('/:id_usuario', auth, artesanoController.obtenerPerfil);
+router.get('/publico/:id_usuario', artesanoController.obtenerPerfilPublico);
 
 module.exports = router; 
