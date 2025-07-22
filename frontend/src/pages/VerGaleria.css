@@ -1,0 +1,612 @@
+/* ==========================================
+   VER GALERÍA - ESTILOS PRINCIPALES
+   ========================================== */
+
+.ver-galeria-root {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fdf7f2 0%, #f3e7df 100%);
+  padding: 2rem 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.ver-galeria-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ==========================================
+   HEADER DEL ARTESANO
+   ========================================== */
+.artesano-header {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(146, 64, 14, 0.15);
+  border: 1px solid #f3e7df;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.artesano-info {
+  flex: 1;
+}
+
+.artesano-nombre {
+  color: #92400E;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(146, 64, 14, 0.1);
+}
+
+.artesano-oficio {
+  color: #EF6210;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.artesano-descripcion {
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.artesano-ubicacion {
+  color: #888;
+  font-size: 1rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.artesano-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 1rem 1.5rem;
+  background: #fdf7f2;
+  border-radius: 12px;
+  border: 2px solid #f3e7df;
+}
+
+.stat-number {
+  display: block;
+  color: #EF6210;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-label {
+  display: block;
+  color: #92400E;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+}
+
+/* ==========================================
+   SECCIÓN DE GALERÍA
+   ========================================== */
+.galeria-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px rgba(146, 64, 14, 0.15);
+  border: 1px solid #f3e7df;
+}
+
+.galeria-title {
+  color: #92400E;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 2rem 0;
+}
+
+/* ==========================================
+   GALERÍA VACÍA
+   ========================================== */
+.empty-gallery {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #666;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.empty-gallery h3 {
+  color: #92400E;
+  font-size: 1.5rem;
+  margin: 0 0 1rem 0;
+}
+
+.empty-gallery p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* ==========================================
+   GRID DE GALERÍA INTELIGENTE
+   ========================================== */
+.galeria-grid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* 1 imagen: ocupa toda la fila */
+.galeria-grid:has(.galeria-item:only-child) {
+  grid-template-columns: 1fr;
+}
+
+/* 2 imágenes: cada una en su columna */
+.galeria-grid:has(.galeria-item:nth-child(2):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* 3 imágenes: 2 en la primera fila, 1 en la segunda */
+.galeria-grid:has(.galeria-item:nth-child(3):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.galeria-grid:has(.galeria-item:nth-child(3):last-child) .galeria-item:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+/* 4 imágenes: 2x2 */
+.galeria-grid:has(.galeria-item:nth-child(4):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* 5 imágenes: 2x2 + 1 en la última fila */
+.galeria-grid:has(.galeria-item:nth-child(5):last-child) {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.galeria-grid:has(.galeria-item:nth-child(5):last-child) .galeria-item:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+.galeria-item {
+  background: #fdf7f2;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #f3e7df;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.galeria-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(239, 98, 16, 0.2);
+  border-color: #EF6210;
+}
+
+.galeria-item.principal {
+  border-color: #EF6210;
+  box-shadow: 0 4px 16px rgba(239, 98, 16, 0.15);
+}
+
+/* ==========================================
+   CONTENEDOR DE FOTO
+   ========================================== */
+.foto-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.foto-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.galeria-item:hover .foto-container img {
+  transform: scale(1.05);
+}
+
+.principal-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #EF6210;
+  color: #fff;
+  padding: 0.5rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(239, 98, 16, 0.3);
+}
+
+/* ==========================================
+   INFORMACIÓN DE FOTO
+   ========================================== */
+.foto-info {
+  padding: 1.5rem;
+}
+
+.foto-descripcion {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 0.8rem 0;
+  line-height: 1.4;
+}
+
+.foto-fecha {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ==========================================
+   NAVEGACIÓN
+   ========================================== */
+.navigation-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.back-to-profile-btn,
+.home-btn {
+  background: #92400E;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-to-profile-btn:hover,
+.home-btn:hover {
+  background: #7a350b;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   MODAL DE IMAGEN
+   ========================================== */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 2rem;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 16px;
+  max-width: 90vw;
+  max-height: 90vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: background 0.2s;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.modal-image-container {
+  width: 100%;
+  height: 60vh;
+  overflow: hidden;
+}
+
+.modal-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modal-info {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.modal-description {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+}
+
+.modal-date {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 0;
+  font-style: italic;
+}
+
+.modal-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+  background: #fdf7f2;
+}
+
+.nav-btn {
+  background: #EF6210;
+  color: #fff;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btn:hover {
+  background: #d95a0c;
+  transform: scale(1.1);
+}
+
+.image-counter {
+  color: #92400E;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* ==========================================
+   LOADING SPINNER
+   ========================================== */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 1rem;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #f3e7df;
+  border-top: 4px solid #EF6210;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  color: #92400E;
+  font-weight: 600;
+}
+
+/* ==========================================
+   MENSAJE DE ERROR
+   ========================================== */
+.error-message {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(146, 64, 14, 0.15);
+}
+
+.error-message h2 {
+  color: #dc3545;
+  margin: 0 0 1rem 0;
+}
+
+.error-message p {
+  color: #666;
+  margin: 0 0 2rem 0;
+}
+
+.back-btn {
+  background: #92400E;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: #7a350b;
+}
+
+/* ==========================================
+   CONTROLES DE PRUEBA
+   ========================================== */
+.test-controls {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px rgba(146, 64, 14, 0.15);
+  border: 1px solid #f3e7df;
+  text-align: center;
+}
+
+.test-controls h3 {
+  color: #92400E;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+}
+
+.test-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.test-btn {
+  background: #EF6210;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.test-btn:hover {
+  background: #d95a0c;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   BOTONES DE NAVEGACIÓN INFERIOR
+   ========================================== */
+.navigation-actions .back-to-profile-btn,
+.navigation-actions .home-btn {
+  background: #EF6210;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  text-decoration: none;
+  margin-right: 1rem;
+  display: inline-block;
+}
+
+.navigation-actions .back-to-profile-btn:hover,
+.navigation-actions .home-btn:hover {
+  background: #d95a0c;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  .ver-galeria-container {
+    padding: 0 1rem;
+  }
+  
+  .artesano-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+  
+  .artesano-nombre {
+    font-size: 2rem;
+  }
+  
+  .test-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .test-btn {
+    width: 200px;
+  }
+  
+  .galeria-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  /* En móviles, todas las imágenes ocupan una columna */
+  .galeria-grid:has(.galeria-item:nth-child(2):last-child),
+  .galeria-grid:has(.galeria-item:nth-child(3):last-child),
+  .galeria-grid:has(.galeria-item:nth-child(4):last-child),
+  .galeria-grid:has(.galeria-item:nth-child(5):last-child) {
+    grid-template-columns: 1fr;
+  }
+  
+  .galeria-grid:has(.galeria-item:nth-child(3):last-child) .galeria-item:nth-child(3),
+  .galeria-grid:has(.galeria-item:nth-child(5):last-child) .galeria-item:nth-child(5) {
+    grid-column: 1;
+  }
+  
+  .navigation-actions {
+    flex-direction: column;
+  }
+  
+  .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+  
+  .modal-image-container {
+    height: 50vh;
+  }
+  
+  .modal-navigation {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .navigation-actions .back-to-profile-btn,
+  .navigation-actions .home-btn {
+    width: 200px;
+    margin: 0 0 1rem 0;
+  }
+} 

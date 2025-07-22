@@ -1,0 +1,409 @@
+/* ==========================================
+   GESTIONAR GALERÍA - ESTILOS PRINCIPALES
+   ========================================== */
+
+.gestionar-galeria-root {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fdf7f2 0%, #f3e7df 100%);
+  padding: 2rem 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.gestionar-galeria-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ==========================================
+   HEADER DEL DASHBOARD
+   ========================================== */
+.gestionar-galeria-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #EF6210;
+}
+
+.gestionar-galeria-title {
+  color: #92400E;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(146, 64, 14, 0.1);
+}
+
+.gestionar-galeria-add-btn {
+  background: #EF6210;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(239, 98, 16, 0.3);
+}
+
+.gestionar-galeria-add-btn:hover {
+  background: #d95a0c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(239, 98, 16, 0.4);
+}
+
+/* ==========================================
+   MENSAJES
+   ========================================== */
+.gestionar-galeria-msg {
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* ==========================================
+   ESTADÍSTICAS
+   ========================================== */
+.galeria-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(146, 64, 14, 0.1);
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #EF6210;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ==========================================
+   GALERÍA VACÍA
+   ========================================== */
+.galeria-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(146, 64, 14, 0.1);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.galeria-empty h3 {
+  color: #92400E;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.galeria-empty p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.empty-btn {
+  background: #EF6210;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.empty-btn:hover {
+  background: #d95a0c;
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   GRID DE GALERÍA
+   ========================================== */
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.galeria-item {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(146, 64, 14, 0.15);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.galeria-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(146, 64, 14, 0.2);
+  border-color: #EF6210;
+}
+
+/* ==========================================
+   HEADER DE ITEM
+   ========================================== */
+.galeria-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #fdf7f2;
+  border-bottom: 1px solid #f3e7df;
+}
+
+.principal-badge {
+  background: #EF6210;
+  color: #fff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.galeria-item-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.view-btn:hover {
+  background: #e3f2fd;
+}
+
+.edit-btn:hover {
+  background: #fff3e0;
+}
+
+.delete-btn:hover {
+  background: #ffebee;
+}
+
+.delete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   IMAGEN DEL ITEM
+   ========================================== */
+.galeria-item-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.galeria-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.galeria-item-image img:hover {
+  transform: scale(1.05);
+}
+
+/* ==========================================
+   CONTENIDO DEL ITEM
+   ========================================== */
+.galeria-item-content {
+  padding: 1rem;
+}
+
+.edit-descripcion textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.edit-actions {
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+.edit-actions button {
+  background: #92400E;
+  color: #fff;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.galeria-item-info {
+  min-height: 80px;
+}
+
+.galeria-descripcion {
+  color: #333;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.galeria-fecha {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+/* ==========================================
+   FOOTER DEL ITEM
+   ========================================== */
+.galeria-item-footer {
+  padding: 1rem;
+  border-top: 1px solid #f3e7df;
+  text-align: center;
+}
+
+.set-principal-btn {
+  background: #EF6210;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(239, 98, 16, 0.3);
+}
+
+.set-principal-btn:hover {
+  background: #d95a0c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(239, 98, 16, 0.4);
+}
+
+/* ==========================================
+   MODAL
+   ========================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 90vw;
+  max-height: 90vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+.modal-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.modal-info p {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.modal-info small {
+  color: #666;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  .gestionar-galeria-container {
+    padding: 0 1rem;
+  }
+  
+  .gestionar-galeria-header-row {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .gestionar-galeria-title {
+    font-size: 2rem;
+  }
+  
+  .galeria-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .galeria-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .galeria-item-actions {
+    flex-wrap: wrap;
+  }
+} 

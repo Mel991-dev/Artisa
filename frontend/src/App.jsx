@@ -1,37 +1,56 @@
 // frontend/src/App.jsx
 
-import React, { useState } from 'react';
-// Importa los componentes de Login y Register
-import Login from './pages/Login';
-import Register from './pages/Register';
+import React from "react";
+// Importa el sistema de rutas de React Router
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// Importa los componentes de cada página
+import Header from "./components/Header";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
+import PublicProfile from "./pages/PublicProfile";
+import DashboardArtesano from "./pages/DashboardArtesano";
+import CrearProducto from "./pages/CrearProducto";
+import EditarProducto from "./pages/EditarProducto";
+import GestionarGaleria from "./pages/GestionarGaleria";
+import SubirFotos from "./pages/SubirFotos";
+import VerGaleria from "./pages/VerGaleria";
+import ActualizarPerfil from "./pages/ActualizarPerfil";
+import PerfilPublico from "./pages/PerfilPublico";
+import PrivateRoute from "./components/PrivateRoute";
+// import { AuthProvider } from "./context/AuthContext";
 
-/**
- * Componente principal de la aplicación.
- * Muestra los formularios de login y registro si el usuario no está autenticado.
- * Si el usuario está autenticado, muestra un mensaje de bienvenida.
- */
 function App() {
-  // Estado para manejar la autenticación del usuario
-  const [auth, setAuth] = useState(() => {
-    // Busca el token en localStorage para mantener la sesión
-    const token = localStorage.getItem('token');
-    return token ? { token } : null;
-  });
-
   return (
-    <div>
-      {/* Si el usuario NO está autenticado, muestra los formularios */}
-      {!auth ? (
-        <>
-          <Login setAuth={setAuth} />
-          <Register />
-        </>
-      ) : (
-        // Si el usuario está autenticado, muestra un mensaje de bienvenida
-        <div>Bienvenido, usuario autenticado</div>
-      )}
-    </div>
+    <Router>
+      {/* El Header se muestra SIEMPRE, sin importar la ruta */}
+      <Header />
+      {/* Aquí se definen las rutas de la app */}
+      <Routes>
+        {/* Cada Route asocia una URL con un componente */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/public-profile" element={<PublicProfile />} />
+        <Route path="/artesano/:id" element={<PerfilPublico />} />
+        <Route path="/dashboard-artesano" element={
+          <PrivateRoute>
+            <DashboardArtesano/>
+          </PrivateRoute>
+        }/>
+        <Route path="/crear-producto" element={<CrearProducto/>}/>
+        <Route path="/editar-producto/:id_producto" element={<EditarProducto/>}/>
+        <Route path="/gestionar-galeria" element={<GestionarGaleria/>}/>
+        <Route path="/subir-fotos" element={<SubirFotos/>}/>
+        <Route path="/ver-galeria/:id_artesano" element={<VerGaleria/>}/>
+        <Route path="/perfil" element={
+          <PrivateRoute>
+            <ActualizarPerfil/>
+          </PrivateRoute>
+        }/>
+        {/* Puedes agregar más rutas según tus páginas */}
+        <Route path="/" element={<h1>Bienvenido a Artisa</h1>} />
+      </Routes>
+    </Router>
   );
 }
 
-export default App;
+export default App; 

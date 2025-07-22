@@ -1,0 +1,377 @@
+/* ==========================================
+   SUBIR FOTOS - ESTILOS PRINCIPALES
+   ========================================== */
+
+.subir-fotos-root {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fdf7f2 0%, #f3e7df 100%);
+  padding: 2rem 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.subir-fotos-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.subir-fotos-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 3rem;
+  box-shadow: 0 8px 32px rgba(146, 64, 14, 0.15);
+  border: 1px solid #f3e7df;
+}
+
+/* ==========================================
+   TÍTULO Y SUBTÍTULO
+   ========================================== */
+.subir-fotos-title {
+  color: #92400E;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 2px 4px rgba(146, 64, 14, 0.1);
+}
+
+.subir-fotos-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+/* ==========================================
+   FORMULARIO
+   ========================================== */
+.subir-fotos-form {
+  text-align: left;
+}
+
+/* ==========================================
+   ÁREA DE DRAG & DROP
+   ========================================== */
+.drag-drop-area {
+  border: 3px dashed #EF6210;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  background: #fdf7f2;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 2rem;
+}
+
+.drag-drop-area:hover {
+  border-color: #d95a0c;
+  background: #f8f0e8;
+  transform: translateY(-2px);
+}
+
+.drag-drop-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.drag-drop-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.drag-drop-content h3 {
+  color: #92400E;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.drag-drop-content p {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.drag-drop-content small {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================
+   ARCHIVOS SELECCIONADOS
+   ========================================== */
+.selected-files {
+  margin-top: 2rem;
+}
+
+.selected-files h3 {
+  color: #92400E;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.files-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.file-item {
+  background: #fdf7f2;
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid #f3e7df;
+  transition: all 0.3s ease;
+}
+
+.file-item:hover {
+  border-color: #EF6210;
+  box-shadow: 0 4px 12px rgba(239, 98, 16, 0.15);
+}
+
+/* ==========================================
+   PREVIEW DE ARCHIVO
+   ========================================== */
+.file-preview {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.file-preview img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid #f3e7df;
+}
+
+.remove-file-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+  transition: all 0.2s ease;
+}
+
+.remove-file-btn:hover {
+  background: #c82333;
+  transform: scale(1.1);
+}
+
+/* ==========================================
+   INFORMACIÓN DEL ARCHIVO
+   ========================================== */
+.file-info {
+  margin-bottom: 1rem;
+}
+
+.file-name {
+  color: #333;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin: 0 0 0.3rem 0;
+  word-break: break-word;
+}
+
+.file-size {
+  color: #666;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* ==========================================
+   ACCIONES DEL ARCHIVO
+   ========================================== */
+.file-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.description-input label {
+  display: block;
+  color: #92400E;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.description-input textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1.5px solid #f3e7df;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.2s ease;
+}
+
+.description-input textarea:focus {
+  outline: none;
+  border-color: #EF6210;
+  box-shadow: 0 0 0 3px rgba(239, 98, 16, 0.1);
+}
+
+.principal-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.principal-checkbox label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.principal-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #EF6210;
+  cursor: pointer;
+}
+
+/* ==========================================
+   MENSAJES
+   ========================================== */
+.subir-fotos-msg {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.subir-fotos-msg:not(.error-msg) {
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.subir-fotos-msg.error-msg {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  text-align: left;
+}
+
+.subir-fotos-msg.error-msg h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #721c24;
+}
+
+.subir-fotos-msg.error-msg ul {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.subir-fotos-msg.error-msg li {
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+}
+
+/* ==========================================
+   ACCIONES DEL FORMULARIO
+   ========================================== */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.cancel-btn {
+  background: transparent;
+  color: #92400E;
+  border: 2px solid #92400E;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.cancel-btn:hover {
+  background: #92400E;
+  color: #fff;
+}
+
+.subir-fotos-btn {
+  background: #EF6210;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.subir-fotos-btn:hover:not(:disabled) {
+  background: #d95a0c;
+}
+
+.subir-fotos-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  .subir-fotos-container {
+    padding: 0 1rem;
+  }
+  
+  .subir-fotos-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .subir-fotos-title {
+    font-size: 2rem;
+  }
+  
+  .drag-drop-area {
+    padding: 2rem 1rem;
+  }
+  
+  .files-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .drag-drop-content h3 {
+    font-size: 1.3rem;
+  }
+  
+  .drag-drop-content p {
+    font-size: 1rem;
+  }
+} 

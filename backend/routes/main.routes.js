@@ -1,10 +1,9 @@
 const express = require('express');
-const router = express.Router(); //crear la principal
-const authRoutes = require('./auth'); // o el nombre correcto
+const router = express.Router();
 
-router.use('/auth', authRoutes);
+// Aquí puedes agregar otras rutas principales, pero NO montes authRoutes aquí
 
-module.exports = router; //exportar la ruta principal
+module.exports = router;
 
 
 

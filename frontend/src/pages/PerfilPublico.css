@@ -1,0 +1,347 @@
+/* ==========================================
+   PERFIL PÚBLICO - ESTILOS PRINCIPALES
+   ========================================== */
+
+.perfil-publico-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #FF6B35 0%, #FF8C42 100%);
+  padding: 20px;
+}
+
+/* ==========================================
+   FONDO Y TARJETA PRINCIPAL
+   ========================================== */
+
+.perfil-publico-background {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  min-height: 60vh;
+}
+
+.perfil-publico-card {
+  background: #FFFFFF;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  padding: 40px;
+  max-width: 800px;
+  width: 100%;
+  position: relative;
+  border: 2px solid #FFE4D6;
+}
+
+/* ==========================================
+   HEADER DEL PERFIL
+   ========================================== */
+
+.perfil-publico-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.perfil-publico-foto {
+  flex-shrink: 0;
+}
+
+.perfil-publico-foto img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #FF6B35;
+  object-fit: cover;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.perfil-publico-info {
+  flex: 1;
+}
+
+.perfil-publico-nombre {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #FF6B35;
+  margin: 0 0 20px 0;
+  line-height: 1.2;
+}
+
+.perfil-publico-detalles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.perfil-publico-especialidad,
+.perfil-publico-ubicacion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+.perfil-publico-especialidad .icon,
+.perfil-publico-ubicacion .icon {
+  font-size: 1.2rem;
+}
+
+/* ==========================================
+   SECCIONES DE CONTENIDO
+   ========================================== */
+
+.perfil-publico-biografia,
+.perfil-publico-historia {
+  margin-bottom: 30px;
+}
+
+.perfil-publico-biografia h3,
+.perfil-publico-historia h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #FF6B35;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #FFE4D6;
+  padding-bottom: 8px;
+}
+
+.perfil-publico-biografia p,
+.perfil-publico-historia p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #555;
+  text-align: justify;
+}
+
+/* ==========================================
+   GALERÍA DE TRABAJOS
+   ========================================== */
+
+.galeria-seccion {
+  background: #F8F9FA;
+  padding: 40px 20px;
+  margin-top: 40px;
+}
+
+.galeria-seccion h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #FF6B35;
+  margin-bottom: 30px;
+}
+
+.galeria-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.galeria-item {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.galeria-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* ==========================================
+   PRODUCTOS DEL ARTESANO
+   ========================================== */
+
+.productos-seccion {
+  background: white;
+  padding: 40px 20px;
+}
+
+.productos-seccion h2 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #8B4513;
+  margin-bottom: 30px;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.producto-card {
+  background: white;
+  border: 2px solid #FFE4D6;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.producto-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(255, 107, 53, 0.2);
+}
+
+.producto-imagen {
+  height: 200px;
+  overflow: hidden;
+}
+
+.producto-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.producto-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.producto-nombre {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #8B4513;
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.producto-precio {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #FF6B35;
+  margin-bottom: 15px;
+}
+
+.producto-btn {
+  background: #FF6B35;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.producto-btn:hover {
+  background: #E55A2B;
+}
+
+/* ==========================================
+   ESTADOS DE CARGA Y ERROR
+   ========================================== */
+
+.perfil-publico-loading,
+.perfil-publico-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  color: white;
+}
+
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.perfil-publico-error h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.perfil-publico-error p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.sin-contenido {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 768px) {
+  .perfil-publico-container {
+    padding: 10px;
+  }
+  
+  .perfil-publico-background {
+    padding: 20px 10px;
+  }
+  
+  .perfil-publico-card {
+    padding: 25px;
+  }
+  
+  .perfil-publico-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .perfil-publico-nombre {
+    font-size: 2rem;
+  }
+  
+  .galeria-grid,
+  .productos-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .galeria-seccion,
+  .productos-seccion {
+    padding: 30px 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-publico-nombre {
+    font-size: 1.8rem;
+  }
+  
+  .perfil-publico-foto img {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .perfil-publico-card {
+    padding: 20px;
+  }
+} 

@@ -1,0 +1,135 @@
+/* ==========================================
+   IMPORTACIÓN DE FUENTES
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL DEL DASHBOARD
+   ========================================== */
+.dashboard-artesano-root {
+  background: #F8F4F0;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL DEL DASHBOARD
+   ========================================== */
+.dashboard-artesano-container {
+  max-width: 1100px;
+  margin: 40px auto 0 auto;
+  padding: 24px;
+}
+
+/* ==========================================
+   FILA SUPERIOR: TÍTULO Y BOTÓN
+   ========================================== */
+.dashboard-artesano-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* ==========================================
+   TÍTULO PRINCIPAL
+   ========================================== */
+.dashboard-artesano-title {
+  color: #92400E;
+  font-weight: 700;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* ==========================================
+   BOTÓN PARA AÑADIR PRODUCTO
+   ========================================== */
+.dashboard-artesano-add-btn {
+  background: #EF6210;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.dashboard-artesano-add-btn:hover {
+  background: #d95a0c;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* ==========================================
+   CONTENEDOR DE LA TABLA
+   ========================================== */
+.dashboard-artesano-table-wrapper {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #0001;
+  padding: 24px;
+}
+
+/* ==========================================
+   TABLA DE PRODUCTOS
+   ========================================== */
+.dashboard-artesano-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* ==========================================
+   ESPACIADO Y ALINEACIÓN DE CELDAS
+   ========================================== */
+.dashboard-artesano-table th,
+.dashboard-artesano-table td {
+  padding: 12px;
+  text-align: left;
+}
+
+/* ==========================================
+   ENCABEZADOS DE LA TABLA
+   ========================================== */
+.dashboard-artesano-table th {
+  color: #92400E;
+  background: #F8F4F0;
+  font-weight: 600;
+}
+
+/* ==========================================
+   LÍNEA DIVISORIA ENTRE FILAS
+   ========================================== */
+.dashboard-artesano-table tbody tr {
+  border-bottom: 1px solid #eee;
+}
+
+/* ==========================================
+   ELIMINA LA LÍNEA DIVISORIA EN LA ÚLTIMA FILA
+   ========================================== */
+.dashboard-artesano-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  .dashboard-artesano-header-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .dashboard-artesano-container {
+    padding: 16px;
+  }
+  
+  .dashboard-artesano-table-wrapper {
+    padding: 16px;
+    overflow-x: auto;
+  }
+} 

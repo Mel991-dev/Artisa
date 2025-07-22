@@ -1,0 +1,332 @@
+/* ==========================================
+   IMPORTACIÓN DE FUENTES
+   ========================================== */
+/* Importamos la fuente Inter desde Google Fonts para una tipografía profesional y moderna */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL DEL LOGIN
+   ========================================== */
+.login-container {
+  /* Altura mínima del 100% del viewport para ocupar toda la pantalla */
+  min-height: 100vh;
+  /* Fondo degradado suave que va de un beige claro a un tono más cálido */
+  background: linear-gradient(135deg, #fdf7f2 0%, #f8f4f0 100%);
+  /* Centramos el contenido tanto horizontal como verticalmente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Espaciado interno para evitar que el contenido toque los bordes */
+  padding: 2rem;
+  /* Familia de fuentes con fallbacks para compatibilidad */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ==========================================
+   TARJETA DEL FORMULARIO DE LOGIN
+   ========================================== */
+.login-card {
+  /* Fondo blanco para contrastar con el degradado del contenedor */
+  background: #fff;
+  /* Borde con color institucional marrón (#92400E) con 40% de transparencia */
+  border: 2px solid rgba(146, 64, 14, 0.4);
+  /* Bordes redondeados para un aspecto moderno */
+  border-radius: 16px;
+  /* Sombra sutil con color naranja institucional para dar profundidad */
+  box-shadow: 0 8px 32px rgba(239, 98, 16, 0.08);
+  /* Espaciado interno generoso para el contenido */
+  padding: 3rem 2.5rem;
+  /* Ancho completo pero con máximo para evitar que sea muy ancha */
+  width: 100%;
+  max-width: 420px;
+  /* Centramos el texto del título y subtítulo */
+  text-align: center;
+}
+
+/* ==========================================
+   TÍTULO PRINCIPAL
+   ========================================== */
+.login-title {
+  /* Color marrón institucional para títulos */
+  color: #92400E;
+  /* Tamaño grande y prominente */
+  font-size: 2.2rem;
+  /* Peso de fuente bold para destacar */
+  font-weight: 700;
+  /* Espaciado inferior para separar del subtítulo */
+  margin-bottom: 0.5rem;
+  /* Ajuste del espaciado entre letras para mejor legibilidad */
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================
+   SUBTÍTULO DESCRIPTIVO
+   ========================================== */
+.login-subtitle {
+  /* Color gris para texto secundario */
+  color: #666;
+  /* Tamaño mediano */
+  font-size: 1.1rem;
+  /* Espaciado inferior para separar del formulario */
+  margin-bottom: 2.5rem;
+  /* Peso de fuente normal para texto descriptivo */
+  font-weight: 400;
+}
+
+/* ==========================================
+   FORMULARIO
+   ========================================== */
+.login-form {
+  /* Alineamos el texto de las etiquetas a la izquierda */
+  text-align: left;
+}
+
+/* ==========================================
+   GRUPOS DE CAMPOS DEL FORMULARIO
+   ========================================== */
+.form-group {
+  /* Espaciado inferior entre grupos de campos */
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   ETIQUETAS DE LOS CAMPOS
+   ========================================== */
+.form-group label {
+  /* Convertimos en bloque para que ocupe toda la línea */
+  display: block;
+  /* Color marrón institucional para etiquetas */
+  color: #92400E;
+  /* Peso de fuente semi-bold para destacar */
+  font-weight: 600;
+  /* Tamaño de fuente legible */
+  font-size: 1rem;
+  /* Espaciado inferior para separar del campo de entrada */
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================
+   CONTENEDOR DE INPUT CON ICONO
+   ========================================== */
+.input-with-icon {
+  /* Posicionamiento relativo para los iconos absolutos */
+  position: relative;
+  /* Flexbox para alinear icono y input */
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================
+   ICONOS DENTRO DE LOS CAMPOS
+   ========================================== */
+.input-icon {
+  /* Posicionamiento absoluto dentro del contenedor relativo */
+  position: absolute;
+  /* Distancia desde el borde izquierdo */
+  left: 1rem;
+  /* Tamaño del icono */
+  font-size: 1.1rem;
+  /* Color marrón institucional para iconos */
+  color: #92400E;
+  /* Z-index para asegurar que esté por encima del input */
+  z-index: 1;
+}
+
+/* ==========================================
+   CAMPOS DE ENTRADA DE TEXTO
+   ========================================== */
+.input-with-icon input {
+  /* Ancho completo del contenedor */
+  width: 100%;
+  /* Padding con más espacio a la izquierda para el icono */
+  padding: 0.9rem 1rem 0.9rem 3rem;
+  /* Borde sutil con color beige */
+  border: 1.5px solid #f3e7df;
+  /* Bordes redondeados para aspecto moderno */
+  border-radius: 10px;
+  /* Tamaño de fuente legible */
+  font-size: 1rem;
+  /* Fondo sutilmente coloreado */
+  background: #fdf7f2;
+  /* Color de texto marrón institucional */
+  color: #92400E;
+  /* Familia de fuentes consistente */
+  font-family: 'Inter', sans-serif;
+  /* Transición suave para efectos de hover y focus */
+  transition: all 0.2s ease;
+}
+
+/* ==========================================
+   ESTADO DE FOCUS EN LOS CAMPOS
+   ========================================== */
+.input-with-icon input:focus {
+  /* Borde naranja institucional cuando está enfocado */
+  border-color: #EF6210;
+  /* Eliminamos el outline por defecto del navegador */
+  outline: none;
+  /* Sombra sutil con color naranja para indicar focus */
+  box-shadow: 0 0 0 3px rgba(239, 98, 16, 0.1);
+}
+
+/* ==========================================
+   BOTÓN TOGGLE DE VISIBILIDAD DE CONTRASEÑA
+   ========================================== */
+.password-toggle {
+  /* Posicionamiento absoluto en el lado derecho */
+  position: absolute;
+  right: 1rem;
+  /* Sin fondo para que sea transparente */
+  background: none;
+  /* Sin borde */
+  border: none;
+  /* Tamaño del icono */
+  font-size: 1.1rem;
+  /* Cursor pointer para indicar que es clickeable */
+  cursor: pointer;
+  /* Color marrón institucional */
+  color: #92400E;
+  /* Sin padding para que solo sea el icono */
+  padding: 0;
+}
+
+/* ==========================================
+   SECCIÓN "OLVIDASTE TU CONTRASEÑA"
+   ========================================== */
+.forgot-password {
+  /* Alineación a la izquierda */
+  text-align: left;
+  /* Espaciado inferior para separar del botón */
+  margin-bottom: 2rem;
+}
+
+/* ==========================================
+   ENLACE "OLVIDASTE TU CONTRASEÑA"
+   ========================================== */
+.forgot-link {
+  /* Color naranja institucional para enlaces */
+  color: #EF6210;
+  /* Sin subrayado por defecto */
+  text-decoration: none;
+  /* Peso de fuente medio */
+  font-weight: 500;
+  /* Tamaño ligeramente menor */
+  font-size: 0.95rem;
+  /* Transición suave para efectos hover */
+  transition: color 0.2s;
+}
+
+/* ==========================================
+   HOVER DEL ENLACE "OLVIDASTE TU CONTRASEÑA"
+   ========================================== */
+.forgot-link:hover {
+  /* Color marrón al hacer hover */
+  color: #92400E;
+  /* Subrayado al hacer hover */
+  text-decoration: underline;
+}
+
+/* ==========================================
+   BOTÓN PRINCIPAL DE INICIAR SESIÓN
+   ========================================== */
+.login-btn {
+  /* Ancho completo del contenedor */
+  width: 100%;
+  /* Fondo naranja institucional */
+  background: #EF6210;
+  /* Texto blanco para contraste */
+  color: #fff;
+  /* Tamaño de fuente prominente */
+  font-size: 1.1rem;
+  /* Peso de fuente semi-bold */
+  font-weight: 600;
+  /* Sin borde */
+  border: none;
+  /* Bordes redondeados */
+  border-radius: 10px;
+  /* Padding vertical generoso */
+  padding: 1rem 0;
+  /* Cursor pointer para indicar que es clickeable */
+  cursor: pointer;
+  /* Transición suave para efectos */
+  transition: all 0.2s ease;
+  /* Familia de fuentes consistente */
+  font-family: 'Inter', sans-serif;
+  /* Espaciado inferior para separar del enlace de registro */
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   HOVER DEL BOTÓN DE INICIAR SESIÓN
+   ========================================== */
+.login-btn:hover {
+  /* Color naranja más oscuro al hacer hover */
+  background: #d55a0e;
+  /* Ligero movimiento hacia arriba para efecto de elevación */
+  transform: translateY(-1px);
+  /* Sombra más pronunciada al hacer hover */
+  box-shadow: 0 4px 12px rgba(239, 98, 16, 0.3);
+}
+
+/* ==========================================
+   SECCIÓN DE ENLACE A REGISTRO
+   ========================================== */
+.register-link {
+  /* Centramos el texto */
+  text-align: center;
+  /* Color gris para texto secundario */
+  color: #666;
+  /* Tamaño de fuente estándar */
+  font-size: 1rem;
+}
+
+/* ==========================================
+   ENLACE "REGÍSTRATE AQUÍ"
+   ========================================== */
+.register-text {
+  /* Color naranja institucional para enlaces */
+  color: #EF6210;
+  /* Sin subrayado por defecto */
+  text-decoration: none;
+  /* Peso de fuente semi-bold para destacar */
+  font-weight: 600;
+  /* Transición suave para efectos hover */
+  transition: color 0.2s;
+}
+
+/* ==========================================
+   HOVER DEL ENLACE "REGÍSTRATE AQUÍ"
+   ========================================== */
+.register-text:hover {
+  /* Color marrón al hacer hover */
+  color: #92400E;
+  /* Subrayado al hacer hover */
+  text-decoration: underline;
+}
+
+/* ==========================================
+   MENSAJES DE ESTADO (ÉXITO/ERROR)
+   ========================================== */
+.login-msg {
+  /* Espaciado superior para separar del formulario */
+  margin-top: 1rem;
+  /* Padding interno para el contenido */
+  padding: 0.8rem;
+  /* Bordes redondeados */
+  border-radius: 8px;
+  /* Peso de fuente medio */
+  font-weight: 500;
+  /* Centramos el texto */
+  text-align: center;
+}
+
+/* ==========================================
+   ESTILOS ESPECÍFICOS PARA MENSAJES NO VACÍOS
+   ========================================== */
+.login-msg:not(:empty) {
+  /* Fondo azul muy claro para mensajes informativos */
+  background: #f0f9ff;
+  /* Color naranja institucional para el texto */
+  color: #EF6210;
+  /* Borde azul claro */
+  border: 1px solid #bae6fd;
+} 

@@ -1,0 +1,306 @@
+/* ==========================================
+   IMPORTACIÓN DE FUENTES
+   ========================================== */
+/* Importamos la fuente Inter desde Google Fonts para una tipografía profesional y moderna */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL DEL REGISTRO
+   ========================================== */
+.register-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #fdf7f2 0%, #f8f4f0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ==========================================
+   TARJETA DEL FORMULARIO DE REGISTRO
+   ========================================== */
+.register-card {
+  background: #fff;
+  border: 2px solid rgba(146, 64, 14, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(239, 98, 16, 0.08);
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+/* ==========================================
+   TÍTULO PRINCIPAL
+   ========================================== */
+.register-title {
+  color: #92400E;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================
+   SUBTÍTULO DESCRIPTIVO
+   ========================================== */
+.register-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+/* ==========================================
+   FORMULARIO
+   ========================================== */
+.register-form {
+  text-align: left;
+}
+
+/* ==========================================
+   GRUPOS DE CAMPOS DEL FORMULARIO
+   ========================================== */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   ETIQUETAS DE LOS CAMPOS
+   ========================================== */
+.form-group label {
+  display: block;
+  color: #92400E;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================
+   CONTENEDOR DE INPUT CON ICONO
+   ========================================== */
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================
+   ICONOS DENTRO DE LOS CAMPOS
+   ========================================== */
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  font-size: 1.1rem;
+  color: #92400E;
+  z-index: 1;
+}
+
+/* ==========================================
+   CAMPOS DE ENTRADA DE TEXTO
+   ========================================== */
+.input-with-icon input,
+.input-with-icon textarea,
+.input-with-icon select {
+  width: 100%;
+  padding: 0.9rem 1rem 0.9rem 3rem;
+  border: 1.5px solid #f3e7df;
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #fdf7f2;
+  color: #92400E;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s ease;
+  resize: vertical;
+}
+
+/* ==========================================
+   ESTILOS ESPECÍFICOS PARA SELECT
+   ========================================== */
+.input-with-icon select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2392400E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1em;
+  padding-right: 2.5rem;
+}
+
+.input-with-icon select:focus {
+  border-color: #EF6210;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(239, 98, 16, 0.1);
+}
+
+/* ==========================================
+   ESTADO DE FOCUS EN LOS CAMPOS
+   ========================================== */
+.input-with-icon input:focus,
+.input-with-icon textarea:focus {
+  border-color: #EF6210;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(239, 98, 16, 0.1);
+}
+
+/* ==========================================
+   CONTADOR DE CARACTERES
+   ========================================== */
+.character-count {
+  font-size: 0.85rem;
+  color: #92400E;
+  text-align: right;
+  margin-top: 0.25rem;
+  font-weight: 400;
+}
+
+/* ==========================================
+   BOTÓN TOGGLE DE VISIBILIDAD DE CONTRASEÑA
+   ========================================== */
+.password-toggle {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #92400E;
+  padding: 0;
+}
+
+/* ==========================================
+   OPCIONES DE SELECCIÓN DE ROL
+   ========================================== */
+.role-options {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   RADIO BUTTONS DENTRO DE LAS TARJETAS DE ROL
+   ========================================== */
+.role-card input[type="radio"] {
+  accent-color: #EF6210;
+}
+
+/* ==========================================
+   TARJETAS DE SELECCIÓN DE ROL (CLICKEABLES)
+   ========================================== */
+.role-card {
+  flex: 1;
+  border: 1.5px solid #f3e7df;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #fff;
+  transition: border 0.2s, box-shadow 0.2s;
+  user-select: none; /* Evita selección de texto al hacer clic */
+}
+
+/* ==========================================
+   ESTADO SELECCIONADO Y HOVER DE TARJETAS DE ROL
+   ========================================== */
+.role-card.selected,
+.role-card:hover {
+  border: 1.5px solid #EF6210;
+  box-shadow: 0 2px 8px 0 rgba(239, 98, 16, 0.08);
+}
+
+/* ==========================================
+   DESCRIPCIÓN DE LOS ROLES
+   ========================================== */
+.role-description {
+  font-size: 0.95em;
+  color: #92400E;
+  margin-top: 0.2rem;
+}
+
+/* ==========================================
+   FILAS DE CHECKBOXES
+   ========================================== */
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.checkbox-row label {
+  font-size: 0.95rem;
+  color: #92400E;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   ENLACES DENTRO DE LOS CHECKBOXES
+   ========================================== */
+.link-accent {
+  color: #EF6210;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-accent:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+   BOTÓN DE REGISTRO
+   ========================================== */
+.register-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #EF6210 0%, #FF6B35 100%);
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 98, 16, 0.3);
+}
+
+/* ==========================================
+   ENLACE PARA INICIAR SESIÓN
+   ========================================== */
+.login-link {
+  text-align: center;
+  color: #92400E;
+  font-size: 0.95rem;
+}
+
+.login-text {
+  color: #EF6210;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-text:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+   MENSAJES DE ERROR/ÉXITO
+   ========================================== */
+.register-msg {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.register-msg:not(:empty) {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+} 

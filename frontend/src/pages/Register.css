@@ -1,0 +1,123 @@
+.register-container {
+  max-width: 480px;
+  margin: 2rem auto;
+  background: #fff;
+  border: 1.5px solid #f3e7df;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px 0 rgba(239, 98, 16, 0.08);
+  padding: 2.5rem 2rem 2rem 2rem;
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.register-title {
+  color: #92400E;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.register-subtitle {
+  color: #666;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-section-title {
+  color: #92400E;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.form-row > * {
+  flex: 1;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1.5px solid #f3e7df;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  background: #fdf7f2;
+  color: #92400E;
+  transition: border 0.2s;
+}
+
+input:focus, select:focus {
+  border: 1.5px solid #EF6210;
+  outline: none;
+}
+
+.role-options {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.role-card {
+  flex: 1;
+  border: 1.5px solid #f3e7df;
+  border-radius: 8px;
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #fff;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.role-card.selected, .role-card:hover {
+  border: 1.5px solid #EF6210;
+  box-shadow: 0 2px 8px 0 rgba(239, 98, 16, 0.08);
+}
+
+.role-card input[type="radio"] {
+  accent-color: #EF6210;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.checkbox-row label {
+  font-size: 0.97rem;
+  color: #92400E;
+}
+
+.register-btn {
+  width: 100%;
+  background: #EF6210;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  padding: 0.9rem 0;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.register-btn:hover {
+  background: #EF6210;
+  opacity: 0.92;
+}
+
+.register-msg {
+  text-align: center;
+  margin-top: 1rem;
+  color: #EF6210;
+  font-weight: 500;
+} 
