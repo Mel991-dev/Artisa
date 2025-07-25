@@ -90,35 +90,34 @@ const Header = () => {
 
   return (
     <header className="header-artisa">
-      <div className="header-logo">
-        {/* Cambia la ruta si tu logo está en otra carpeta */}
-        <img src="/img/logo.png" alt="Artisa logo" className="logo-img" />
+      <div className="header-inner">
+        <div className="header-logo">
+          <img src="/img/logo.png" alt="Artisa logo" className="logo-img" />
+        </div>
+        <nav className="header-nav">
+          <Link to="/">Inicio</Link>
+          <Link to="/catalogo-productos">Catalogo</Link>
+          <Link to="/blog">Blog</Link>
+          {usuario ? (
+            <div className="header-user-menu">
+              <img
+                src={getFotoUrl(usuario)}
+                alt="Perfil"
+                className="header-user-avatar"
+                onClick={() => navigate('/perfil')}
+                onError={(e) => {
+                  e.target.src = '/img/user-default.png';
+                }}
+              />
+              <button onClick={handleLogout} className="header-logout-btn">
+                Cerrar sesión
+              </button>
+            </div>
+          ) : (
+            <Link to="/login">Iniciar sesión</Link>
+          )}
+        </nav>
       </div>
-      <nav className="header-nav">
-        <Link to="/">Inicio</Link>
-        <Link to="/catalogo">Catalogo</Link>
-        <Link to="/blog">Blog</Link>
-        {usuario ? (
-          <div className="header-user-menu">
-            <img
-              src={getFotoUrl(usuario)}
-              alt="Perfil"
-              className="header-user-avatar"
-              style={{ width: 50, height: 50, borderRadius: '50%', objectFit: 'cover', cursor: 'pointer' }}
-              onClick={() => navigate('/perfil')}
-              onError={(e) => {
-                // Si la imagen falla, usar la imagen por defecto
-                e.target.src = '/img/user-default.png';
-              }}
-            />
-            <button onClick={handleLogout} className="header-logout-btn">
-              Cerrar sesión
-            </button>
-          </div>
-        ) : (
-          <Link to="/login">Iniciar sesión</Link>
-        )}
-      </nav>
     </header>
   );
 };

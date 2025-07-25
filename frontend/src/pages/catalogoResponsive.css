@@ -1,0 +1,55 @@
+/* frontend/src/components/catalogoResponsive.css */
+
+/* === Estilos Responsive para dispositivos pequeños (<= 768px) === */
+@media (max-width: 768px) {
+  /* Ocultar el sidebar inicialmente */
+  .catalogo-sidebar {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.4s ease, opacity 0.4s ease, transform 0.4s ease;
+  }
+
+  /* Mostrar el sidebar cuando tenga la clase 'visible' */
+  .catalogo-sidebar.visible {
+    max-height: 2000px; /* Suficiente para mostrar todo el contenido */
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ✅ Botón para mostrar/ocultar filtros (en responsive) */
+  .btn-filtrar-toggle {
+    display: block;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #EF6210 0%, #f57c00 100%);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(239, 98, 16, 0.3);
+  }
+
+  .btn-filtrar-toggle:hover {
+    transform: scale(1.02);
+    background: linear-gradient(135deg, #f57c00 0%, #EF6210 100%);
+  }
+}
+
+/* === Para pantallas más grandes (>= 769px) === */
+@media (min-width: 769px) {
+  .btn-filtrar-toggle {
+    display: none; /* Oculta el botón en escritorio */
+  }
+
+  .catalogo-sidebar {
+    max-height: none;
+    opacity: 1;
+    transform: none;
+  }
+}
