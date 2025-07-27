@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import './catalogo.css';
 import './catalogoResponsive.css';
+import { Link } from 'react-router-dom';
 
 // Lista de productos simulada
 const productos = [
@@ -18,14 +19,11 @@ const productos = [
 ];
 
 const CatalogoProductos = () => {
-  // Estado para mostrar/ocultar filtros (usado en responsive)
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
-
-  // Estados para almacenar filtros activos
   const [categoriasSeleccionadas, setCategoriasSeleccionadas] = useState([]);
   const [rangosSeleccionados, setRangosSeleccionados] = useState([]);
+  const [busqueda, setBusqueda] = useState(""); // ⬅️ NUEVO estado
 
-  // ✅ Función para manejar cambio en checkbox de categorías
   const manejarCambioCategoria = (categoria) => {
     setCategoriasSeleccionadas(prev =>
       prev.includes(categoria)
@@ -34,7 +32,6 @@ const CatalogoProductos = () => {
     );
   };
 
-  // ✅ Función para manejar cambio en checkbox de rangos de precio
   const manejarCambioRango = (rango) => {
     setRangosSeleccionados(prev =>
       prev.includes(rango)
@@ -43,7 +40,7 @@ const CatalogoProductos = () => {
     );
   };
 
-  // ✅ Función que aplica los filtros a la lista de productos
+  // ✅ Función que aplica los filtros incluyendo búsqueda
   const filtrarProductos = () => {
     return productos.filter(producto => {
       const cumpleCategoria = categoriasSeleccionadas.length === 0 || categoriasSeleccionadas.includes(producto.categoria);
@@ -59,7 +56,9 @@ const CatalogoProductos = () => {
         return false;
       })();
 
-      return cumpleCategoria && cumpleRango;
+      const coincideBusqueda = producto.nombre.toLowerCase().includes(busqueda.toLowerCase()); // ✅ Búsqueda por nombre
+
+      return cumpleCategoria && cumpleRango && coincideBusqueda;
     });
   };
 
@@ -67,16 +66,12 @@ const CatalogoProductos = () => {
 
   return (
     <div className="catalogo-container">
-      
-      {/* ✅ Botón para mostrar/ocultar filtros (solo visible en pantallas pequeñas gracias a las media queries) */}
-      <button
-        className="btn-filtrar-toggle" // 🔄 CORREGIDO: antes era catalogo-toggle-filtros
-        onClick={() => setMostrarFiltros(!mostrarFiltros)}
-      >
+
+      <button className="btn-filtrar-toggle" onClick={() => setMostrarFiltros(!mostrarFiltros)}>
         {mostrarFiltros ? 'Ocultar Filtros' : 'Mostrar Filtros'}
       </button>
 
-      {/* ✅ Barra lateral de filtros con clase visible si el estado está activado */}
+            {/* ✅ Barra lateral de filtros con clase visible si el estado está activado */}
       <aside className={`catalogo-sidebar ${mostrarFiltros ? 'visible' : ''}`}>
         <h2 className="catalogo-sidebar-title">Filtros</h2>
 
@@ -110,9 +105,18 @@ const CatalogoProductos = () => {
         </div>
       </aside>
 
-      {/* ✅ Contenido principal del catálogo */}
       <main className="catalogo-main">
         <h1 className="catalogo-header">Catálogo de Productos ({productosFiltrados.length} productos)</h1>
+
+        {/* ✅ Input de Búsqueda */}
+        <div className="barra-busqueda">
+          <input
+            type="text"
+            placeholder="🔍 Buscar productos por nombre..."
+            value={busqueda}
+            onChange={(e) => setBusqueda(e.target.value)}
+          />
+        </div>
 
         <div className="catalogo-productos-grid">
           {productosFiltrados.map(producto => (
@@ -123,7 +127,7 @@ const CatalogoProductos = () => {
                 <h3 className="catalogo-producto-nombre">{producto.nombre}</h3>
                 <p className="catalogo-producto-artesano">Por: {producto.artesano}</p>
                 <p className="catalogo-producto-precio">${producto.precio.toLocaleString()}</p>
-                <button className="btn-vermas">Ver Más</button>
+                <Link to="/vista-producto"><button className="btn-vermas">Ver Más</button></Link>
               </div>
             </div>
           ))}

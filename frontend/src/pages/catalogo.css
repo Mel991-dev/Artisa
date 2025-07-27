@@ -230,18 +230,7 @@ body {
   background: linear-gradient(135deg, #f57c00 0%, #EF6210 100%);
 }
 
-/* Inputs de búsqueda y ordenamiento */
-.catalogo-busqueda,
-.catalogo-ordenar {
-  font-size: 16px;
-  padding: 10px 15px;
-  border-radius: 10px;
-  border: 2px solid rgba(146, 64, 14, 0.4);
-  outline: none;
-  transition: all 0.3s ease;
-  margin-right: 15px;
-  margin-bottom: 20px;
-}
+
 
 .catalogo-busqueda:focus,
 .catalogo-ordenar:focus {
@@ -256,6 +245,29 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+}
+
+/* Buscador sofisticado */
+.barra-busqueda {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.barra-busqueda input {
+  width: 90%;
+  max-width: 500px;
+  padding: 12px 18px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  outline: none;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.barra-busqueda input:focus {
+  border-color: #865439;
+  box-shadow: 0 0 8px rgba(134, 84, 57, 0.3);
 }
 
 /* === Responsivo extra === */

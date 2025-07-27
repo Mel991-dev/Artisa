@@ -18,8 +18,10 @@ import ActualizarPerfil from "./pages/ActualizarPerfil";
 import PerfilPublico from "./pages/PerfilPublico";
 import PrivateRoute from "./components/PrivateRoute";
 import CatalogoProductos from "./pages/CatalogoProductos";
+import VistaProducto from "./pages/VistaProducto";
+import Carrito from "./pages/Carrito";
+import Checkout from "./pages/Checkout";
 // import { AuthProvider } from "./context/AuthContext";
-
 import './index.css';
 
 function App() {
@@ -45,6 +47,9 @@ function App() {
         <Route path="/subir-fotos" element={<SubirFotos/>}/>
         <Route path="/ver-galeria/:id_artesano" element={<VerGaleria/>}/>
         <Route path="/catalogo-productos" element={<CatalogoProductos/>}/>
+        <Route path="/vista-producto" element={<VistaProducto/>}/>
+        <Route path="/carrito" element={<Carrito/>}/>
+        <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/perfil" element={
           <PrivateRoute>
             <ActualizarPerfil/>
