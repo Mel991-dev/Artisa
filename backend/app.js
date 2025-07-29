@@ -49,3 +49,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`✅ Servidor backend escuchando en http://localhost:${PORT}`);
 });
+
+// Importar y montar las rutas de reseñas
+const resenaRoutes = require('./routes/resena.routes');
+app.use('/api/resenas', resenaRoutes);

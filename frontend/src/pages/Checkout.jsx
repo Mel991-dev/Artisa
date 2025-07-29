@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import './Checkout.css';
 
 const metodosPago = [
-  { id: 1, nombre: 'Tarjeta de Crédito/Débito' },
-  { id: 2, nombre: 'PayPal' },
-  { id: 3, nombre: 'Nequi' },
-  { id: 4, nombre: 'Daviplata' },
-  { id: 5, nombre: 'PSE' },
+  { id: 1, nombre: 'Tarjeta de Crédito/Débito', descripcion: 'Aceptamos Visa, MasterCard y American Express.' },
+  { id: 2, nombre: 'PayPal', descripcion: 'Serás redirigido a PayPal para completar el pago.' },
+  { id: 3, nombre: 'Nequi', descripcion: 'Te enviaremos un enlace de pago a tu número registrado en Nequi.' },
+  { id: 4, nombre: 'Daviplata', descripcion: 'Recibirás instrucciones vía mensaje de texto.' },
+  { id: 5, nombre: 'PSE', descripcion: 'Realiza el pago desde tu banco en línea con PSE.' },
 ];
 
 const productos = [
@@ -21,7 +21,7 @@ function Checkout() {
     apellido: '',
     email: '',
     direccion: '',
-    pais: 'Colombia',
+    pais: '',
     metodoPago: 5,
   });
 
@@ -68,16 +68,23 @@ function Checkout() {
           </div>
           <input id="email" placeholder="Correo electrónico" value={formData.email} onChange={handleChange} />
           <input id="direccion" placeholder="Dirección completa" value={formData.direccion} onChange={handleChange} />
-          <input id="pais" placeholder="País" value={formData.pais} onChange={handleChange} disabled />
+          <input id="pais" placeholder="País" value={formData.pais} onChange={handleChange} />
         </div>
 
         <div className="checkout-card">
           <h2>Método de Pago</h2>
           {metodosPago.map((m) => (
-            <div key={m.id} className={`pago-opcion ${formData.metodoPago === m.id ? 'seleccionado' : ''}`} onClick={() => handleMetodoChange(m.id)}>
+            <label
+              key={m.id}
+              className={`pago-opcion ${formData.metodoPago === m.id ? 'seleccionado' : ''}`}
+              onClick={() => handleMetodoChange(m.id)}
+            >
               <input type="radio" checked={formData.metodoPago === m.id} readOnly />
-              <label>{m.nombre}</label>
-            </div>
+              <div>
+                <div className="nombre-metodo">{m.nombre}</div>
+                <div className="descripcion-metodo">{m.descripcion}</div>
+              </div>
+            </label>
           ))}
         </div>
       </div>

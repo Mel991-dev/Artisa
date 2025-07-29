@@ -3,6 +3,36 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './DashboardArtesano.css';
 
+/*
+-------------------------------------------------------------
+DOCUMENTACIÓN: LÓGICA DE MANEJO DE IMÁGENES EN DASHBOARD ARTESANO
+-------------------------------------------------------------
+
+1. Problema detectado:
+- El campo 'imagen' en la base de datos puede contener la ruta completa o solo el nombre de archivo.
+- El frontend construía la URL concatenando la ruta base y el campo 'imagen', lo que podía duplicar la ruta y causar errores 404.
+- Esto provocaba que las imágenes reales no se mostraran y se usara el fallback 'product-default.svg'.
+
+2. Solución aplicada:
+- Se creó la función extraerNombreArchivo(ruta) para obtener solo el nombre de archivo, sin importar si el campo contiene la ruta completa o parcial.
+- Al construir la URL de la imagen, se usa:
+    src={`http://localhost:3000/uploads/productos/${extraerNombreArchivo(producto.imagen)}`}
+- Así, la URL siempre apunta correctamente al archivo real en la carpeta backend/uploads/productos/.
+
+3. Recomendaciones para futuros desarrollos:
+- Guardar en la base de datos solo el nombre de archivo, nunca la ruta completa.
+- El backend debe servir la carpeta de archivos estáticos con Express usando una ruta clara (/uploads).
+- El frontend debe construir la URL concatenando la ruta base y el nombre de archivo, usando la función extraerNombreArchivo si es necesario.
+- Usar una imagen por defecto si la imagen real no existe o falla la carga.
+
+4. Beneficios:
+- Evita errores de duplicación de rutas y 404.
+- Hace el código más mantenible y predecible.
+- Permite cambiar la estructura de carpetas sin modificar la base de datos.
+- Facilita el manejo de imágenes y otros archivos estáticos en todo el proyecto.
+-------------------------------------------------------------
+*/
+
 export default function DashboardArtesano() {
   const [productos, setProductos] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -49,6 +79,13 @@ export default function DashboardArtesano() {
       currency: 'COP'
     }).format(precio);
   };
+
+  // Función para extraer solo el nombre de archivo de la imagen
+  function extraerNombreArchivo(ruta) {
+    if (!ruta) return '';
+    const partes = ruta.split('/');
+    return partes[partes.length - 1];
+  }
 
   if (isLoading) {
     return (
@@ -148,7 +185,7 @@ export default function DashboardArtesano() {
                     <td>
                       {producto.imagen ? (
                         <img 
-                          src={`http://localhost:3000${producto.imagen}`} 
+                          src={`http://localhost:3000/uploads/productos/${extraerNombreArchivo(producto.imagen)}`}
                           alt={producto.nombre}
                           style={{
                             width: '40px',
@@ -157,8 +194,8 @@ export default function DashboardArtesano() {
                             borderRadius: '4px'
                           }}
                           onError={(e) => {
-                            e.target.style.display = 'none';
-                            e.target.nextSibling.style.display = 'inline';
+                            e.target.onerror = null;
+                            e.target.src = '/img/product-default.svg';
                           }}
                         />
                       ) : (
@@ -206,4 +243,4 @@ export default function DashboardArtesano() {
       </div>
     </div>
   );
-} 
+}

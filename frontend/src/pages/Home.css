@@ -1,0 +1,238 @@
+body {
+  font-family: 'Arial', sans-serif;
+  line-height: 1.6;
+}
+
+.hero {
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.hero-content h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  max-width: 800px;
+}
+
+.hero-content p {
+  font-size: 24px;
+  margin-bottom: 30px;
+  max-width: 700px;
+  line-height: 1.4;
+}
+
+.cta-button {
+  background-color: #f0650e;
+  color: white;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.cta-button:hover {
+  background-color: #d4540a;
+  transform: translateY(-2px);
+}
+
+.categories {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 36px;
+  color: #8B4513;
+  margin-bottom: 50px;
+  font-weight: bold;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.category-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(240, 101, 14, 0.08);
+  padding: 40px 30px;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(240, 101, 14, 0.2);
+}
+
+.category-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.category-card h3 {
+  color: #8B4513;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.category-button {
+  background: transparent;
+  color: #8B4513;
+  border: 2px solid #8B4513;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.category-button:hover {
+  background-color: #8B4513;
+  color: white;
+}
+
+.stories {
+  padding: 80px 0;
+  background-color: white;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.story-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(240, 101, 14, 0.08);
+  padding: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  box-shadow: 0 10px 25px rgba(240, 101, 14, 0.2);
+}
+
+.story-avatar {
+  width: 80px;
+  height: 80px;
+  background-color: #ddd;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.story-content h4 {
+  color: #8B4513;
+  font-size: 22px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.story-specialty {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.story-text {
+  color: #333;
+  font-size: 16px;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.testimonials {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.testimonial-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(240, 101, 14, 0.08);
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(240, 101, 14, 0.2);
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.star {
+  color: #FFD700;
+  font-size: 24px;
+}
+
+.testimonial-text {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: #333;
+  font-style: italic;
+}
+
+.testimonial-author {
+  color: #8B4513;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 36px;
+  }
+  .hero-content p {
+    font-size: 20px;
+  }
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  .story-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}

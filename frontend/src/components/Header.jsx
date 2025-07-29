@@ -92,11 +92,11 @@ const Header = () => {
     <header className="header-artisa">
       <div className="header-inner">
         <div className="header-logo">
-          <img src="/img/logo.png" alt="Artisa logo" className="logo-img" />
+          <img src="/img/" alt="Artisa logo" className="logo-img" style={{width: '48px', marginRight: '12px'}} />
         </div>
         <nav className="header-nav">
           <Link to="/">Inicio</Link>
-          <Link to="/catalogo-productos">Catalogo</Link>
+          <Link to="/catalogo-productos">Catálogo</Link>
           <Link to="/blog">Blog</Link>
           {usuario ? (
             <div className="header-user-menu">

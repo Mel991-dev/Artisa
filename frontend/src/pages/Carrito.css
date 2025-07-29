@@ -25,6 +25,18 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
+.carrito-wrapper {
+  width: 90%;
+  max-width: 1300px;
+  margin: 75px auto 40px; /* Deja espacio bajo el header */
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+
 .cart-title {
   font-size: 32px;
   font-weight: bold;

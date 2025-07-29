@@ -10,6 +10,7 @@
 .login-container {
   /* Altura mínima del 100% del viewport para ocupar toda la pantalla */
   min-height: 100vh;
+  width: 100%;
   /* Fondo degradado suave que va de un beige claro a un tono más cálido */
   background: linear-gradient(135deg, #fdf7f2 0%, #f8f4f0 100%);
   /* Centramos el contenido tanto horizontal como verticalmente */

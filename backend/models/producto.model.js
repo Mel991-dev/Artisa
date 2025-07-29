@@ -109,5 +109,52 @@ module.exports = {
   obtenerProductoPorId,
   actualizarProducto,
   eliminarProducto,
-  obtenerCategorias
-}; 
+  obtenerCategorias,
+  listarProductos
+};
+/**
+ * Lista todos los productos con filtros opcionales
+ * @param {Object} filtros - { nombre, categoria, precioMin, precioMax }
+ */
+async function listarProductos(filtros = {}) {
+  const pool = await poolPromise;
+  let query = `SELECT p.id_producto, p.id_artesano, p.id_categoria, p.nombre, p.descripcion, p.precio, p.stock, p.imagen,
+                      c.nombre as nombre_categoria, a.especialidad, a.biografia, a.historia, a.id_usuario,
+                      u.nombre as nombre_artesano, u.apellido as apellido_artesano, u.rol as rol_artesano
+               FROM Producto p
+               LEFT JOIN Categoria c ON p.id_categoria = c.id_categoria
+               INNER JOIN Artesano a ON p.id_artesano = a.id_artesano
+               INNER JOIN Usuario u ON a.id_usuario = u.id_usuario
+               WHERE 1=1`;
+  const params = [];
+  if (filtros.nombre) {
+    query += ' AND p.nombre LIKE @nombre';
+    params.push({ name: 'nombre', type: sql.NVarChar, value: `%${filtros.nombre}%` });
+  }
+  if (filtros.categoria) {
+    // Si el filtro es un número, filtra por id_categoria
+    if (!isNaN(Number(filtros.categoria))) {
+      query += ' AND p.id_categoria = @id_categoria';
+      params.push({ name: 'id_categoria', type: sql.Int, value: Number(filtros.categoria) });
+    } else {
+      // Si es texto, filtra por nombre de la categoría
+      query += ' AND c.nombre = @categoria_nombre';
+      params.push({ name: 'categoria_nombre', type: sql.NVarChar, value: filtros.categoria });
+    }
+  }
+  if (filtros.precioMin) {
+    query += ' AND p.precio >= @precioMin';
+    params.push({ name: 'precioMin', type: sql.Decimal(10,2), value: filtros.precioMin });
+  }
+  if (filtros.precioMax) {
+    query += ' AND p.precio <= @precioMax';
+    params.push({ name: 'precioMax', type: sql.Decimal(10,2), value: filtros.precioMax });
+  }
+  query += ' ORDER BY p.id_producto DESC';
+  let req = pool.request();
+  params.forEach(param => {
+    req.input(param.name, param.type, param.value);
+  });
+  const result = await req.query(query);
+  return result.recordset;
+}

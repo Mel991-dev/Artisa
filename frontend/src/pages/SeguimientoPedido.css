@@ -1,0 +1,248 @@
+/* SeguimientoPedido.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #faf7f4;
+  color: #333;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.header-section {
+  background: #dd6e2d;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="0.8" fill="rgba(255,255,255,0.08)"/><circle cx="40" cy="80" r="1.2" fill="rgba(255,255,255,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+  opacity: 0.3;
+}
+
+.package-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 30px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+  animation: float 3s ease-in-out infinite;
+}
+
+.header-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.header-subtitle {
+  font-size: 1.3rem;
+  opacity: 0.95;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  font-weight: 400;
+}
+
+.container {
+  max-width: 800px;
+  margin: -50px auto 50px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.search-card {
+  background: white;
+  border-radius: 20px;
+  padding: 50px 40px;
+  box-shadow: 0 20px 60px rgba(124, 74, 39, 0.15);
+  border: 2px solid rgba(124, 74, 39, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #D68F48, #B87A3B);
+}
+
+.search-title {
+  color: #EF6210;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.search-form {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.search-input-container {
+  flex: 1;
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 18px;
+  z-index: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 18px 20px 18px 55px;
+  border: 2px solid rgba(124, 74, 39, 0.2);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #fafafa;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #D68F48;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(214, 143, 72, 0.1);
+}
+
+.search-btn {
+  padding: 18px 35px;
+  background: #D68F48;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 15px rgba(214, 143, 72, 0.3);
+}
+
+.search-btn:hover {
+  background: #B87A3B;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(214, 143, 72, 0.4);
+}
+
+.example-section {
+  text-align: center;
+  padding: 20px;
+  background: #f8f5f2;
+  border-radius: 12px;
+  border: 1px solid rgba(124, 74, 39, 0.1);
+}
+
+.example-label {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.example-codes {
+  color: #7C4A27;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  background: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(124, 74, 39, 0.2);
+  display: inline-block;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 2.2rem;
+  }
+
+  .header-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .search-card {
+    padding: 35px 25px;
+    margin-top: -30px;
+  }
+
+  .search-form {
+    flex-direction: column;
+  }
+
+  .search-btn {
+    padding: 16px 25px;
+  }
+
+  .container {
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-section {
+    padding: 60px 15px;
+  }
+
+  .header-title {
+    font-size: 1.8rem;
+  }
+
+  .search-card {
+    padding: 25px 20px;
+  }
+
+  .search-input {
+    padding: 16px 18px 16px 50px;
+  }
+}
+
+.search-btn:focus {
+  outline: 3px solid rgba(214, 143, 72, 0.5);
+  outline-offset: 2px;
+}

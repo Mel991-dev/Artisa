@@ -5,6 +5,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // Importa los componentes de cada página
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import PublicProfile from "./pages/PublicProfile";
@@ -21,6 +22,12 @@ import CatalogoProductos from "./pages/CatalogoProductos";
 import VistaProducto from "./pages/VistaProducto";
 import Carrito from "./pages/Carrito";
 import Checkout from "./pages/Checkout";
+import ConfirmacionPago from "./pages/ConfirmacionPago";
+import SeguimientoPedido from "./pages/SeguimientoPedido";
+import Blog from "./pages/Blog";
+import Articulo from "./pages/Articulo";
+import CrearArticulo from "./pages/CrearArticulo";
+import Home from "./pages/Home";
 // import { AuthProvider } from "./context/AuthContext";
 import './index.css';
 
@@ -47,17 +54,23 @@ function App() {
         <Route path="/subir-fotos" element={<SubirFotos/>}/>
         <Route path="/ver-galeria/:id_artesano" element={<VerGaleria/>}/>
         <Route path="/catalogo-productos" element={<CatalogoProductos/>}/>
-        <Route path="/vista-producto" element={<VistaProducto/>}/>
+        <Route path="/vista-producto/:id" element={<VistaProducto/>}/>
         <Route path="/carrito" element={<Carrito/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
+        <Route path="/confirmacion-pago" element={<ConfirmacionPago/>}/>
+        <Route path="/seguimiento-pedido" element={<SeguimientoPedido/>}/>
+        <Route path="/blog" element={<Blog/>}/>
+        <Route path="/articulo" element={<Articulo/>}/>
+        <Route path="/crear-articulo" element={<CrearArticulo/>}/>
         <Route path="/perfil" element={
           <PrivateRoute>
             <ActualizarPerfil/>
           </PrivateRoute>
         }/>
         {/* Puedes agregar más rutas según tus páginas */}
-        <Route path="/" element={<h1>Bienvenido a Artisa</h1>} />
+        <Route path="/" element={<Home />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }

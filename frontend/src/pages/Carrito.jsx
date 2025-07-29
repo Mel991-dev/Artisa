@@ -49,7 +49,7 @@ function Carrito() {
   const subtotal = productos.reduce((acc, p) => acc + p.precio * p.cantidad, 0);
 
   return (
-    <div className="container">
+    <div className="carrito-wrapper">
       <div className="cart-header">
         <h1 className="cart-title">
           <span className="cart-icon">🛒</span>

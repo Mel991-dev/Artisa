@@ -1,3 +1,20 @@
+// Listar productos con filtros
+async function listarProductos(req, res) {
+  try {
+    // Recoger filtros desde query params
+    const filtros = {};
+    if (req.query.nombre) filtros.nombre = req.query.nombre;
+    if (req.query.categoria) filtros.categoria = req.query.categoria;
+    if (req.query.precioMin) filtros.precioMin = parseFloat(req.query.precioMin);
+    if (req.query.precioMax) filtros.precioMax = parseFloat(req.query.precioMax);
+
+    const productos = await productoModel.listarProductos(filtros);
+    res.json(productos);
+  } catch (err) {
+    console.error('Error al listar productos:', err);
+    res.status(500).json({ msg: 'Error al listar productos', error: err.message });
+  }
+}
 // backend/controllers/producto.controller.js
 const productoModel = require('../models/producto.model');
 const { poolPromise, sql } = require('../db');
@@ -53,11 +70,12 @@ async function crearProducto(req, res) {
       return res.status(400).json({ msg: 'ID de artesano es requerido.' });
     }
 
-    // Procesar imagen si se subió
-    let rutaImagen = null;
+
+    // Procesar imagen: guardar solo el nombre del archivo
+    let nombreImagen = null;
     if (req.file) {
-      rutaImagen = `/uploads/productos/${req.file.filename}`;
-      console.log('Imagen procesada:', rutaImagen);
+      nombreImagen = req.file.filename;
+      console.log('Imagen procesada (solo nombre):', nombreImagen);
     } else {
       console.log('No se subió imagen');
     }
@@ -65,7 +83,7 @@ async function crearProducto(req, res) {
     const datosProducto = {
       ...datos,
       id_artesano,
-      imagen: rutaImagen
+      imagen: nombreImagen
     };
     
     console.log('Datos a insertar en BD:', datosProducto);
@@ -76,7 +94,7 @@ async function crearProducto(req, res) {
     res.status(201).json({ 
       msg: 'Producto creado correctamente.',
       id_producto,
-      imagen: rutaImagen
+      imagen: nombreImagen
     });
     
     console.log('=== FIN CREAR PRODUCTO ===');
@@ -169,19 +187,20 @@ async function actualizarProducto(req, res) {
       return res.status(404).json({ msg: 'Producto no encontrado.' });
     }
 
-    // Procesar imagen si se subió una nueva
-    let rutaImagen = productoExistente.imagen; // Mantener imagen actual por defecto
+
+    // Procesar imagen: guardar solo el nombre del archivo
+    let nombreImagen = productoExistente.imagen; // Mantener imagen actual por defecto
     if (req.file) {
-      rutaImagen = `/uploads/productos/${req.file.filename}`;
-      console.log('Nueva imagen procesada:', rutaImagen);
+      nombreImagen = req.file.filename;
+      console.log('Nueva imagen procesada (solo nombre):', nombreImagen);
     } else {
-      console.log('No se subió nueva imagen, manteniendo la actual:', rutaImagen);
+      console.log('No se subió nueva imagen, manteniendo la actual:', nombreImagen);
     }
 
     const datosActualizados = {
       id_producto: parseInt(id_producto),
       ...datos,
-      imagen: rutaImagen
+      imagen: nombreImagen
     };
     
     console.log('Datos a actualizar en BD:', datosActualizados);
@@ -191,7 +210,7 @@ async function actualizarProducto(req, res) {
 
     res.json({ 
       msg: 'Producto actualizado correctamente.',
-      imagen: rutaImagen
+      imagen: nombreImagen
     });
     
     console.log('=== FIN ACTUALIZAR PRODUCTO ===');
@@ -238,4 +257,5 @@ module.exports = {
   actualizarProducto,
   eliminarProducto,
   obtenerCategorias
+  ,listarProductos
 }; 

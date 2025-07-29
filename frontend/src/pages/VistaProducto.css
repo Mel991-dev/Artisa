@@ -17,7 +17,8 @@
 .producto-imagen-galeria {
   flex: 1;
   min-width: 300px;
-  border: 2px solid #d8a76c;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(240, 101, 14, 0.08);
   padding: 1rem;
   background: #f3f3f3;
   display: flex;
@@ -26,10 +27,13 @@
 }
 
 .imagen-principal img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  object-fit: contain;
+width: 100%;
+max-width: 600px;
+height: 350px;
+min-height: 250px;
+object-fit: cover;
+border-radius: 12px;
+box-shadow: 0 4px 16px rgba(0,0,0,0.08);
 }
 
 .galeria-imagenes {
@@ -42,8 +46,8 @@
   width: 60px;
   height: 60px;
   object-fit: cover;
-  border: 1px solid #ccc;
   border-radius: 4px;
+  box-shadow: 0 2px 6px rgba(240, 101, 14, 0.08);
   cursor: pointer;
 }
 
@@ -78,7 +82,7 @@
 /* Precio */
 .producto-precio {
   font-size: 1.6rem;
-  color: #ff5c42;
+  color: #8B4513;
   font-weight: bold;
 }
 
@@ -95,9 +99,9 @@
 /* Información del artesano */
 .producto-artesano {
   background: #fdfaf7;
-  border: 1px solid #d9a76e;
-  padding: 1rem;
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(240, 101, 14, 0.08);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -105,7 +109,7 @@
 
 .etiqueta-creado {
   font-weight: bold;
-  color: #7a4a00;
+  color: #8B4513;
 }
 
 .perfil-artesano {
@@ -134,8 +138,8 @@
 
 .btn-perfil-artesano {
   padding: 0.5rem 1rem;
-  border: 2px solid #ff4b2b;
-  color: #ff4b2b;
+  border: 2px solid #f0650e;
+  color: #f0650e;
   background: transparent;
   border-radius: 6px;
   font-weight: bold;
@@ -151,7 +155,7 @@
 /* Botón Añadir al carrito */
 .btn-agregar-carrito {
   margin-top: 1.2rem;
-  background: #ff6c4b;
+  background: #f0650e;
   color: white;
   border: none;
   padding: 0.9rem 1.5rem;
@@ -163,7 +167,7 @@
 }
 
 .btn-agregar-carrito:hover {
-  background: #e65234;
+  background: #f0650e;
 }
 
 /* Reseñas publicadas */
@@ -171,12 +175,13 @@
   background: #fdfaf7;
   padding: 2rem;
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(240, 101, 14, 0.08);
   font-size: 1.2rem;
 }
 
 .titulo-reseñas {
   font-size: 1.5rem;
-  color: #894d11;
+  color: #8B4513;
   margin-bottom: 1rem;
 }
 
@@ -185,14 +190,14 @@
   padding: 1.5rem;
   border-radius: 10px;
   margin-bottom: 1rem;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 2px 6px rgba(240, 101, 14, 0.08);
 }
 
 .reseña-cabecera {
   display: flex;
   justify-content: space-between;
   font-weight: bold;
-  color: #7a4a00;
+  color: #8B4513;
   margin-bottom: 0.3rem;
 }
 
@@ -207,12 +212,12 @@
   border-radius: 12px;
   padding: 2rem;
   margin-top: 2rem;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 12px rgba(240, 101, 14, 0.08);
 }
 
 .titulo-reseña {
   font-size: 2rem;
-  color: #894d11;
+  color: #8B4513;
   margin-bottom: 0.5rem;
 }
 
@@ -241,7 +246,7 @@
 
 /* Botón de publicar reseña */
 .btn-publicar-reseña {
-  background: #ff6c4b;
+  background: #f0650e;
   color: white;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -253,5 +258,5 @@
 }
 
 .btn-publicar-reseña:hover {
-  background: #e65234;
+  background: #f0650e;
 }

@@ -1,121 +1,179 @@
-// Componente VistaProducto.jsx actualizado con funcionalidad de validación de reseñas
+// Componente VistaProducto.jsx actualizado con funcionalidad de validación de resenas
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import './VistaProducto.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios'; // Importa axios para peticiones HTTP
 
 const VistaProducto = () => {
+  const { id } = useParams();
+  const [producto, setProducto] = useState(null);
+  const [artesano, setArtesano] = useState(null);
+  const [resenas, setResenas] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  // Estados para reseña nueva
   const [calificacion, setCalificacion] = useState(0);
   const [hover, setHover] = useState(0);
   const [comentario, setComentario] = useState('');
   const [mensaje, setMensaje] = useState('');
-  const [tipoMensaje, setTipoMensaje] = useState(''); // 'error' o 'exito'
+  const [tipoMensaje, setTipoMensaje] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        // Petición al backend para obtener todos los datos del producto y artesano
+        const response = await axios.get(`http://localhost:3000/api/productos/detalle/${id}`);
+        setProducto(response.data.producto);
+        setArtesano(response.data.artesano);
+        // Obtener reseñas desde el nuevo endpoint
+        const resenasResp = await axios.get(`http://localhost:3000/api/resenas/producto/${id}`);
+        setResenas(resenasResp.data || []);
+      } catch (err) {
+        setError('Error al cargar los datos del producto');
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [id]);
 
   const manejarClickEstrella = (valor) => {
     setCalificacion(valor);
   };
 
-  const manejarPublicarReseña = () => {
+  // Función para publicar la reseña usando axios
+  const manejarPublicarReseña = async () => {
     if (calificacion === 0) {
       setMensaje('Por favor selecciona una calificación con estrellas.');
       setTipoMensaje('error');
       return;
     }
-
     if (comentario.trim() === '') {
       setMensaje('Por favor escribe un comentario antes de publicar.');
       setTipoMensaje('error');
       return;
     }
-
-    // Simulación de envío exitoso
-    setMensaje('¡Gracias por tu reseña!');
-    setTipoMensaje('exito');
-
-    // Limpiar campos
-    setComentario('');
-    setCalificacion(0);
-    setHover(0);
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/resenas',
+        {
+          id_producto: id,
+          comentario,
+          calificacion
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        }
+      );
+      setMensaje('¡Gracias por tu reseña!');
+      setTipoMensaje('exito');
+      // Refresca las reseñas desde el backend tras publicar
+      try {
+        const resenasResp = await axios.get(`http://localhost:3000/api/resenas/producto/${id}`);
+        setResenas(resenasResp.data || []);
+      } catch {}
+      setComentario('');
+      setCalificacion(0);
+      setHover(0);
+    } catch (error) {
+      setMensaje(error.response?.data?.error || 'Error al publicar la reseña.');
+      setTipoMensaje('error');
+    }
   };
+
+  if (loading) return <div className="contenedor-detalle-producto"><p>Cargando producto...</p></div>;
+  if (error) return <div className="contenedor-detalle-producto"><p>{error}</p></div>;
+  if (!producto || !artesano) return <div className="contenedor-detalle-producto"><p>No se encontró el producto.</p></div>;
 
   return (
     <div className="contenedor-detalle-producto">
-      {/* Contenedor principal dividido en dos secciones */}
       <div className="contenedor-principal-producto">
         <div className="producto-imagen-galeria">
           <div className="imagen-principal">
-            <img src="/camara.png" alt="Imagen Principal" />
-          </div>
-          <div className="galeria-imagenes">
-            <img src="/camara.png" alt="Miniatura 1" />
-            <img src="/camara.png" alt="Miniatura 2" />
+            <img
+              src={producto.imagen ? `http://localhost:3000/uploads/productos/${producto.imagen}` : '/img/product-default.svg'}
+              alt={producto.nombre}
+            />
           </div>
         </div>
 
         <div className="producto-detalles">
-          <h1 className="producto-titulo">Collar de Plata Artesanal</h1>
+          <h1 className="producto-titulo">{producto.nombre}</h1>
+          {/* Descripción debajo del nombre */}
+          {producto.descripcion && (
+            <div className="producto-descripcion" style={{ marginBottom: '1rem' }}>
+              <h3>Descripción</h3>
+              <p>{producto.descripcion}</p>
+            </div>
+          )}
           <div className="producto-calificacion">
-            <span>⭐⭐⭐☆☆</span>
-            <span className="total-resenas">(24 reseñas)</span>
+            <span>{'★'.repeat(Math.round(producto.promedio_calificacion || 0)) + '☆'.repeat(5 - Math.round(producto.promedio_calificacion || 0))}</span>
+            <span className="total-resenas">({resenas.length} resenas)</span>
           </div>
-          <p className="producto-precio">$45.000</p>
+          <p className="producto-precio">${producto.precio?.toLocaleString()}</p>
           <p className="producto-stock">
-            📦 <span>Stock disponible: 8 unidades</span>
+            📦 <span>Stock disponible: {producto.stock}</span>
           </p>
-
           <div className="producto-artesano">
             <p className="etiqueta-creado">Creado por:</p>
             <div className="perfil-artesano">
-              <div className="avatar">MG</div>
+              <img
+                className="avatar"
+                src={artesano.foto_perfil ? `http://localhost:3000/uploads/${artesano.foto_perfil}` : '/img/user-default.svg'}
+                alt={artesano.nombre}
+                style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', marginRight: 12 }}
+              />
               <div className="info-artesano">
-                <p className="nombre-artesano">María González</p>
-                <p>Artesana especializada en joyería de plata con técnicas tradicionales colombianas.</p>
+                <p className="nombre-artesano">{artesano.nombre}</p>
+                <p>{artesano.biografia}</p>
               </div>
             </div>
-            <Link to="/artesano/1">
+            <Link to={`/artesano/${artesano.id_artesano}`}>
               <button className="btn-perfil-artesano">Ver Perfil del Artesano</button>
             </Link>
           </div>
-
           <button className="btn-agregar-carrito">🛒 Añadir al Carrito</button>
         </div>
       </div>
 
-      {/* Reseñas publicadas */}
-      <div className="reseñas-publicadas">
-        <h2 className="titulo-reseñas">Reseñas de Clientes (3)</h2>
-        <div className="reseña">
-          <div className="reseña-cabecera">
-            <strong>Laura Pérez</strong>
-            <span className="fecha-reseña">15 de Noviembre, 2024</span>
-          </div>
-          <p className="reseña-calificacion">★★★★★</p>
-          <p>Absolutamente hermoso. La calidad es excepcional y se nota el trabajo artesanal. Llegó perfectamente empacado.</p>
-        </div>
-
-        <div className="reseña">
-          <div className="reseña-cabecera">
-            <strong>Roberto Silva</strong>
-            <span className="fecha-reseña">10 de Noviembre, 2024</span>
-          </div>
-          <p className="reseña-calificacion">★★★★★</p>
-          <p>Compré este collar para mi esposa y quedó encantada. Es una pieza única y muy bien elaborada.</p>
-        </div>
-
-        <div className="reseña">
-          <div className="reseña-cabecera">
-            <strong>Carmen Rodríguez</strong>
-            <span className="fecha-reseña">5 de Noviembre, 2024</span>
-          </div>
-          <p className="reseña-calificacion">★★★★☆</p>
-          <p>Muy bonito collar, aunque tardó un poco más de lo esperado en llegar. Pero vale la pena la espera.</p>
-        </div>
+      <div className="resenas-publicadas">
+        <h2 className="titulo-resenas">Resenas de Clientes ({resenas.length})</h2>
+        {resenas.length === 0 ? (
+          <p>No hay resenas aún para este producto.</p>
+        ) : (
+          resenas.map((r, idx) => (
+            <div className="reseña" key={r.id_reseña || idx} style={{ position: 'relative' }}>
+              <div className="reseña-cabecera">
+                <strong>{r.nombre_usuario || 'Usuario'}</strong>
+                <span className="fecha-reseña">{r.fecha ? new Date(r.fecha).toLocaleString() : ''}</span>
+                {/* Icono de 3 puntos */}
+                <div className="menu-reseña">
+                  <button className="btn-menu-reseña" tabIndex={0}>
+                    <img src="/img/dots-vertical.svg" alt="Opciones" style={{ width: 20, height: 20, background: 'none', border: 'none' }} />
+                  </button>
+                  <div className="opciones-reseña">
+                    <button className="opcion-reseña">Actualizar</button>
+                    <button className="opcion-reseña">Eliminar</button>
+                  </div>
+                </div>
+              </div>
+              <p className="reseña-calificacion">
+                {'★'.repeat(r.calificacion) + '☆'.repeat(5 - r.calificacion)}
+              </p>
+              <p>{r.comentario}</p>
+            </div>
+          ))
+        )}
       </div>
 
-      {/* Formulario para publicar reseña */}
       <div className="formulario-reseña">
         <h2 className="titulo-reseña">Deja tu Reseña</h2>
-        <p className="nota-usuarios">Solo los usuarios que han comprado este producto pueden dejar reseñas</p>
+        <p className="nota-usuarios">Solo los usuarios que han comprado este producto pueden dejar resenas</p>
 
         <label htmlFor="calificacion">Tu Calificación </label>
         <div className="estrellas">
@@ -146,15 +204,16 @@ const VistaProducto = () => {
           onChange={(e) => setComentario(e.target.value)}
         ></textarea>
 
-        {/* Mensaje de validación */}
         {mensaje && (
           <p style={{ color: tipoMensaje === 'error' ? 'red' : 'green', marginTop: '10px' }}>{mensaje}</p>
         )}
 
-        <button className="btn-publicar-reseña" onClick={manejarPublicarReseña}>
+        <button className="dashboard-artesano-add-btn" onClick={manejarPublicarReseña}>
           Publicar Reseña
         </button>
       </div>
+
+      {/* ...existing code... */}
     </div>
   );
 };
