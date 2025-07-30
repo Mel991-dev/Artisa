@@ -28,6 +28,7 @@ import Blog from "./pages/Blog";
 import Articulo from "./pages/Articulo";
 import CrearArticulo from "./pages/CrearArticulo";
 import Home from "./pages/Home";
+import EditarResena from "./pages/EditarResena";
 // import { AuthProvider } from "./context/AuthContext";
 import './index.css';
 
@@ -60,13 +61,14 @@ function App() {
         <Route path="/confirmacion-pago" element={<ConfirmacionPago/>}/>
         <Route path="/seguimiento-pedido" element={<SeguimientoPedido/>}/>
         <Route path="/blog" element={<Blog/>}/>
-        <Route path="/articulo" element={<Articulo/>}/>
+        <Route path="/articulo/:id_post" element={<Articulo/>}/>
         <Route path="/crear-articulo" element={<CrearArticulo/>}/>
         <Route path="/perfil" element={
           <PrivateRoute>
             <ActualizarPerfil/>
           </PrivateRoute>
         }/>
+        <Route path="/editar-resena/:id_reseña" element={<EditarResena />} />
         {/* Puedes agregar más rutas según tus páginas */}
         <Route path="/" element={<Home />} />
       </Routes>

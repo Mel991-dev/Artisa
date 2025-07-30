@@ -72,11 +72,15 @@ const VistaProducto = () => {
       );
       setMensaje('¡Gracias por tu reseña!');
       setTipoMensaje('exito');
-      // Refresca las reseñas desde el backend tras publicar
-      try {
-        const resenasResp = await axios.get(`http://localhost:3000/api/resenas/producto/${id}`);
-        setResenas(resenasResp.data || []);
-      } catch {}
+      setResenas([
+        ...resenas,
+        {
+          nombre: 'Tú',
+          fecha: new Date().toLocaleDateString(),
+          calificacion,
+          comentario
+        }
+      ]);
       setComentario('');
       setCalificacion(0);
       setHover(0);

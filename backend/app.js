@@ -37,6 +37,8 @@ app.use('/api/artesanos', artesanoRoutes);
 // Importar y montar las rutas de galería
 const galeriaRoutes = require('./routes/galeria.routes');
 app.use('/api/galeria', galeriaRoutes);
+const blogRoutes = require('./routes/blog.routes');
+app.use('/api/blog', blogRoutes);
 
 // Importar y montar las rutas de usuario
 const usuarioRoutes = require('./routes/usuario.routes');
@@ -52,4 +54,4 @@ app.listen(PORT, () => {
 
 // Importar y montar las rutas de reseñas
 const resenaRoutes = require('./routes/resena.routes');
-app.use('/api/resenas', resenaRoutes);
+app.use('/api/resenas', require('./routes/resena.routes'));

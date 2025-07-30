@@ -98,10 +98,10 @@ function validarDatosArtesano(datos) {
 async function obtenerPerfil(req, res) {
   try {
     console.log('=== OBTENER PERFIL ===');
-    console.log('Usuario autenticado:', req.usuario);
-    console.log('ID del usuario:', req.usuario.id_usuario);
+    console.log('Usuario autenticado:', req.user);
+    console.log('ID del usuario:', req.user?.id_usuario);
     
-    const id_usuario = req.usuario.id_usuario;
+    const id_usuario = req.user?.id_usuario;
     const perfil = await usuarioModel.obtenerPerfilCompleto(id_usuario);
     
     console.log('Perfil obtenido:', perfil);
@@ -128,7 +128,7 @@ async function actualizarPerfil(req, res) {
     console.log('Archivo recibido:', req.file);
     console.log('Headers recibidos:', req.headers);
     
-    const id_usuario = req.user.id;
+    const id_usuario = req.user.id_usuario;
     const datos = req.body;
     
     console.log('ID usuario:', id_usuario);

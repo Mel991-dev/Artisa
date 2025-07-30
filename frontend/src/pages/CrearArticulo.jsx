@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CrearArticulo.css';
+import axios from 'axios';
 
 const CrearArticulo = () => {
   const [titulo, setTitulo] = useState('');
@@ -11,7 +12,7 @@ const CrearArticulo = () => {
     setImagen(file);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!titulo.trim()) return alert('Por favor, ingresa un título.');
     if (!imagen) return alert('Por favor, selecciona una imagen.');
     if (!contenido.trim()) return alert('Por favor, escribe el contenido.');
@@ -21,13 +22,34 @@ const CrearArticulo = () => {
       if (!confirmar) return;
     }
 
-    alert('¡Artículo publicado exitosamente!');
-    console.log({
-      titulo,
-      contenido,
-      imagen,
-      fecha: new Date(),
-    });
+    try {
+      // Preparar datos para la tabla BlogPost
+      const formData = new FormData();
+      formData.append('titulo', titulo);
+      formData.append('contenido', contenido);
+      formData.append('imagen_blog', imagen);
+      // id_usuario: por ahora fijo, luego se tomará del usuario autenticado
+      formData.append('id_usuario', 1);
+
+      // fecha_publicacion: el backend puede asignarla automáticamente, pero si se requiere:
+      // formData.append('fecha_publicacion', new Date().toISOString());
+
+      // Enviar al backend (ruta pendiente de crear)
+      const response = await axios.post('http://localhost:3000/api/blog/articulos', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+
+      alert('¡Artículo publicado exitosamente!');
+      // Limpiar formulario
+      setTitulo('');
+      setContenido('');
+      setImagen(null);
+    } catch (err) {
+      alert('Error al publicar el artículo.');
+      console.error('Error al publicar artículo:', err);
+    }
   };
 
   return (

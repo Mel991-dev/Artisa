@@ -1,75 +1,88 @@
 // Blog.jsx
-import React from 'react';
+
+import React, { useEffect, useState } from 'react';
 import './Blog.css';
 import { Link } from 'react-router-dom';
-
-const articulos = [
-  {
-    id: 1,
-    titulo: 'La Tradición de la Filigrana en Colombia',
-    resumen: 'Descubre cómo esta técnica ancestral de joyería ha pasado de generación en generación...',
-    autor: 'María González',
-    fecha: '2024-11-15'
-  },
-  {
-    id: 2,
-    titulo: 'El Impacto Social del Comercio Artesanal',
-    resumen: 'Conoce cómo la compra de productos artesanales contribuye al desarrollo económico...',
-    autor: 'Carlos Mendoza',
-    fecha: '2024-11-12'
-  },
-  {
-    id: 3,
-    titulo: 'Historia de los Textiles Wayuu',
-    resumen: 'Un viaje a través del tiempo para entender el significado cultural de los textiles...',
-    autor: 'Ana Rodríguez',
-    fecha: '2024-11-08'
-  },
-  {
-    id: 4,
-    titulo: 'Técnicas Ancestrales de Cerámica Precolombina',
-    resumen: 'Explora las técnicas milenarias que aún utilizan los ceramistas colombianos...',
-    autor: 'Diego Herrera',
-    fecha: '2024-11-05'
-  },
-  {
-    id: 5,
-    titulo: 'El Arte del Tejido en Telar Tradicional',
-    resumen: 'Descubre los secretos detrás de la elaboración de textiles en telar tradicional...',
-    autor: 'Carmen Silva',
-    fecha: '2024-11-02'
-  },
-  {
-    id: 6,
-    titulo: 'Sostenibilidad en la Artesanía Moderna',
-    resumen: 'Cómo los artesanos contemporáneos están adoptando prácticas sostenibles...',
-    autor: 'Luis Martínez',
-    fecha: '2024-10-28'
-  }
-];
+import axios from 'axios';
 
 function Blog() {
+  const [articulos, setArticulos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchArticulos = async () => {
+      try {
+        // Ruta pendiente de crear en el backend
+        const response = await axios.get('http://localhost:3000/api/blog/articulos');
+        setArticulos(response.data);
+      } catch (err) {
+        setError('No se pudieron cargar los artículos.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchArticulos();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="container">
+        <div className="header">
+          <h1 className="header-title">Cargando artículos...</h1>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container">
+        <div className="header">
+          <h1 className="header-title">{error}</h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container">
       <div className="header">
         <h1 className="header-title">Explora nuestros artículos ({articulos.length})</h1>
+        <Link to="/crear-articulo">
+          <button className="crear-articulo-btn" style={{ marginTop: '18px', marginBottom: '8px', background: '#f0650e', color: 'white', fontWeight: 'bold', fontSize: '1rem', padding: '12px 28px', border: 'none', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.3s ease' }}>
+            📝 Crear Artículo
+          </button>
+        </Link>
       </div>
 
       <div className="articles-grid">
         {articulos.map((articulo) => (
-          <article key={articulo.id} className="article-card">
-            <div className="article-image"></div>
+          <article key={articulo.id_post} className="article-card">
+            <div className="article-image">
+              {/* Mostrar imagen si existe */}
+              {articulo.imagen_blog && (
+                <img
+                  src={`http://localhost:3000/uploads/blog/${articulo.imagen_blog}`}
+                  alt={articulo.titulo}
+                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
+                />
+              )}
+            </div>
             <div className="article-content">
               <h2 className="article-title">{articulo.titulo}</h2>
-              <p className="article-excerpt">{articulo.resumen}</p>
               <div className="article-meta">
                 <div className="author-info">
                   <div className="author-icon">👤</div>
                   <span className="author-name">{articulo.autor}</span>
                 </div>
-                <span className="publish-date">{new Date(articulo.fecha).toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                <span className="publish-date">
+                  {articulo.fecha_publicacion
+                    ? new Date(articulo.fecha_publicacion).toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' })
+                    : 'Sin fecha'}
+                </span>
               </div>
-              <Link to="/articulo"> <button className="read-more-btn">Leer Más &gt;</button></Link>
+              <Link to={`/articulo/${articulo.id_post}`}> <button className="read-more-btn">Leer Más &gt;</button></Link>
             </div>
           </article>
         ))}

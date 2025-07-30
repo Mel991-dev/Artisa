@@ -18,7 +18,12 @@ module.exports = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET || 'tu_secret_key');
     console.log('Token decodificado:', decoded);
-    req.usuario = { id_usuario: decoded.id_usuario, nombre: decoded.nombre };
+    // Aseguramos que req.user tenga id_usuario
+    req.user = {
+      ...decoded,
+      id_usuario: decoded.id_usuario || decoded.id || decoded.usuario_id // soporta diferentes nombres de campo
+    };
+    console.log('req.user asignado en middleware:', req.user);
     next();
   } catch (err) {
     console.log('Error al verificar token:', err.message);
