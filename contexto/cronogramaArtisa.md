@@ -236,14 +236,14 @@
 #### 9.1 Backend - APIs Administrativas
 - **9.1.1** Dashboard de estadísticas
 - **9.1.2** Gestión de usuarios
-- **9.1.5** Configuraciones del sistema
-- **9.1.6** Moderación de reseñas y blog
+- **9.1.3** Configuraciones del sistema
+- **9.1.4** Moderación de reseñas y blog
 
 #### 9.2 Frontend - Panel Administrativo
 - **9.2.1** Dashboard principal
 - **9.2.2** Gestión de usuarios
 - **9.2.3** Moderación de productos
-- **9.2.5** Testing administrativo
+- **9.2.4** Testing administrativo
 
 ---
 

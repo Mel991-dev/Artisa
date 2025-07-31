@@ -44,6 +44,10 @@ app.use('/api/blog', blogRoutes);
 const usuarioRoutes = require('./routes/usuario.routes');
 app.use('/api/usuarios', usuarioRoutes);
 
+// Importar y montar las rutas de administrador
+const adminRoutes = require('./routes/admin.routes');
+app.use('/api/admin', adminRoutes);
+
 app.use(logger);
 app.use(errorHandler);
 

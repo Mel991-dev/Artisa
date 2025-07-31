@@ -60,10 +60,15 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
   const { correo, contraseña } = req.body;
   try {
+    console.log('=== INICIO LOGIN ===');
+    console.log('Intentando login para:', correo);
+    
     const pool = await poolPromise;
     const user = await pool.request()
       .input('correo', sql.NVarChar, correo)
       .query('SELECT * FROM Usuario WHERE correo = @correo');
+    
+    console.log('Usuario encontrado:', user.recordset[0] ? 'Sí' : 'No');
     if (user.recordset.length === 0) {
       return res.status(400).json({ msg: 'Usuario o contraseña incorrectos.' });
     }
@@ -72,11 +77,24 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       return res.status(400).json({ msg: 'Usuario o contraseña incorrectos.' });
     }
-    // Genera el token
+    console.log('Rol del usuario:', usuario.rol);
+    
+    // Genera el token con información completa
+    const tokenPayload = { 
+      id_usuario: usuario.id_usuario,
+      nombre: usuario.nombre,
+      apellido: usuario.apellido,
+      correo: usuario.correo,
+      rol: usuario.rol,
+      foto: usuario.foto || null
+    };
+    
+    console.log('Token payload:', tokenPayload);
+    
     const token = jwt.sign(
-      { id_usuario: usuario.id_usuario, nombre: usuario.nombre, rol: usuario.rol },
+      tokenPayload,
       process.env.JWT_SECRET || 'tu_secret_key',
-      { expiresIn: '2h' }
+      { expiresIn: '24h' }
     );
     
     // Devuelve información más completa del usuario

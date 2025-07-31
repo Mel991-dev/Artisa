@@ -10,6 +10,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import DashboardArtesano from "./pages/DashboardArtesano";
 import DashboardAdmin from "./pages/DashboardAdmin";
+import AdminRoute from "./components/AdminRoute";
 import CrearProducto from "./pages/CrearProducto";
 import EditarProducto from "./pages/EditarProducto";
 import GestionarGaleria from "./pages/GestionarGaleria";
@@ -50,9 +51,9 @@ function App() {
           </PrivateRoute>
         }/>
         <Route path="/dashboard-admin" element={
-          <PrivateRoute>
+          <AdminRoute>
             <DashboardAdmin/>
-          </PrivateRoute>
+          </AdminRoute>
         }/>
         <Route path="/crear-producto" element={<CrearProducto/>}/>
         <Route path="/editar-producto/:id_producto" element={<EditarProducto/>}/>
