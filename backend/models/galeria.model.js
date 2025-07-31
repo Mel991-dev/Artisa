@@ -16,10 +16,10 @@ async function obtenerGaleriaPorArtesano(id_artesano) {
     const result = await pool.request()
       .input('id_artesano', sql.Int, id_artesano)
       .query(`
-        SELECT id_galeria, id_artesano, nombre_archivo, ruta_archivo, descripcion, es_principal, fecha_creacion
+        SELECT id_galeria, id_artesano, nombre_archivo, ruta_archivo, descripcion, es_principal, fecha_subida
         FROM GaleriaArtesano 
         WHERE id_artesano = @id_artesano 
-        ORDER BY es_principal DESC, fecha_creacion DESC
+        ORDER BY es_principal DESC, fecha_subida DESC
       `);
     
     console.log('Galería obtenida:', result.recordset);
@@ -132,17 +132,52 @@ async function crearGaleria(datos) {
  */
 async function actualizarGaleria(datos) {
   try {
+    console.log('=== ACTUALIZAR GALERÍA EN MODELO ===');
+    console.log('Datos recibidos:', datos);
+    
     const pool = await poolPromise;
     
-    await pool.request()
-      .input('id_galeria', sql.Int, datos.id_galeria)
-      .input('descripcion', sql.NVarChar, datos.descripcion)
-      .input('es_principal', sql.Bit, datos.es_principal)
-      .query(`
-        UPDATE GaleriaArtesano 
-        SET descripcion = @descripcion, es_principal = @es_principal
-        WHERE id_galeria = @id_galeria
-      `);
+    // Construir query dinámicamente según los campos que se van a actualizar
+    let query = 'UPDATE GaleriaArtesano SET ';
+    const inputs = [];
+    
+    // Agregar campos a actualizar
+    if (datos.descripcion !== undefined) {
+      query += 'descripcion = @descripcion, ';
+      inputs.push({ name: 'descripcion', type: sql.NVarChar, value: datos.descripcion });
+    }
+    
+    if (datos.nombre_archivo !== undefined) {
+      query += 'nombre_archivo = @nombre_archivo, ';
+      inputs.push({ name: 'nombre_archivo', type: sql.NVarChar, value: datos.nombre_archivo });
+    }
+    
+    if (datos.ruta_archivo !== undefined) {
+      query += 'ruta_archivo = @ruta_archivo, ';
+      inputs.push({ name: 'ruta_archivo', type: sql.NVarChar, value: datos.ruta_archivo });
+    }
+    
+    if (datos.es_principal !== undefined) {
+      query += 'es_principal = @es_principal, ';
+      inputs.push({ name: 'es_principal', type: sql.Bit, value: datos.es_principal });
+    }
+    
+    // Remover la última coma y agregar WHERE
+    query = query.slice(0, -2) + ' WHERE id_galeria = @id_galeria';
+    inputs.push({ name: 'id_galeria', type: sql.Int, value: datos.id_galeria });
+    
+    console.log('Query a ejecutar:', query);
+    console.log('Inputs:', inputs);
+    
+    // Construir request con inputs dinámicos
+    const request = pool.request();
+    inputs.forEach(input => {
+      request.input(input.name, input.type, input.value);
+    });
+    
+    await request.query(query);
+    
+    console.log('Galería actualizada correctamente en BD');
   } catch (error) {
     console.error('Error en actualizarGaleria:', error);
     throw error;

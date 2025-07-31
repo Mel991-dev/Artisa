@@ -1,13 +1,13 @@
 // Componente VistaProducto.jsx actualizado con funcionalidad de validación de resenas
 
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import './VistaProducto.css';
-import { Link } from 'react-router-dom';
 import axios from 'axios'; // Importa axios para peticiones HTTP
 
 const VistaProducto = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [producto, setProducto] = useState(null);
   const [artesano, setArtesano] = useState(null);
   const [resenas, setResenas] = useState([]);
@@ -19,6 +19,8 @@ const VistaProducto = () => {
   const [comentario, setComentario] = useState('');
   const [mensaje, setMensaje] = useState('');
   const [tipoMensaje, setTipoMensaje] = useState('');
+  // Obtener el id_usuario del usuario autenticado (desde el token)
+  const [idUsuarioActual, setIdUsuarioActual] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +40,19 @@ const VistaProducto = () => {
       setLoading(false);
     };
     fetchData();
+  }, [id]);
+
+  useEffect(() => {
+    // Decodificar el token para obtener el id_usuario
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        setIdUsuarioActual(payload.id_usuario);
+      } catch (e) {
+        setIdUsuarioActual(null);
+      }
+    }
   }, [id]);
 
   const manejarClickEstrella = (valor) => {
@@ -74,18 +89,27 @@ const VistaProducto = () => {
       setTipoMensaje('exito');
       setResenas([
         ...resenas,
-        {
-          nombre: 'Tú',
-          fecha: new Date().toLocaleDateString(),
-          calificacion,
-          comentario
-        }
+        response.data // Agrega la reseña completa con id_resena
       ]);
       setComentario('');
       setCalificacion(0);
       setHover(0);
     } catch (error) {
       setMensaje(error.response?.data?.error || 'Error al publicar la reseña.');
+      setTipoMensaje('error');
+    }
+  };
+
+  const manejarEliminarResena = async (id_resena) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/resenas/${id_resena}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
+      setResenas(resenas.filter(r => r.id_resena !== id_resena));
+    } catch (error) {
+      setMensaje('Error al eliminar la reseña.');
       setTipoMensaje('error');
     }
   };
@@ -151,19 +175,19 @@ const VistaProducto = () => {
           <p>No hay resenas aún para este producto.</p>
         ) : (
           resenas.map((r, idx) => (
-            <div className="reseña" key={r.id_reseña || idx} style={{ position: 'relative' }}>
+            <div className="reseña" key={r.id_resena || idx}>
               <div className="reseña-cabecera">
-                <strong>{r.nombre_usuario || 'Usuario'}</strong>
-                <span className="fecha-reseña">{r.fecha ? new Date(r.fecha).toLocaleString() : ''}</span>
-                {/* Icono de 3 puntos */}
-                <div className="menu-reseña">
-                  <button className="btn-menu-reseña" tabIndex={0}>
-                    <img src="/img/dots-vertical.svg" alt="Opciones" style={{ width: 20, height: 20, background: 'none', border: 'none' }} />
-                  </button>
-                  <div className="opciones-reseña">
-                    <button className="opcion-reseña">Actualizar</button>
-                    <button className="opcion-reseña">Eliminar</button>
-                  </div>
+                <div className="reseña-cabecera-izq">
+                  <strong>{r.nombre_usuario || 'Usuario'}</strong>
+                  <span className="fecha-reseña">{r.fecha ? new Date(r.fecha).toLocaleString() : ''}</span>
+                </div>
+                <div className="acciones-reseña">
+                <button className="btn-actualizar-reseña reseña-btn" onClick={() => navigate(`/editar-resena/${r.id_resena}`)}>
+                  Actualizar
+                </button>
+                <button className="btn-eliminar-reseña reseña-btn" onClick={() => manejarEliminarResena(r.id_resena)}>
+                  Eliminar
+                </button>
                 </div>
               </div>
               <p className="reseña-calificacion">
@@ -230,4 +254,6 @@ export default VistaProducto;
 - Muestra mensajes de error o éxito.
 - El formulario se limpia al enviar.
 - No se permite enviar reseñas vacías o sin calificación.
+- Añadida lógica para mostrar botones de actualizar y eliminar solo al dueño de la reseña.
+- Conectados botones de actualizar y eliminar con las funcionalidades correspondientes.
 */

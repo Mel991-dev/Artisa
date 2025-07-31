@@ -233,6 +233,41 @@ box-shadow: 0 4px 16px rgba(0,0,0,0.08);
   margin-bottom: 1rem;
 }
 
+.acciones-reseña {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-actualizar-reseña {
+  height: 30px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: #EF6210;
+  color: white;
+  border: 1px solid #EF6210;
+}
+
+.btn-actualizar-reseña:hover {
+  background-color: #d95a0c;
+  border-color: #d95a0c;
+}
+
+.btn-eliminar-reseña {
+  height: 30px;
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  background-color: #dc3545;
+  color: white;
+  border: 1px solid #dc3545;
+}
+
+.btn-eliminar-reseña:hover {
+  background-color: white;
+  color: #dc3545;
+}
+
 .input-textarea {
   width: 100%;
   height: 120px;

@@ -92,7 +92,12 @@ async function crearGaleria(req, res) {
     console.log('Archivo recibido:', req.file);
     console.log('Files:', req.files);
     
-    const datos = req.body;
+    // Obtener id_artesano del usuario autenticado
+    const datos = {
+      id_artesano: req.user.id_usuario,
+      ...req.body
+    };
+    console.log('Datos a procesar:', datos);
     const errores = validarDatosGaleria(datos);
     
     if (errores.length > 0) {
@@ -153,22 +158,18 @@ async function crearGaleria(req, res) {
   }
 }
 
-// Actualizar foto existente
+// Actualizar foto de galería (descripción e imagen)
 async function actualizarGaleria(req, res) {
   try {
     console.log('=== INICIO ACTUALIZAR GALERÍA ===');
     console.log('Params recibidos:', req.params);
     console.log('Body recibido:', req.body);
+    console.log('Archivo recibido:', req.file);
     
     const { id_galeria } = req.params;
     const datos = req.body;
-    const errores = validarDatosGaleria(datos);
+    const archivo = req.file;
     
-    if (errores.length > 0) {
-      console.log('Errores de validación:', errores);
-      return res.status(400).json({ errores });
-    }
-
     // Verificar que la foto existe
     const fotoExistente = await galeriaModel.obtenerGaleriaPorId(id_galeria);
     if (!fotoExistente) {
@@ -176,23 +177,62 @@ async function actualizarGaleria(req, res) {
       return res.status(404).json({ msg: 'Foto no encontrada.' });
     }
 
+    // Validar que el usuario autenticado es el propietario de la foto
+    if (fotoExistente.id_artesano !== req.user.id_usuario) {
+      console.log('Error: Usuario no autorizado');
+      return res.status(403).json({ msg: 'No tienes permisos para actualizar esta foto.' });
+    }
+
+    // Preparar datos de actualización
     const datosActualizados = {
       id_galeria: parseInt(id_galeria),
-      descripcion: datos.descripcion || null,
-      es_principal: datos.es_principal === 'true' ? 1 : 0
+      descripcion: datos.descripcion || fotoExistente.descripcion
     };
+
+    // Si se subió una nueva imagen
+    if (archivo) {
+      console.log('Nueva imagen recibida:', archivo.originalname);
+      
+      // Validar tipo de archivo
+      if (!archivo.mimetype.startsWith('image/')) {
+        return res.status(400).json({ msg: 'El archivo debe ser una imagen.' });
+      }
+
+      // Validar tamaño (5MB)
+      if (archivo.size > 5 * 1024 * 1024) {
+        return res.status(400).json({ msg: 'La imagen debe ser menor a 5MB.' });
+      }
+
+      // Eliminar imagen anterior si existe
+      const rutaImagenAnterior = path.join(__dirname, '..', 'uploads', 'artesanos', 'galeria', fotoExistente.nombre_archivo);
+      if (fs.existsSync(rutaImagenAnterior)) {
+        fs.unlinkSync(rutaImagenAnterior);
+        console.log('Imagen anterior eliminada:', rutaImagenAnterior);
+      }
+
+      // Actualizar datos con nueva imagen
+      datosActualizados.nombre_archivo = archivo.filename;
+      datosActualizados.ruta_archivo = `/uploads/artesanos/galeria/${archivo.filename}`;
+    }
+
+    // Validar descripción
+    if (datosActualizados.descripcion && datosActualizados.descripcion.length > 500) {
+      return res.status(400).json({ msg: 'La descripción no puede exceder 500 caracteres.' });
+    }
     
     console.log('Datos a actualizar en BD:', datosActualizados);
 
+    // Actualizar en base de datos
     await galeriaModel.actualizarGaleria(datosActualizados);
     console.log('Foto actualizada correctamente');
 
-    // Si se establece como principal, actualizar
-    if (datos.es_principal === 'true') {
-      await galeriaModel.establecerFotoPrincipal(id_galeria, fotoExistente.id_artesano);
-    }
+    // Obtener la foto actualizada para devolverla
+    const fotoActualizada = await galeriaModel.obtenerGaleriaPorId(id_galeria);
 
-    res.json({ msg: 'Foto actualizada correctamente.' });
+    res.json({ 
+      msg: 'Foto actualizada correctamente.',
+      foto: fotoActualizada
+    });
     
     console.log('=== FIN ACTUALIZAR GALERÍA ===');
   } catch (err) {

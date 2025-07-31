@@ -4,7 +4,8 @@ const path = require('path');
 // Configurar almacenamiento de archivos para galería
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/artesanos/galeria/');
+    const uploadPath = path.join(__dirname, '..', 'uploads', 'artesanos', 'galeria');
+    cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
     // Crear nombre único: timestamp + nombre original

@@ -22,6 +22,16 @@ router.post('/articulos', upload.single('imagen_blog'), blogController.createArt
 // Listar todos los artículos
 router.get('/articulos', blogController.getArticulos);
 
+// Obtener artículos por usuario (para el dashboard)
+router.get('/articulos/usuario/:id_usuario', blogController.getArticulosPorUsuario);
+
 // Obtener artículo por id
 router.get('/articulos/:id_post', blogController.getArticuloPorId);
+
+// Actualizar artículo (con imagen opcional)
+router.put('/articulos/:id_post', upload.single('imagen_blog'), blogController.updateArticulo);
+
+// Eliminar artículo
+router.delete('/articulos/:id_post', blogController.deleteArticulo);
+
 module.exports = router;

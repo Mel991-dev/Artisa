@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const EditarResena = () => {
-  const { id_reseña } = useParams();
+  const { id_resena } = useParams();
   const navigate = useNavigate();
   const [comentario, setComentario] = useState("");
   const [calificacion, setCalificacion] = useState(5);
@@ -13,7 +13,7 @@ const EditarResena = () => {
   useEffect(() => {
     const fetchResena = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/resenas/${id_reseña}`);
+        const response = await axios.get(`http://localhost:3000/api/resenas/${id_resena}`);
         setComentario(response.data.comentario);
         setCalificacion(response.data.calificacion);
       } catch (err) {
@@ -23,13 +23,13 @@ const EditarResena = () => {
       }
     };
     fetchResena();
-  }, [id_reseña]);
+  }, [id_resena]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     try {
-      await axios.put(`http://localhost:3000/api/resenas/${id_reseña}`, {
+      await axios.put(`http://localhost:3000/api/resenas/${id_resena}`, {
         comentario,
         calificacion,
       });

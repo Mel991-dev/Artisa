@@ -11,6 +11,8 @@ export default function GestionarGaleria() {
   const [showModal, setShowModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [editingImage, setEditingImage] = useState(null);
+  const [newImage, setNewImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const navigate = useNavigate();
 
   // Datos mock para desarrollo (después vendrán del backend)
@@ -143,6 +145,28 @@ export default function GestionarGaleria() {
     setEditingImage(imagen);
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Validar tipo de archivo
+      if (!file.type.startsWith('image/')) {
+        setMsg('El archivo debe ser una imagen');
+        return;
+      }
+
+      // Validar tamaño (5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        setMsg('La imagen debe ser menor a 5MB');
+        return;
+      }
+
+      setNewImage(file);
+      const reader = new FileReader();
+      reader.onload = (e) => setImagePreview(e.target.result);
+      reader.readAsDataURL(file);
+    }
+  };
+
   const guardarEdicion = async (id_galeria, nuevaDescripcion) => {
     try {
       const token = localStorage.getItem('token');
@@ -151,22 +175,47 @@ export default function GestionarGaleria() {
         return;
       }
 
-      await axios.put(`http://localhost:3000/api/galeria/${id_galeria}`, { descripcion: nuevaDescripcion }, {
-        headers: { Authorization: `Bearer ${token}` }
+      // Crear FormData para enviar tanto descripción como imagen
+      const formData = new FormData();
+      formData.append('descripcion', nuevaDescripcion);
+      
+      // Si hay una nueva imagen, agregarla al FormData
+      if (newImage) {
+        formData.append('imagen', newImage);
+      }
+
+      console.log('Enviando actualización:', {
+        id_galeria,
+        descripcion: nuevaDescripcion,
+        tieneNuevaImagen: !!newImage
+      });
+
+      const response = await axios.put(`http://localhost:3000/api/galeria/${id_galeria}`, formData, {
+        headers: { 
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data'
+        }
       });
       
-      setGaleria(galeria.map(img => 
-        img.id_galeria === id_galeria 
-          ? { ...img, descripcion: nuevaDescripcion }
-          : img
-      ));
+      console.log('Respuesta del servidor:', response.data);
+      
+      // Actualizar estado local con la respuesta del servidor
+      if (response.data.foto) {
+        setGaleria(galeria.map(img => 
+          img.id_galeria === id_galeria 
+            ? response.data.foto
+            : img
+        ));
+      }
       
       setEditingImage(null);
-      setMsg('Descripción actualizada correctamente.');
+      setNewImage(null);
+      setImagePreview(null);
+      setMsg('Imagen actualizada correctamente.');
       setTimeout(() => setMsg(''), 3000);
     } catch (err) {
-      console.error('Error al actualizar descripción:', err);
-      setMsg('Error al actualizar la descripción. Inténtalo de nuevo.');
+      console.error('Error al actualizar imagen:', err);
+      setMsg(err.response?.data?.msg || 'Error al actualizar la imagen. Inténtalo de nuevo.');
     }
   };
 
@@ -294,21 +343,53 @@ export default function GestionarGaleria() {
                   <div className="galeria-item-content">
                     {editingImage && editingImage.id_galeria === imagen.id_galeria ? (
                       <div className="edit-descripcion">
+                        <div className="edit-image-preview">
+                          <img 
+                            src={imagePreview || `http://localhost:3000${imagen.ruta_archivo}`}
+                            alt="Preview"
+                          />
+                          <div className="edit-image-overlay">
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleImageChange}
+                              style={{ display: 'none' }}
+                              id={`file-${imagen.id_galeria}`}
+                            />
+                            <label 
+                              htmlFor={`file-${imagen.id_galeria}`}
+                              className="change-image-btn"
+                            >
+                              📷 Cambiar imagen
+                            </label>
+                          </div>
+                        </div>
                         <textarea
                           defaultValue={imagen.descripcion || ''}
                           placeholder="Describe esta imagen..."
                           maxLength="500"
-                          onKeyDown={(e) => {
-                            if (e.key === 'Enter' && !e.shiftKey) {
-                              e.preventDefault();
-                              guardarEdicion(imagen.id_galeria, e.target.value);
-                            }
-                          }}
-                          onBlur={(e) => guardarEdicion(imagen.id_galeria, e.target.value)}
-                          autoFocus
+                          className="edit-descripcion-textarea"
                         />
                         <div className="edit-actions">
-                          <button onClick={() => setEditingImage(null)}>Cancelar</button>
+                          <button 
+                            className="edit-btn-cancel" 
+                            onClick={() => {
+                              setEditingImage(null);
+                              setNewImage(null);
+                              setImagePreview(null);
+                            }}
+                          >
+                            Cancelar
+                          </button>
+                          <button 
+                            className="edit-btn-save"
+                            onClick={(e) => {
+                              const textarea = e.target.closest('.edit-descripcion').querySelector('textarea');
+                              guardarEdicion(imagen.id_galeria, textarea.value);
+                            }}
+                          >
+                            Guardar cambios
+                          </button>
                         </div>
                       </div>
                     ) : (

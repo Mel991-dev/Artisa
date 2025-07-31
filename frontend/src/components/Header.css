@@ -62,23 +62,21 @@
   text-decoration: underline;
 }
 
-/* Menú de usuario */
-.header-user-menu {
+/* Sección de usuario */
+.header-user-section {
   display: flex;
   align-items: center;
-  gap: 14px;
-  position: relative;
-  z-index: 5;
+  gap: 12px;
+  position: relative; /* Importante para el posicionamiento del menú */
 }
 
 .header-user-avatar {
-  border: 2px solid #EF6210;
-  background: #fff;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
   cursor: pointer;
+  border: 2px solid white;
   transition: transform 0.2s ease;
 }
 
@@ -86,25 +84,77 @@
   transform: scale(1.05);
 }
 
-/* Botón cerrar sesión */
-.header-logout-btn {
-  background: #fff;
-  color: #EF6210;
-  border: 2px solid #EF6210;
-  border-radius: 6px;
-  padding: 10px 20px;
-  font-weight: 700;
-  font-size: 1rem;
+.header-menu-btn {
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: all 0.25s ease;
-  white-space: nowrap;
+  padding: 8px;
+  border-radius: 4px;
+  color: white;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.header-logout-btn:hover {
-  background: #EF6210;
-  color: #fff;
-  transform: scale(1.03);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+.header-menu-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.header-menu-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+/* Menú desplegable */
+.header-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  animation: slideDown 0.2s ease-out;
+  margin-top: 8px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-menu-item {
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-menu-item:hover {
+  background-color: #f5f5f5;
+  color: #EF6210;
+}
+
+.header-menu-item:first-child {
+  border-bottom: 1px solid #eee;
 }
 
 /* Responsive */
@@ -124,18 +174,14 @@
     justify-content: space-between;
   }
 
-  .header-user-menu {
+  .header-user-section {
     gap: 10px;
     flex-shrink: 0;
   }
 
-  .header-logout-btn {
-    padding: 8px 14px;
-    font-size: 0.9rem;
-  }
-
-  .header-logo .logo-img {
-    height: 40px;
+  .header-dropdown-menu {
+    right: -10px;
+    min-width: 180px;
   }
 }
 
@@ -144,12 +190,26 @@
     gap: 0.8rem;
   }
 
-  .header-user-menu {
+  .header-user-section {
     gap: 6px;
   }
 
-  .header-logout-btn {
-    padding: 6px 10px;
-    font-size: 0.85rem;
+  .header-menu-btn {
+    padding: 6px;
+  }
+
+  .header-menu-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header-dropdown-menu {
+    right: -15px;
+    min-width: 160px;
+  }
+
+  .header-menu-item {
+    padding: 10px 14px;
+    font-size: 0.9rem;
   }
 }

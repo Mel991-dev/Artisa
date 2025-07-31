@@ -34,9 +34,9 @@ exports.createResena = async (req, res) => {
       return res.status(400).json({ error: 'La calificación debe estar entre 1 y 5.' });
     }
 
-    // Crear la resena
-    await Resena.create({ id_usuario, id_producto, comentario, calificacion });
-    res.status(201).json({ message: 'Resena creada exitosamente.' });
+    // Crear la resena y obtener el objeto creado
+    const nuevaResena = await Resena.create({ id_usuario, id_producto, comentario, calificacion });
+    res.status(201).json(nuevaResena);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Error al crear la resena.' });
@@ -49,12 +49,12 @@ exports.createResena = async (req, res) => {
  */
 exports.updateResena = async (req, res) => {
   try {
-    const { id_reseña } = req.params;
+    const { id_resena } = req.params;
     const { comentario, calificacion } = req.body;
     if (calificacion < 1 || calificacion > 5) {
       return res.status(400).json({ error: 'La calificación debe estar entre 1 y 5.' });
     }
-    await Resena.update(id_reseña, { comentario, calificacion });
+    await Resena.update(id_resena, { comentario, calificacion });
     res.json({ message: 'Resena actualizada exitosamente.' });
   } catch (error) {
     console.error(error);
@@ -68,8 +68,8 @@ exports.updateResena = async (req, res) => {
  */
 exports.deleteResena = async (req, res) => {
   try {
-    const { id_reseña } = req.params;
-    await Resena.delete(id_reseña);
+    const { id_resena } = req.params;
+    await Resena.delete(id_resena);
     res.json({ message: 'Resena eliminada exitosamente.' });
   } catch (error) {
     console.error(error);

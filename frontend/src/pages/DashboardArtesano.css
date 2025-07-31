@@ -80,6 +80,7 @@
 .dashboard-artesano-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* Importante para controlar el ancho de columnas */
 }
 
 /* ==========================================
@@ -89,6 +90,7 @@
 .dashboard-artesano-table td {
   padding: 12px;
   text-align: left;
+  vertical-align: top;
 }
 
 /* ==========================================
@@ -98,6 +100,78 @@
   color: #92400E;
   background: #F8F4F0;
   font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* ==========================================
+   CONTENIDO DE CELDAS
+   ========================================== */
+.cell-content {
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* ==========================================
+   CELDAS ESPECÍFICAS POR TIPO
+   ========================================== */
+
+/* Título - Ancho fijo, truncamiento */
+.table-cell-title {
+  width: 20%;
+  max-width: 200px;
+}
+
+.table-cell-title .cell-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+
+/* Contenido - Ancho fijo, múltiples líneas */
+.table-cell-content {
+  width: 35%;
+  max-width: 300px;
+}
+
+.table-cell-content .cell-content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+  max-height: 4.2em; /* 3 líneas * 1.4 line-height */
+}
+
+/* Fecha - Ancho fijo */
+.table-cell-date {
+  width: 15%;
+  max-width: 120px;
+}
+
+.table-cell-date .cell-content {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Imagen - Ancho fijo */
+.table-cell-image {
+  width: 10%;
+  max-width: 80px;
+  text-align: center;
+}
+
+/* Acciones - Ancho fijo */
+.table-cell-actions {
+  width: 20%;
+  max-width: 150px;
+  text-align: center;
 }
 
 /* ==========================================
@@ -112,6 +186,48 @@
    ========================================== */
 .dashboard-artesano-table tbody tr:last-child {
   border-bottom: none;
+}
+
+/* ==========================================
+   HOVER EN FILAS
+   ========================================== */
+.dashboard-artesano-table tbody tr:hover {
+  background-color: rgba(239, 98, 16, 0.05);
+}
+
+/* ==========================================
+   TABS DE NAVEGACIÓN
+   ========================================== */
+.dashboard-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0;
+}
+
+.dashboard-tab {
+  background: none;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+  position: relative;
+}
+
+.dashboard-tab:hover {
+  color: #EF6210;
+  background-color: rgba(239, 98, 16, 0.05);
+}
+
+.dashboard-tab.active {
+  color: #EF6210;
+  border-bottom-color: #EF6210;
+  background-color: rgba(239, 98, 16, 0.1);
 }
 
 /* ==========================================
@@ -131,5 +247,51 @@
   .dashboard-artesano-table-wrapper {
     padding: 16px;
     overflow-x: auto;
+  }
+
+  .dashboard-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .dashboard-tab {
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    border-radius: 6px;
+  }
+
+  .dashboard-tab.active {
+    border-bottom-color: #EF6210;
+  }
+
+  /* Responsive para tabla */
+  .dashboard-artesano-table {
+    table-layout: auto;
+    min-width: 600px;
+  }
+
+  .table-cell-title {
+    width: 25%;
+    max-width: 150px;
+  }
+
+  .table-cell-content {
+    width: 30%;
+    max-width: 200px;
+  }
+
+  .table-cell-date {
+    width: 20%;
+    max-width: 100px;
+  }
+
+  .table-cell-image {
+    width: 10%;
+    max-width: 60px;
+  }
+
+  .table-cell-actions {
+    width: 15%;
+    max-width: 120px;
   }
 } 

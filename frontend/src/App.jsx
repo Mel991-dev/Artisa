@@ -8,8 +8,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
-import PublicProfile from "./pages/PublicProfile";
 import DashboardArtesano from "./pages/DashboardArtesano";
+import DashboardAdmin from "./pages/DashboardAdmin";
 import CrearProducto from "./pages/CrearProducto";
 import EditarProducto from "./pages/EditarProducto";
 import GestionarGaleria from "./pages/GestionarGaleria";
@@ -27,6 +27,7 @@ import SeguimientoPedido from "./pages/SeguimientoPedido";
 import Blog from "./pages/Blog";
 import Articulo from "./pages/Articulo";
 import CrearArticulo from "./pages/CrearArticulo";
+import EditarArticulo from "./pages/EditarArticulo";
 import Home from "./pages/Home";
 import EditarResena from "./pages/EditarResena";
 // import { AuthProvider } from "./context/AuthContext";
@@ -42,11 +43,15 @@ function App() {
         {/* Cada Route asocia una URL con un componente */}
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/public-profile" element={<PublicProfile />} />
         <Route path="/artesano/:id" element={<PerfilPublico />} />
         <Route path="/dashboard-artesano" element={
           <PrivateRoute>
             <DashboardArtesano/>
+          </PrivateRoute>
+        }/>
+        <Route path="/dashboard-admin" element={
+          <PrivateRoute>
+            <DashboardAdmin/>
           </PrivateRoute>
         }/>
         <Route path="/crear-producto" element={<CrearProducto/>}/>
@@ -63,12 +68,13 @@ function App() {
         <Route path="/blog" element={<Blog/>}/>
         <Route path="/articulo/:id_post" element={<Articulo/>}/>
         <Route path="/crear-articulo" element={<CrearArticulo/>}/>
+        <Route path="/editar-articulo/:id_post" element={<EditarArticulo/>}/>
         <Route path="/perfil" element={
           <PrivateRoute>
             <ActualizarPerfil/>
           </PrivateRoute>
         }/>
-        <Route path="/editar-resena/:id_reseña" element={<EditarResena />} />
+        <Route path="/editar-resena/:id_resena" element={<EditarResena />} />
         {/* Puedes agregar más rutas según tus páginas */}
         <Route path="/" element={<Home />} />
       </Routes>

@@ -1,0 +1,462 @@
+/* ==========================================
+   IMPORTACIÓN DE FUENTES
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL DEL DASHBOARD ADMIN
+   ========================================== */
+.dashboard-admin-root {
+  background: #F8F4F0;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL DEL DASHBOARD
+   ========================================== */
+.dashboard-admin-container {
+  max-width: 1400px;
+  margin: 40px auto 0 auto;
+  padding: 24px;
+}
+
+/* ==========================================
+   FILA SUPERIOR: TÍTULO Y ESTADÍSTICAS
+   ========================================== */
+.dashboard-admin-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+/* ==========================================
+   TÍTULO PRINCIPAL
+   ========================================== */
+.dashboard-admin-title {
+  color: #92400E;
+  font-weight: 700;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* ==========================================
+   ESTADÍSTICAS DEL ADMIN
+   ========================================== */
+.admin-stats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat-item {
+  background: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  color: #92400E;
+  font-size: 0.95rem;
+}
+
+/* ==========================================
+   SECCIÓN DE BÚSQUEDA
+   ========================================== */
+.search-section {
+  margin-bottom: 24px;
+}
+
+.search-container {
+  position: relative;
+  max-width: 500px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px 12px 45px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: white;
+  transition: border-color 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #EF6210;
+  box-shadow: 0 0 0 3px rgba(239, 98, 16, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* ==========================================
+   CONTENEDOR DE LA TABLA
+   ========================================== */
+.dashboard-admin-table-wrapper {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px #0001;
+  padding: 24px;
+  overflow-x: auto;
+}
+
+/* ==========================================
+   TABLA ADMINISTRATIVA
+   ========================================== */
+.dashboard-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+/* ==========================================
+   ESPACIADO Y ALINEACIÓN DE CELDAS
+   ========================================== */
+.dashboard-admin-table th,
+.dashboard-admin-table td {
+  padding: 16px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* ==========================================
+   ENCABEZADOS DE LA TABLA
+   ========================================== */
+.dashboard-admin-table th {
+  color: #92400E;
+  background: #F8F4F0;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* ==========================================
+   CELDAS ESPECÍFICAS POR TIPO
+   ========================================== */
+
+/* Foto de perfil */
+.table-cell-photo {
+  width: 8%;
+  max-width: 80px;
+  text-align: center;
+}
+
+/* Información personal */
+.table-cell-info {
+  width: 25%;
+  max-width: 250px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+.user-id {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.user-email {
+  font-size: 0.9rem;
+  color: #EF6210;
+  word-break: break-all;
+}
+
+/* Contacto */
+.table-cell-contact {
+  width: 20%;
+  max-width: 200px;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.email {
+  font-size: 0.9rem;
+  color: #333;
+  word-break: break-all;
+}
+
+/* Ubicación */
+.table-cell-location {
+  width: 20%;
+  max-width: 200px;
+}
+
+.location-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.address {
+  font-size: 0.9rem;
+  color: #333;
+  word-break: break-all;
+}
+
+.country {
+  font-size: 0.85rem;
+  color: #666;
+  text-transform: capitalize;
+}
+
+/* Especialidad */
+.table-cell-specialty {
+  width: 15%;
+  max-width: 150px;
+}
+
+.specialty-info {
+  display: flex;
+  justify-content: center;
+}
+
+.specialty-badge {
+  background: #EF6210;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Biografía */
+.table-cell-bio {
+  width: 25%;
+  max-width: 300px;
+}
+
+.bio-content {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Estado */
+.table-cell-status {
+  width: 12%;
+  max-width: 120px;
+  text-align: center;
+}
+
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-badge.comprador {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-badge.artesano {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+/* Acciones */
+.table-cell-actions {
+  width: 15%;
+  max-width: 150px;
+  text-align: center;
+}
+
+/* ==========================================
+   LÍNEA DIVISORIA ENTRE FILAS
+   ========================================== */
+.dashboard-admin-table tbody tr {
+  border-bottom: 1px solid #eee;
+}
+
+/* ==========================================
+   ELIMINA LA LÍNEA DIVISORIA EN LA ÚLTIMA FILA
+   ========================================== */
+.dashboard-admin-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+/* ==========================================
+   HOVER EN FILAS
+   ========================================== */
+.dashboard-admin-table tbody tr:hover {
+  background-color: rgba(239, 98, 16, 0.05);
+}
+
+/* ==========================================
+   TABS DE NAVEGACIÓN
+   ========================================== */
+.dashboard-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0;
+}
+
+.dashboard-tab {
+  background: none;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 3px solid transparent;
+  position: relative;
+}
+
+.dashboard-tab:hover {
+  color: #EF6210;
+  background-color: rgba(239, 98, 16, 0.05);
+}
+
+.dashboard-tab.active {
+  color: #EF6210;
+  border-bottom-color: #EF6210;
+  background-color: rgba(239, 98, 16, 0.1);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 1200px) {
+  .dashboard-admin-container {
+    padding: 16px;
+  }
+  
+  .admin-stats {
+    gap: 1rem;
+  }
+  
+  .stat-item {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-admin-header-row {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  
+  .admin-stats {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .dashboard-admin-container {
+    padding: 16px;
+  }
+  
+  .dashboard-admin-table-wrapper {
+    padding: 16px;
+    overflow-x: auto;
+  }
+
+  .dashboard-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .dashboard-tab {
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    border-radius: 6px;
+  }
+
+  .dashboard-tab.active {
+    border-bottom-color: #EF6210;
+  }
+
+  /* Responsive para tabla */
+  .dashboard-admin-table {
+    table-layout: auto;
+    min-width: 800px;
+  }
+
+  .table-cell-photo {
+    width: 10%;
+    max-width: 60px;
+  }
+
+  .table-cell-info {
+    width: 20%;
+    max-width: 150px;
+  }
+
+  .table-cell-contact {
+    width: 18%;
+    max-width: 120px;
+  }
+
+  .table-cell-location {
+    width: 18%;
+    max-width: 120px;
+  }
+
+  .table-cell-specialty {
+    width: 12%;
+    max-width: 100px;
+  }
+
+  .table-cell-bio {
+    width: 20%;
+    max-width: 150px;
+  }
+
+  .table-cell-status {
+    width: 10%;
+    max-width: 80px;
+  }
+
+  .table-cell-actions {
+    width: 12%;
+    max-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container {
+    max-width: 100%;
+  }
+  
+  .admin-stats {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .stat-item {
+    text-align: center;
+  }
+} 
