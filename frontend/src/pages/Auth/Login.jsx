@@ -38,7 +38,10 @@ export default function Login() {
       setMsg('¡Inicio de sesión exitoso!');
       
       // Redirigir según rol
-      if (res.data.usuario.rol === 'artesano') {
+      if (res.data.usuario.rol === 'administrador') {
+        console.log('Redirigiendo a dashboard-admin');
+        navigate('/dashboard-admin');
+      } else if (res.data.usuario.rol === 'artesano') {
         console.log('Redirigiendo a dashboard-artesano');
         navigate('/dashboard-artesano');
       } else {

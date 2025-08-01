@@ -13,4 +13,7 @@ router.put('/perfil', auth, usuarioController.uploadMiddleware, usuarioControlle
 // Obtener perfil público de un usuario (ruta específica)
 router.get('/perfil-publico/:id_usuario', usuarioController.obtenerPerfilPublico);
 
+// Obtener datos específicos de artesano
+router.get('/artesano/:id_usuario', auth, usuarioController.obtenerDatosArtesano);
+
 module.exports = router; 

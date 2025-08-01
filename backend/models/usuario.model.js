@@ -76,13 +76,27 @@ async function actualizarPerfilCompleto(id_usuario, datos) {
     
     const pool = await poolPromise;
     
+    // Obtener el rol actual del usuario
+    const userCheck = await pool.request()
+      .input('id_usuario', sql.Int, id_usuario)
+      .query('SELECT rol FROM Usuario WHERE id_usuario = @id_usuario');
+    
+    if (userCheck.recordset.length === 0) {
+      throw new Error('Usuario no encontrado');
+    }
+    
+    const rolAnterior = userCheck.recordset[0].rol;
+    const rolNuevo = datos.rol;
+    console.log('Rol anterior:', rolAnterior, 'Nuevo rol:', rolNuevo);
+    
     // Preparar datos para actualización de usuario
     const datosUsuario = {
       nombre: datos.nombre,
       apellido: datos.apellido,
       correo: datos.correo,
       direccion: datos.direccion,
-      pais: datos.pais
+      pais: datos.pais,
+      rol: datos.rol
     };
     
     // Si se proporciona nueva contraseña, hashearla
@@ -93,14 +107,15 @@ async function actualizarPerfilCompleto(id_usuario, datos) {
     }
     
     // Actualizar datos básicos del usuario
-    let query = 'UPDATE Usuario SET nombre = @nombre, apellido = @apellido, correo = @correo, direccion = @direccion, pais = @pais';
+    let query = 'UPDATE Usuario SET nombre = @nombre, apellido = @apellido, correo = @correo, direccion = @direccion, pais = @pais, rol = @rol';
     const request = pool.request()
       .input('id_usuario', sql.Int, id_usuario)
       .input('nombre', sql.NVarChar, datosUsuario.nombre)
       .input('apellido', sql.NVarChar, datosUsuario.apellido)
       .input('correo', sql.NVarChar, datosUsuario.correo)
       .input('direccion', sql.NVarChar, datosUsuario.direccion)
-      .input('pais', sql.NVarChar, datosUsuario.pais);
+      .input('pais', sql.NVarChar, datosUsuario.pais)
+      .input('rol', sql.NVarChar, datosUsuario.rol);
     
     if (datosUsuario.contraseña) {
       query += ', contraseña = @contraseña';
@@ -113,6 +128,47 @@ async function actualizarPerfilCompleto(id_usuario, datos) {
     const result = await request.query(query);
     console.log('Usuario actualizado en la base de datos');
     console.log('Filas afectadas:', result.rowsAffected);
+    
+    // Manejar cambios de rol
+    if (rolAnterior === 'artesano' && rolNuevo !== 'artesano') {
+      console.log('Eliminando datos de artesano...');
+      const deleteResult = await pool.request()
+        .input('id_usuario', sql.Int, id_usuario)
+        .query('DELETE FROM Artesano WHERE id_usuario = @id_usuario');
+      console.log('Datos de artesano eliminados, filas afectadas:', deleteResult.rowsAffected);
+    }
+    
+    if (rolNuevo === 'artesano' && rolAnterior !== 'artesano') {
+      console.log('Creando registro de artesano...');
+      const insertResult = await pool.request()
+        .input('id_usuario', sql.Int, id_usuario)
+        .input('especialidad', sql.NVarChar, datos.especialidad || '')
+        .input('biografia', sql.NVarChar, datos.biografia || '')
+        .input('historia', sql.NVarChar, datos.historia || '')
+        .query(`
+          INSERT INTO Artesano (id_usuario, especialidad, biografia, historia)
+          VALUES (@id_usuario, @especialidad, @biografia, @historia)
+        `);
+      console.log('Registro de artesano creado, filas afectadas:', insertResult.rowsAffected);
+    }
+    
+    // Si es artesano (ya sea que cambió o ya era), actualizar datos específicos
+    if (rolNuevo === 'artesano') {
+      console.log('Actualizando datos específicos de artesano...');
+      console.log('Datos a actualizar:', { especialidad: datos.especialidad, biografia: datos.biografia, historia: datos.historia });
+      
+      const updateArtesanoResult = await pool.request()
+        .input('id_usuario', sql.Int, id_usuario)
+        .input('especialidad', sql.NVarChar, datos.especialidad || '')
+        .input('biografia', sql.NVarChar, datos.biografia || '')
+        .input('historia', sql.NVarChar, datos.historia || '')
+        .query(`
+          UPDATE Artesano 
+          SET especialidad = @especialidad, biografia = @biografia, historia = @historia
+          WHERE id_usuario = @id_usuario
+        `);
+      console.log('Datos de artesano actualizados, filas afectadas:', updateArtesanoResult.rowsAffected);
+    }
     
     // Si se proporciona nueva foto, actualizar en la tabla Perfil
     if (datos.foto) {
@@ -142,20 +198,6 @@ async function actualizarPerfilCompleto(id_usuario, datos) {
         console.log('Nuevo registro creado en Perfil con foto');
         console.log('Filas afectadas:', insertFoto.rowsAffected);
       }
-    }
-    
-    // Si es artesano, actualizar datos específicos
-    if (datos.rol === 'artesano' && datos.especialidad && datos.biografia && datos.historia) {
-      console.log('Actualizando datos de artesano');
-      const artesanoResult = await pool.request()
-        .input('id_usuario', sql.Int, id_usuario)
-        .input('especialidad', sql.NVarChar, datos.especialidad)
-        .input('biografia', sql.NVarChar, datos.biografia)
-        .input('historia', sql.NVarChar, datos.historia)
-        .query('UPDATE Artesano SET especialidad = @especialidad, biografia = @biografia, historia = @historia WHERE id_usuario = @id_usuario');
-      
-      console.log('Datos de artesano actualizados');
-      console.log('Filas artesano afectadas:', artesanoResult.rowsAffected);
     }
     
     console.log('Perfil actualizado exitosamente');
@@ -229,8 +271,41 @@ async function obtenerPerfilPublico(id_usuario) {
   }
 }
 
+/**
+ * Obtiene los datos específicos de un artesano
+ * @param {number} id_usuario
+ * @returns {Object} Datos del artesano
+ */
+async function obtenerDatosArtesano(id_usuario) {
+  try {
+    console.log('=== OBTENER DATOS ARTESANO ===');
+    console.log('ID usuario:', id_usuario);
+    
+    const pool = await poolPromise;
+    
+    const result = await pool.request()
+      .input('id_usuario', sql.Int, id_usuario)
+      .query('SELECT especialidad, biografia, historia FROM Artesano WHERE id_usuario = @id_usuario');
+    
+    console.log('Consulta artesano ejecutada');
+    console.log('Registros encontrados:', result.recordset.length);
+    
+    if (result.recordset.length === 0) {
+      console.log('No se encontraron datos de artesano para el usuario:', id_usuario);
+      return null;
+    }
+    
+    console.log('Datos de artesano encontrados:', result.recordset[0]);
+    return result.recordset[0];
+  } catch (error) {
+    console.error('Error en obtenerDatosArtesano:', error);
+    throw error;
+  }
+}
+
 module.exports = {
   obtenerPerfilCompleto,
   actualizarPerfilCompleto,
-  obtenerPerfilPublico
+  obtenerPerfilPublico,
+  obtenerDatosArtesano
 }; 

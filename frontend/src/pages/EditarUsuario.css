@@ -1,0 +1,357 @@
+/* ==========================================
+   IMPORTACIÓN DE FUENTES
+   ========================================== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL
+   ========================================== */
+.editar-usuario-container {
+  background: #F8F4F0;
+  min-height: 100vh;
+  padding: 40px 20px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.editar-usuario-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================
+   TÍTULOS Y SUBTÍTULOS
+   ========================================== */
+.editar-usuario-title {
+  color: #92400E;
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.editar-usuario-subtitle {
+  color: #666;
+  font-size: 1.1rem;
+  text-align: center;
+  margin: 0 0 40px 0;
+}
+
+/* ==========================================
+   SECCIÓN DE FOTO DE PERFIL
+   ========================================== */
+.foto-perfil-section {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.foto-perfil-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+.foto-perfil {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #EF6210;
+  background: #f5f5f5;
+  transition: transform 0.2s ease;
+}
+
+.foto-perfil:hover {
+  transform: scale(1.05);
+}
+
+.foto-perfil-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: #EF6210;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+  border: 3px solid white;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(239, 98, 16, 0.3);
+}
+
+.foto-perfil-btn:hover {
+  background: #d95a0c;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 98, 16, 0.4);
+}
+
+.foto-perfil-instruction {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0 0 8px 0;
+}
+
+.foto-perfil-info {
+  color: #EF6210;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0;
+  padding: 8px 16px;
+  background: #FFF8F3;
+  border-radius: 20px;
+  display: inline-block;
+  border: 1px solid #EF6210;
+}
+
+/* ==========================================
+   FORMULARIO
+   ========================================== */
+.editar-usuario-form {
+  max-width: 100%;
+}
+
+/* ==========================================
+   SECCIONES DEL FORMULARIO
+   ========================================== */
+.form-section {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  color: #92400E;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: 0 0 24px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #EF6210;
+}
+
+/* Sección específica para artesanos */
+.artesano-section {
+  background: #FFF8F3;
+  border: 2px solid #EF6210;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 32px;
+}
+
+/* ==========================================
+   FILAS Y GRUPOS DE FORMULARIO
+   ========================================== */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: #333;
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #EF6210;
+  box-shadow: 0 0 0 3px rgba(239, 98, 16, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ==========================================
+   INPUT CON ICONO
+   ========================================== */
+.input-with-icon {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  font-size: 16px;
+}
+
+.input-with-icon input {
+  padding-left: 48px;
+}
+
+/* ==========================================
+   MENSAJES DE ERROR Y ÉXITO
+   ========================================== */
+.error-messages {
+  margin-bottom: 20px;
+}
+
+.error-message {
+  background: #FEF2F2;
+  color: #DC2626;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #FECACA;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.success-message {
+  background: #F0FDF4;
+  color: #16A34A;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #BBF7D0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Mensaje de error específico para errores del servidor */
+.editar-usuario-form .error-message,
+.editar-usuario-form .success-message {
+  text-align: center;
+  font-weight: 600;
+}
+
+.editar-usuario-form .error-message {
+  background: #FEE2E2;
+  color: #DC2626;
+  border: 2px solid #FCA5A5;
+  box-shadow: 0 2px 4px rgba(220, 38, 38, 0.1);
+}
+
+/* ==========================================
+   BOTONES DE ACCIÓN
+   ========================================== */
+.form-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn-guardar {
+  background: linear-gradient(135deg, #EF6210 0%, #FF6B35 100%);
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(239, 98, 16, 0.3);
+}
+
+.btn-guardar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 98, 16, 0.4);
+}
+
+.btn-guardar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-cancelar {
+  background: #F3F4F6;
+  color: #374151;
+  border: 2px solid #D1D5DB;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cancelar:hover {
+  background: #E5E7EB;
+  border-color: #9CA3AF;
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+@media (max-width: 768px) {
+  .editar-usuario-container {
+    padding: 20px 10px;
+  }
+  
+  .editar-usuario-card {
+    padding: 30px 20px;
+  }
+  
+  .editar-usuario-title {
+    font-size: 2rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-guardar,
+  .btn-cancelar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .editar-usuario-card {
+    padding: 20px 15px;
+  }
+  
+  .editar-usuario-title {
+    font-size: 1.8rem;
+  }
+  
+  .foto-perfil {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .foto-perfil-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+} 

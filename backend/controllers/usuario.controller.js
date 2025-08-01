@@ -196,6 +196,27 @@ async function obtenerPerfilPublico(req, res) {
   }
 }
 
+// Obtener datos específicos de artesano
+async function obtenerDatosArtesano(req, res) {
+  try {
+    const { id_usuario } = req.params;
+    console.log('=== OBTENER DATOS ARTESANO ===');
+    console.log('ID Usuario:', id_usuario);
+    
+    const datosArtesano = await usuarioModel.obtenerDatosArtesano(id_usuario);
+    
+    if (!datosArtesano) {
+      return res.status(404).json({ msg: 'Datos de artesano no encontrados' });
+    }
+    
+    console.log('Datos de artesano encontrados:', datosArtesano);
+    res.json(datosArtesano);
+  } catch (error) {
+    console.error('Error al obtener datos de artesano:', error);
+    res.status(500).json({ msg: 'Error al obtener datos de artesano', error: error.message });
+  }
+}
+
 // Middleware para manejar la subida de archivos
 function uploadMiddleware(req, res, next) {
   console.log('=== UPLOAD MIDDLEWARE ===');
@@ -230,5 +251,6 @@ module.exports = {
   obtenerPerfil,
   actualizarPerfil,
   obtenerPerfilPublico,
+  obtenerDatosArtesano,
   uploadMiddleware
 }; 

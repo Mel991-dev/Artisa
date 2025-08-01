@@ -17,6 +17,7 @@ import GestionarGaleria from "./pages/GestionarGaleria";
 import SubirFotos from "./pages/SubirFotos";
 import VerGaleria from "./pages/VerGaleria";
 import ActualizarPerfil from "./pages/ActualizarPerfil";
+import EditarArtesano from "./pages/EditarArtesano";
 import PerfilPublico from "./pages/PerfilPublico";
 import PrivateRoute from "./components/PrivateRoute";
 import CatalogoProductos from "./pages/CatalogoProductos";
@@ -29,6 +30,7 @@ import Blog from "./pages/Blog";
 import Articulo from "./pages/Articulo";
 import CrearArticulo from "./pages/CrearArticulo";
 import EditarArticulo from "./pages/EditarArticulo";
+import EditarUsuario from "./pages/EditarUsuario";
 import Home from "./pages/Home";
 import EditarResena from "./pages/EditarResena";
 // import { AuthProvider } from "./context/AuthContext";
@@ -53,6 +55,16 @@ function App() {
         <Route path="/dashboard-admin" element={
           <AdminRoute>
             <DashboardAdmin/>
+          </AdminRoute>
+        }/>
+        <Route path="/admin/editar-usuario/:id_usuario" element={
+          <AdminRoute>
+            <EditarUsuario/>
+          </AdminRoute>
+        }/>
+        <Route path="/admin/editar-artesano/:id_usuario" element={
+          <AdminRoute>
+            <EditarArtesano/>
           </AdminRoute>
         }/>
         <Route path="/crear-producto" element={<CrearProducto/>}/>

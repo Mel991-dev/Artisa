@@ -20,7 +20,7 @@ const AdminRoute = ({ children }) => {
         // Primero verificamos localmente
         const decodedToken = jwtDecode(token);
         
-        if (decodedToken.rol !== 'admin') {
+        if (decodedToken.rol !== 'administrador') {
           setIsVerifying(false);
           return;
         }
@@ -32,10 +32,10 @@ const AdminRoute = ({ children }) => {
 
         console.log('Respuesta del servidor:', response.data);
 
-        if (response.data.user && response.data.user.rol === 'admin') {
+        if (response.data.user && response.data.user.rol === 'administrador') {
           setIsAdmin(true);
         } else {
-          console.log('Usuario no es admin:', response.data);
+          console.log('Usuario no es administrador:', response.data);
           setIsAdmin(false);
         }
       } catch (error) {

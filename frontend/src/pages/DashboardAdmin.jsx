@@ -14,9 +14,28 @@ export default function DashboardAdmin() {
   const [filteredArtesanos, setFilteredArtesanos] = useState([]);
   const navigate = useNavigate();
 
+  // Configurar interceptor de Axios para incluir token automáticamente
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+  }, []);
+
   // Cargar usuarios al montar el componente
   useEffect(() => {
     cargarUsuarios();
+  }, []);
+
+  // Recargar usuarios cuando se regresa al dashboard (detectar cambios en la URL)
+  useEffect(() => {
+    const handleFocus = () => {
+      // Recargar cuando la ventana vuelve a tener foco (después de editar)
+      cargarUsuarios();
+    };
+
+    window.addEventListener('focus', handleFocus);
+    return () => window.removeEventListener('focus', handleFocus);
   }, []);
 
   // Filtrar usuarios cuando cambie el término de búsqueda
@@ -31,6 +50,8 @@ export default function DashboardAdmin() {
       // Cargar todos los usuarios con sus perfiles
       const responseUsuarios = await axios.get('http://localhost:3000/api/admin/usuarios');
       const usuariosData = responseUsuarios.data;
+      
+      console.log('Usuarios cargados:', usuariosData);
       
       // Separar compradores y artesanos
       const compradores = usuariosData.filter(user => user.rol === 'comprador');
@@ -109,12 +130,13 @@ export default function DashboardAdmin() {
     });
   };
 
-  // Función para extraer solo el nombre de archivo de la imagen
-  function extraerNombreArchivo(ruta) {
-    if (!ruta) return '';
-    const partes = ruta.split('/');
-    return partes[partes.length - 1];
-  }
+  // Función para obtener la URL de la foto de perfil
+  const obtenerFotoUrl = (foto) => {
+    if (foto) {
+      return `http://localhost:3000/uploads/${foto}`;
+    }
+    return '/img/user-default.png';
+  };
 
   if (isLoading) {
     return (
@@ -218,10 +240,7 @@ export default function DashboardAdmin() {
                     <tr key={usuario.id_usuario}>
                       <td className="table-cell-photo">
                         <img 
-                          src={usuario.foto_perfil ? 
-                            `http://localhost:3000/uploads/perfil/${extraerNombreArchivo(usuario.foto_perfil)}` : 
-                            '/img/user-default.png'
-                          }
+                          src={obtenerFotoUrl(usuario.foto_perfil)}
                           alt={`${usuario.nombre} ${usuario.apellido}`}
                           style={{
                             width: '50px',
@@ -328,10 +347,7 @@ export default function DashboardAdmin() {
                     <tr key={artesano.id_usuario}>
                       <td className="table-cell-photo">
                         <img 
-                          src={artesano.foto_perfil ? 
-                            `http://localhost:3000/uploads/perfil/${extraerNombreArchivo(artesano.foto_perfil)}` : 
-                            '/img/user-default.png'
-                          }
+                          src={obtenerFotoUrl(artesano.foto_perfil)}
                           alt={`${artesano.nombre} ${artesano.apellido}`}
                           style={{
                             width: '50px',
