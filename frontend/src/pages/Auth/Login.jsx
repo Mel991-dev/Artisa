@@ -62,9 +62,8 @@ export default function Login() {
         
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="correo">Correo Electrónico *</label>
+            <label htmlFor="correo">Correo Electrónico</label>
             <div className="input-with-icon">
-              <span className="input-icon">📧</span>
               <input
                 id="correo"
                 name="correo"
@@ -78,9 +77,8 @@ export default function Login() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="contraseña">Contraseña *</label>
+            <label htmlFor="contraseña">Contraseña</label>
             <div className="input-with-icon">
-              <span className="input-icon">🔒</span>
               <input
                 id="contraseña"
                 name="contraseña"

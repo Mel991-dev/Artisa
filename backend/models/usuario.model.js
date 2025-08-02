@@ -3,6 +3,98 @@ const { poolPromise, sql } = require('../db');
 const bcrypt = require('bcryptjs');
 
 /**
+ * Verifica la unicidad de correo e identificación
+ * @param {string} correo - Correo electrónico
+ * @param {string} identificacion - Número de identificación
+ * @param {number} id_usuario_excluir - ID de usuario a excluir (para actualizaciones)
+ * @returns {Array} Campos duplicados encontrados
+ */
+async function verificarUnicidad(correo, identificacion, id_usuario_excluir = null) {
+  try {
+    console.log('=== VERIFICAR UNICIDAD ===');
+    console.log('Correo:', correo);
+    console.log('Identificación:', identificacion);
+    console.log('Excluir ID:', id_usuario_excluir);
+    
+    const pool = await poolPromise;
+    
+    let query = `
+      SELECT 
+        CASE WHEN EXISTS (
+          SELECT 1 FROM Usuario 
+          WHERE correo = @correo 
+          ${id_usuario_excluir ? 'AND id_usuario != @id_usuario_excluir' : ''}
+        ) THEN 'correo' ELSE NULL END as correo_existe,
+        CASE WHEN EXISTS (
+          SELECT 1 FROM Usuario 
+          WHERE identificacion = @identificacion 
+          ${id_usuario_excluir ? 'AND id_usuario != @id_usuario_excluir' : ''}
+        ) THEN 'identificacion' ELSE NULL END as identificacion_existe
+    `;
+    
+    const request = pool.request()
+      .input('correo', sql.NVarChar, correo)
+      .input('identificacion', sql.NVarChar, identificacion);
+    
+    if (id_usuario_excluir) {
+      request.input('id_usuario_excluir', sql.Int, id_usuario_excluir);
+    }
+    
+    const resultado = await request.query(query);
+    
+    const camposDuplicados = [];
+    if (resultado.recordset[0].correo_existe) {
+      camposDuplicados.push('correo');
+    }
+    if (resultado.recordset[0].identificacion_existe) {
+      camposDuplicados.push('identificacion');
+    }
+    
+    console.log('Campos duplicados encontrados:', camposDuplicados);
+    return camposDuplicados;
+  } catch (error) {
+    console.error('Error en verificarUnicidad:', error);
+    throw error;
+  }
+}
+
+/**
+ * Busca usuarios por identificación (para detección de multicuentas)
+ * @param {string} identificacion - Número de identificación
+ * @returns {Array} Lista de usuarios con esa identificación
+ */
+async function buscarPorIdentificacion(identificacion) {
+  try {
+    console.log('=== BUSCAR POR IDENTIFICACIÓN ===');
+    console.log('Identificación:', identificacion);
+    
+    const pool = await poolPromise;
+    const resultado = await pool.request()
+      .input('identificacion', sql.NVarChar, identificacion)
+      .query(`
+        SELECT 
+          u.id_usuario,
+          u.nombre,
+          u.apellido,
+          u.correo,
+          u.rol,
+          u.fecha_creacion,
+          p.foto as foto_perfil
+        FROM Usuario u
+        LEFT JOIN Perfil p ON u.id_usuario = p.id_usuario
+        WHERE u.identificacion = @identificacion
+        ORDER BY u.fecha_creacion DESC
+      `);
+    
+    console.log('Usuarios encontrados con esta identificación:', resultado.recordset.length);
+    return resultado.recordset;
+  } catch (error) {
+    console.error('Error en buscarPorIdentificacion:', error);
+    throw error;
+  }
+}
+
+/**
  * Obtiene el perfil completo de un usuario (incluyendo datos de artesano si aplica)
  * @param {number} id_usuario
  * @returns {Object} Perfil completo del usuario
@@ -18,7 +110,7 @@ async function obtenerPerfilCompleto(id_usuario) {
     const usuario = await pool.request()
       .input('id_usuario', sql.Int, id_usuario)
       .query(`
-        SELECT u.id_usuario, u.nombre, u.apellido, u.correo, u.direccion, u.pais, u.rol, p.foto 
+        SELECT u.id_usuario, u.nombre, u.apellido, u.correo, u.identificacion, u.direccion, u.pais, u.rol, p.foto 
         FROM Usuario u 
         LEFT JOIN Perfil p ON u.id_usuario = p.id_usuario 
         WHERE u.id_usuario = @id_usuario
@@ -94,10 +186,22 @@ async function actualizarPerfilCompleto(id_usuario, datos) {
       nombre: datos.nombre,
       apellido: datos.apellido,
       correo: datos.correo,
+      identificacion: datos.identificacion,
       direccion: datos.direccion,
       pais: datos.pais,
       rol: datos.rol
     };
+
+    // Verificar unicidad antes de actualizar
+    const camposDuplicados = await verificarUnicidad(
+      datos.correo, 
+      datos.identificacion, 
+      id_usuario
+    );
+
+    if (camposDuplicados.length > 0) {
+      throw new Error(`Los siguientes campos ya están en uso: ${camposDuplicados.join(', ')}`);
+    }
     
     // Si se proporciona nueva contraseña, hashearla
     if (datos.contraseña) {
@@ -107,12 +211,13 @@ async function actualizarPerfilCompleto(id_usuario, datos) {
     }
     
     // Actualizar datos básicos del usuario
-    let query = 'UPDATE Usuario SET nombre = @nombre, apellido = @apellido, correo = @correo, direccion = @direccion, pais = @pais, rol = @rol';
+    let query = 'UPDATE Usuario SET nombre = @nombre, apellido = @apellido, correo = @correo, identificacion = @identificacion, direccion = @direccion, pais = @pais, rol = @rol';
     const request = pool.request()
       .input('id_usuario', sql.Int, id_usuario)
       .input('nombre', sql.NVarChar, datosUsuario.nombre)
       .input('apellido', sql.NVarChar, datosUsuario.apellido)
       .input('correo', sql.NVarChar, datosUsuario.correo)
+      .input('identificacion', sql.NVarChar, datosUsuario.identificacion)
       .input('direccion', sql.NVarChar, datosUsuario.direccion)
       .input('pais', sql.NVarChar, datosUsuario.pais)
       .input('rol', sql.NVarChar, datosUsuario.rol);
@@ -307,5 +412,7 @@ module.exports = {
   obtenerPerfilCompleto,
   actualizarPerfilCompleto,
   obtenerPerfilPublico,
-  obtenerDatosArtesano
+  obtenerDatosArtesano,
+  verificarUnicidad,
+  buscarPorIdentificacion
 }; 

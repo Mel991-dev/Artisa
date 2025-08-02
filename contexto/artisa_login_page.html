@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisa - Iniciar Sesión</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, system-ui;
+            background: linear-gradient(135deg, #fed7aa 0%, #fde68a 50%, #fef3c7 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(90deg, #92400e 0%, #b45309 50%, #ea580c 100%);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 20px 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #fed7aa 0%, #fde68a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            font-size: 30px;
+        }
+
+        .logo-text {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ffffff 0%, #fed7aa 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .register-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: white;
+        }
+
+        .register-text {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .register-button {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .register-button:hover {
+            background: white;
+            color: #b45309;
+            transform: scale(1.05);
+        }
+
+        /* Main Container */
+        .main-container {
+            min-height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 48px 24px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: all 0.5s ease;
+            max-width: 1152px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .login-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Left Column - Welcome Card */
+        .left-column {
+            position: relative;
+            background: linear-gradient(135deg, #92400e 0%, #ea580c 50%, #dc2626 100%);
+            color: white;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 600px;
+        }
+
+        /* Decorative Patterns */
+        .decorative-patterns {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+        }
+
+        .pattern-circle-1 {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            width: 128px;
+            height: 128px;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .pattern-circle-2 {
+            position: absolute;
+            bottom: 80px;
+            right: 40px;
+            width: 96px;
+            height: 96px;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .pattern-circle-3 {
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            width: 64px;
+            height: 64px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .pattern-square {
+            position: absolute;
+            top: 25%;
+            right: 25%;
+            width: 80px;
+            height: 80px;
+            border: 2px solid white;
+            transform: rotate(45deg);
+        }
+
+        /* Content */
+        .content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .welcome-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .welcome-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 32px;
+        }
+
+        .welcome-title {
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .welcome-description {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Contact Info */
+        .contact-info {
+            margin-bottom: 32px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 20px;
+        }
+
+        .contact-label {
+            font-weight: 900;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .contact-value {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+
+        /* Social Media */
+        .social-section {
+            margin-bottom: 32px;
+        }
+
+        .social-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        /* Recovery Section */
+        .recovery-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(4px);
+        }
+
+        .recovery-title {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .recovery-text {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .recovery-note {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fed7aa;
+        }
+
+        /* Right Column - Login Form */
+        .right-column {
+            background: white;
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 448px;
+            margin: 0 auto;
+        }
+
+        /* Form Header */
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 32px;
+            border-radius: 16px;
+            color: white;
+            background-color: #f0650e;
+        }
+
+        .form-icon {
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 32px;
+        }
+
+        .form-title {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .form-subtitle {
+            font-size: 20px;
+            font-weight: 700;
+            opacity: 0.9;
+        }
+
+        /* Form Fields */
+        .form-field {
+            margin-bottom: 32px;
+        }
+
+        .form-label {
+            font-size: 20px;
+            font-weight: 900;
+            color: #1f2937;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .input-group:focus-within .input-icon {
+            color: #ea580c;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 24px 16px 24px 56px;
+            font-size: 20px;
+            font-weight: 700;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', cursive, system-ui;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #ea580c;
+            background: white;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .password-toggle:hover {
+            color: #ea580c;
+        }
+
+        .password-toggle:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #fed7aa;
+        }
+
+        /* Submit Button */
+        .submit-button {
+            width: 100%;
+            background-color: #f0650e;
+            color: white;
+            font-size: 24px;
+            font-weight: 900;
+            padding: 28px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            font-family: 'Comic Sans MS', cursive, system-ui;
+        }
+
+        .submit-button:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(1.05);
+        }
+
+        .submit-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px #fed7aa;
+        }
+
+        .submit-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid white;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: 12px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Register Link */
+        .register-link {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .register-text-bottom {
+            font-size: 20px;
+            color: #6b7280;
+            font-weight: 700;
+        }
+
+        .register-anchor {
+            font-weight: 900;
+            font-size: 20px;
+            color: #f0650e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .register-anchor:hover {
+            color: #ea580c;
+        }
+
+        /* Test Users */
+        .test-users {
+            margin-top: 40px;
+            padding: 24px;
+            background: linear-gradient(90deg, #f9fafb 0%, #fed7aa 100%);
+            border-radius: 16px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .test-users-title {
+            font-size: 20px;
+            font-weight: 900;
+            color: #1f2937;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .test-users-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .test-user-card {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .test-user-type {
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .test-user-email {
+            font-weight: 700;
+        }
+
+        .comprador { color: #2563eb; }
+        .artesano { color: #16a34a; }
+        .admin { color: #9333ea; }
+        .error { color: #dc2626; }
+
+        .test-users-note {
+            font-size: 12px;
+            margin-top: 16px;
+            text-align: center;
+            color: #6b7280;
+            font-weight: 900;
+        }
+
+        /* Error Alert */
+        .error-alert {
+            margin-bottom: 32px;
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            display: none;
+        }
+
+        .error-alert.show {
+            display: flex;
+        }
+
+        .error-icon {
+            color: #dc2626;
+            margin-right: 12px;
+            font-size: 20px;
+        }
+
+        .error-text {
+            color: #991b1b;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-column {
+                min-height: 400px;
+            }
+
+            .welcome-title {
+                font-size: 40px;
+            }
+
+            .welcome-description {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 24px;
+            }
+
+            .left-column,
+            .right-column {
+                padding: 32px;
+            }
+
+            .welcome-title {
+                font-size: 32px;
+            }
+
+            .form-title {
+                font-size: 32px;
+            }
+
+            .form-input {
+                font-size: 18px;
+                padding: 20px 16px 20px 48px;
+            }
+
+            .submit-button {
+                font-size: 20px;
+                padding: 24px;
+            }
+
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .register-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .test-users-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="/" class="logo">
+                <div class="logo-circle">🎨</div>
+                <div class="logo-text">Artisa</div>
+            </a>
+            <div class="register-section">
+                <span class="register-text">¿No tienes cuenta?</span>
+                <a href="/registro" class="register-button">Registrarse</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="login-container">
+            <!-- Left Column - Welcome Card -->
+            <div class="left-column">
+                <!-- Decorative Patterns -->
+                <div class="decorative-patterns">
+                    <div class="pattern-circle-1"></div>
+                    <div class="pattern-circle-2"></div>
+                    <div class="pattern-circle-3"></div>
+                    <div class="pattern-square"></div>
+                </div>
+
+                <!-- Content -->
+                <div class="content">
+                    <div class="welcome-header">
+                        <div class="welcome-icon">🎭</div>
+                        <h2 class="welcome-title">¡Hola,<br>Bienvenido!</h2>
+                    </div>
+
+                    <p class="welcome-description">
+                        Nos emociona verte de nuevo en Artisa. Donde cada obra de arte tiene su propia historia.
+                    </p>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <div class="contact-label">Teléfono</div>
+                                <div class="contact-value">+1 (555) 123-4567</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <div class="contact-label">Email</div>
+                                <div class="contact-value">soporte@artisa.com</div>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <div class="contact-label">Ubicación</div>
+                                <div class="contact-value">Ciudad de México</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="social-section">
+                        <h3 class="social-title">Síguenos</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link" aria-label="Facebook">📘</a>
+                            <a href="#" class="social-link" aria-label="Instagram">📷</a>
+                            <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+                        </div>
+                    </div>
+
+                    <!-- Recovery Section -->
+                    <div class="recovery-section">
+                        <h4 class="recovery-title">¿Problemas para acceder?</h4>
+                        <p class="recovery-text">¿Se te olvidó la contraseña?</p>
+                        <p class="recovery-note">
+                            Espera por favor, todavía no hay funcionalidad para recuperarla.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Login Form -->
+            <div class="right-column">
+                <div class="form-container">
+                    <!-- Form Header -->
+                    <div class="form-header">
+                        <div class="form-icon">🔒</div>
+                        <h2 class="form-title">Iniciar Sesión</h2>
+                        <p class="form-subtitle">¡Qué alegría tenerte de vuelta!</p>
+                    </div>
+
+                    <!-- Error Alert -->
+                    <div id="errorAlert" class="error-alert">
+                        <span class="error-icon">⚠️</span>
+                        <span class="error-text" id="errorText">Error message</span>
+                    </div>
+
+                    <form id="loginForm">
+                        <!-- Email Field -->
+                        <div class="form-field">
+                            <label for="email" class="form-label">Correo Electrónico *</label>
+                            <div class="input-group">
+                                <span class="input-icon">✉️</span>
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    class="form-input"
+                                    required
+                                    placeholder="tu@email.com"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="form-field">
+                            <label for="password" class="form-label">Contraseña *</label>
+                            <div class="input-group">
+                                <span class="input-icon">🔒</span>
+                                <input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    class="form-input"
+                                    required
+                                    placeholder="Tu contraseña"
+                                />
+                                <button
+                                    type="button"
+                                    id="passwordToggle"
+                                    class="password-toggle"
+                                    aria-label="Mostrar contraseña"
+                                >
+                                    👁️
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submitButton" class="submit-button">
+                            ¡Entrar a Artisa!
+                        </button>
+                    </form>
+
+                    <!-- Register Link -->
+                    <div class="register-link">
+                        <p class="register-text-bottom">
+                            ¿No tienes cuenta? 
+                            <a href="/registro" class="register-anchor">¡Regístrate aquí!</a>
+                        </p>
+                    </div>
+
+                    <!-- Test Users -->
+                    <div class="test-users">
+                        <h3 class="test-users-title">Usuarios de prueba:</h3>
+                        <div class="test-users-grid">
+                            <div class="test-user-card">
+                                <p class="test-user-type comprador">Comprador:</p>
+                                <p class="test-user-email">comprador@test.com</p>
+                            </div>
+                            <div class="test-user-card">
+                                <p class="test-user-type artesano">Artesano:</p>
+                                <p class="test-user-email">artesano@test.com</p>
+                            </div>
+                            <div class="test-user-card">
+                                <p class="test-user-type admin">Admin:</p>
+                                <p class="test-user-email">admin@test.com</p>
+                            </div>
+                            <div class="test-user-card">
+                                <p class="test-user-type error">Error:</p>
+                                <p class="test-user-email">error@test.com</p>
+                            </div>
+                        </div>
+                        <p class="test-users-note">Contraseña: cualquiera</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Password toggle functionality
+        const passwordToggle = document.getElementById('passwordToggle');
+        const passwordInput = document.getElementById('password');
+        let showPassword = false;
+
+        passwordToggle.addEventListener('click', () => {
+            showPassword = !showPassword;
+            passwordInput.type = showPassword ? 'text' : 'password';
+            passwordToggle.textContent = showPassword ? '🙈' : '👁️';
+            passwordToggle.setAttribute('aria-label', showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña');
+        });
+
+        // Form submission
+        const loginForm = document.getElementById('loginForm');
+        const submitButton = document.getElementById('submitButton');
+        const errorAlert = document.getElementById('errorAlert');
+        const errorText = document.getElementById('errorText');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(loginForm);
+            const email = formData.get('email');
+            const password = formData.get('password');
+
+            // Hide previous errors
+            errorAlert.classList.remove('show');
+
+            // Show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="loading-spinner"></span>Iniciando sesión...';
+
+            // Simulate API call
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Simulate different login scenarios
+            if (email === 'error@test.com') {
+                showError('Correo electrónico o contraseña incorrectos');
+                return;
+            }
+
+            if (email === 'blocked@test.com') {
+                showError('Tu cuenta ha sido suspendida. Contacta al administrador.');
+                return;
+            }
+
+            // Successful login - redirect based on user type
+            if (email.includes('admin')) {
+                window.location.href = '/admin';
+            } else if (email.includes('artesano')) {
+                window.location.href = '/inventario';
+            } else {
+                window.location.href = '/';
+            }
+
+            // Reset button (in case redirect fails)
+            submitButton.disabled = false;
+            submitButton.innerHTML = '¡Entrar a Artisa!';
+        });
+
+        function showError(message) {
+            errorText.textContent = message;
+            errorAlert.classList.add('show');
+            submitButton.disabled = false;
+            submitButton.innerHTML = '¡Entrar a Artisa!';
+        }
+
+        // Clear errors when user starts typing
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                errorAlert.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>

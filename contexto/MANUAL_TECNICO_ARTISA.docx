@@ -1,0 +1,125 @@
+MANUAL TÉCNICO DEL MARKETPLACE ARTISA
+
+Autor: Mel991-dev
+Fecha: 30 de julio de 2025
+
+---
+
+ÍNDICE
+1. Introducción
+2. Estructura del Proyecto
+3. Frontend
+   3.1. Estructura y Componentes
+   3.2. Sistema de Rutas
+   3.3. CRUD de Reseñas
+4. Backend
+   4.1. Estructura y Arquitectura
+   4.2. Endpoints REST
+   4.3. Modelo y Controlador de Reseñas
+5. Base de Datos
+   5.1. Estructura de Tablas
+   5.2. Ejemplo de Script
+6. Seguridad y Autenticación
+7. Recomendaciones de Desarrollo
+8. Referencias
+
+---
+
+1. INTRODUCCIÓN
+Artisa es un marketplace para artesanos, con frontend en React y backend en Node.js/Express. Permite gestión de productos, galería, blog, usuarios y reseñas.
+
+2. ESTRUCTURA DEL PROYECTO
+- backend/
+  - app.js
+  - controllers/
+  - models/
+  - routes/
+  - middleware/
+  - config/
+- frontend/
+  - src/
+    - App.jsx
+    - components/
+    - pages/
+    - context/
+  - public/
+
+3. FRONTEND
+3.1. Estructura y Componentes
+- App.jsx: Define rutas principales.
+- VistaProducto.jsx: Muestra detalles de producto y reseñas.
+- EditarResena.jsx: Formulario para editar reseñas.
+- PrivateRoute.jsx: Protege rutas privadas.
+- Otros: Header, Footer, Login, Register, Dashboard, etc.
+
+3.2. Sistema de Rutas
+Ejemplo de rutas en App.jsx:
+- /login → Login
+- /register → Register
+- /dashboard-artesano → DashboardArtesano (privada)
+- /vista-producto/:id → VistaProducto
+- /editar-resena/:id_resena → EditarResena
+- /crear-producto, /editar-producto/:id_producto, /blog, /articulo/:id_post, etc.
+
+3.3. CRUD de Reseñas
+- Listado, creación, edición y eliminación de reseñas desde VistaProducto.jsx.
+- Edición mediante ruta /editar-resena/:id_resena.
+- Uso de Axios para llamadas al backend.
+
+4. BACKEND
+4.1. Estructura y Arquitectura
+- app.js: Configuración principal.
+- controllers/: Lógica de negocio (ej. resena.controller.js).
+- models/: Acceso a datos (ej. resena.model.js).
+- routes/: Definición de endpoints.
+- middleware/: Autenticación, manejo de errores, logger, etc.
+
+4.2. Endpoints REST (Reseñas)
+- GET /api/resenas/:id → Obtener reseña por ID
+- POST /api/resenas → Crear reseña
+- PUT /api/resenas/:id_resena → Actualizar reseña
+- DELETE /api/resenas/:id_resena → Eliminar reseña
+
+4.3. Modelo y Controlador de Reseñas
+- Uso de id_resena como identificador único.
+- Métodos: create, get, update, delete.
+- El método create retorna el objeto completo con id_resena.
+
+5. BASE DE DATOS
+5.1. Estructura de Tablas (Ejemplo)
+Tabla: resenas
+- id_resena (PK, int, auto_increment)
+- id_usuario (FK)
+- id_producto (FK)
+- comentario (text)
+- calificacion (int)
+- fecha (datetime)
+
+5.2. Ejemplo de Script
+CREATE TABLE resenas (
+  id_resena INT PRIMARY KEY IDENTITY(1,1),
+  id_usuario INT,
+  id_producto INT,
+  comentario TEXT,
+  calificacion INT,
+  fecha DATETIME
+);
+
+6. SEGURIDAD Y AUTENTICACIÓN
+- Uso de JWT para rutas privadas.
+- Middleware de autenticación y roles.
+- Validación de datos en backend y frontend.
+
+7. RECOMENDACIONES DE DESARROLLO
+- Mantener consistencia en nombres de variables y rutas (usar id_resena, no id_reseña).
+- Validar datos en ambos extremos.
+- Manejar errores y mostrar mensajes claros al usuario.
+- Documentar endpoints y componentes.
+
+8. REFERENCIAS
+- Documentación oficial de React, Express, SQL Server.
+- Repositorio Artisa: Mel991-dev/Artisa
+
+---
+
+Fin del manual técnico.

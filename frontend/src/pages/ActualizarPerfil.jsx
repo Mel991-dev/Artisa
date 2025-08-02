@@ -12,6 +12,7 @@ export default function ActualizarPerfil() {
   
   // Estado para datos del formulario
   const [form, setForm] = useState({
+    identificacion: '',
     nombre: '',
     apellido: '',
     correo: '',
@@ -67,6 +68,7 @@ export default function ActualizarPerfil() {
       
       // Llenar formulario con datos existentes
       setForm({
+        identificacion: datosUsuario.identificacion || '',
         nombre: datosUsuario.nombre || '',
         apellido: datosUsuario.apellido || '',
         correo: datosUsuario.correo || '',
@@ -140,6 +142,16 @@ export default function ActualizarPerfil() {
     // Validaciones
     const nuevosErrores = [];
     
+    // Validación de identificación
+    if (!form.identificacion) {
+      nuevosErrores.push('La identificación es obligatoria.');
+    } else {
+      const identificacionRegex = /^\d{8,15}$/;
+      if (!identificacionRegex.test(form.identificacion)) {
+        nuevosErrores.push('La identificación debe contener solo números (8-15 dígitos).');
+      }
+    }
+    
     if (!form.nombre || form.nombre.length < 2) {
       nuevosErrores.push('El nombre debe tener al menos 2 caracteres.');
     }
@@ -196,6 +208,7 @@ export default function ActualizarPerfil() {
       const formData = new FormData();
       
       // Agregar datos del formulario
+      formData.append('identificacion', form.identificacion);
       formData.append('nombre', form.nombre);
       formData.append('apellido', form.apellido);
       formData.append('correo', form.correo);
@@ -221,6 +234,7 @@ export default function ActualizarPerfil() {
       }
 
       console.log('Enviando datos al servidor:', {
+        identificacion: form.identificacion,
         nombre: form.nombre,
         apellido: form.apellido,
         correo: form.correo,
@@ -346,6 +360,24 @@ export default function ActualizarPerfil() {
           {/* Información Personal */}
           <div className="form-section">
             <h2 className="section-title">Información Personal</h2>
+            
+            <div className="form-group">
+              <label htmlFor="identificacion">Identificación *</label>
+              <div className="input-with-icon">
+                <span className="input-icon">🆔</span>
+                <input
+                  id="identificacion"
+                  name="identificacion"
+                  type="text"
+                  placeholder="Número de identificación (solo números)"
+                  value={form.identificacion}
+                  onChange={handleChange}
+                  pattern="[0-9]{8,15}"
+                  title="Ingresa solo números (8-15 dígitos)"
+                  required
+                />
+              </div>
+            </div>
             
             <div className="form-row">
               <div className="form-group">

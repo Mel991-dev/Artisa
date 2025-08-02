@@ -11,6 +11,7 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #fdf7f2 0%, #f8f4f0 100%);
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
   padding: 2rem;
@@ -26,8 +27,7 @@
   border-radius: 16px;
   box-shadow: 0 8px 32px rgba(239, 98, 16, 0.08);
   padding: 3rem 2.5rem;
-  width: 100%;
-  max-width: 480px;
+  width: 80%;
   text-align: center;
 }
 
@@ -73,7 +73,7 @@
   display: block;
   color: #92400E;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
 

@@ -6,6 +6,7 @@ import './Register.css';
 export default function Register() {
   // Estado para los campos básicos que existen en la BD
   const [form, setForm] = useState({
+    identificacion: '',
     nombre: '',
     apellido: '',
     correo: '',
@@ -64,6 +65,19 @@ export default function Register() {
   const handleSubmit = async e => {
     e.preventDefault();
     
+    // Validación de identificación
+    if (!form.identificacion) {
+      setMsg('La identificación es obligatoria.');
+      return;
+    }
+    
+    // Validar formato de identificación (solo números, 8-15 dígitos)
+    const identificacionRegex = /^\d{8,15}$/;
+    if (!identificacionRegex.test(form.identificacion)) {
+      setMsg('La identificación debe contener solo números (8-15 dígitos).');
+      return;
+    }
+    
     if (!form.terminos) {
       setMsg('Debes aceptar los términos y condiciones.');
       return;
@@ -109,6 +123,7 @@ export default function Register() {
 
     try {
       const userData = {
+        identificacion: form.identificacion,
         nombre: form.nombre,
         apellido: form.apellido,
         correo: form.correo,
@@ -134,7 +149,13 @@ export default function Register() {
         console.log('Datos de artesano para completar perfil:', artesanoFields);
       }
     } catch (err) {
-      setMsg(err.response?.data?.msg || 'Error en el registro');
+      if (err.response?.data?.errores) {
+        // Si hay errores específicos (como identificación duplicada)
+        const errores = err.response.data.errores;
+        setMsg(errores.join(', '));
+      } else {
+        setMsg(err.response?.data?.msg || 'Error en el registro');
+      }
     }
   };
 
@@ -179,6 +200,24 @@ export default function Register() {
           </div>
 
           {/* Información personal */}
+          <div className="form-group">
+            <label htmlFor="identificacion">Identificación *</label>
+            <div className="input-with-icon">
+              <span className="input-icon">🆔</span>
+              <input
+                id="identificacion"
+                name="identificacion"
+                type="text"
+                placeholder="Número de identificación (solo números)"
+                value={form.identificacion}
+                onChange={handleChange}
+                pattern="[0-9]{8,15}"
+                title="Ingresa solo números (8-15 dígitos)"
+                required
+              />
+            </div>
+          </div>
+
           <div className="form-group">
             <label htmlFor="nombre">Nombre *</label>
             <div className="input-with-icon">

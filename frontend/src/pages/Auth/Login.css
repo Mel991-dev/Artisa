@@ -38,8 +38,7 @@
   /* Espaciado interno generoso para el contenido */
   padding: 3rem 2.5rem;
   /* Ancho completo pero con máximo para evitar que sea muy ancha */
-  width: 100%;
-  max-width: 420px;
+  width: 80%;
   /* Centramos el texto del título y subtítulo */
   text-align: center;
 }
@@ -51,11 +50,11 @@
   /* Color marrón institucional para títulos */
   color: #92400E;
   /* Tamaño grande y prominente */
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   /* Peso de fuente bold para destacar */
   font-weight: 700;
   /* Espaciado inferior para separar del subtítulo */
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   /* Ajuste del espaciado entre letras para mejor legibilidad */
   letter-spacing: -0.02em;
 }
@@ -69,7 +68,7 @@
   /* Tamaño mediano */
   font-size: 1.1rem;
   /* Espaciado inferior para separar del formulario */
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   /* Peso de fuente normal para texto descriptivo */
   font-weight: 400;
 }
@@ -87,7 +86,7 @@
    ========================================== */
 .form-group {
   /* Espaciado inferior entre grupos de campos */
-  margin-bottom: 1.5rem;
+  margin-bottom: 0rem;
 }
 
 /* ==========================================
@@ -101,46 +100,17 @@
   /* Peso de fuente semi-bold para destacar */
   font-weight: 600;
   /* Tamaño de fuente legible */
-  font-size: 1rem;
+  font-size: 1.2rem;
   /* Espaciado inferior para separar del campo de entrada */
-  margin-bottom: 0.5rem;
+  margin: 0;
 }
 
-/* ==========================================
-   CONTENEDOR DE INPUT CON ICONO
-   ========================================== */
-.input-with-icon {
-  /* Posicionamiento relativo para los iconos absolutos */
-  position: relative;
-  /* Flexbox para alinear icono y input */
-  display: flex;
-  align-items: center;
-}
-
-/* ==========================================
-   ICONOS DENTRO DE LOS CAMPOS
-   ========================================== */
-.input-icon {
-  /* Posicionamiento absoluto dentro del contenedor relativo */
-  position: absolute;
-  /* Distancia desde el borde izquierdo */
-  left: 1rem;
-  /* Tamaño del icono */
-  font-size: 1.1rem;
-  /* Color marrón institucional para iconos */
-  color: #92400E;
-  /* Z-index para asegurar que esté por encima del input */
-  z-index: 1;
-}
-
-/* ==========================================
-   CAMPOS DE ENTRADA DE TEXTO
-   ========================================== */
 .input-with-icon input {
   /* Ancho completo del contenedor */
   width: 100%;
   /* Padding con más espacio a la izquierda para el icono */
   padding: 0.9rem 1rem 0.9rem 3rem;
+  margin: 0;
   /* Borde sutil con color beige */
   border: 1.5px solid #f3e7df;
   /* Bordes redondeados para aspecto moderno */

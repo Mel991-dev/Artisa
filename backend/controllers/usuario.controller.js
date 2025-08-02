@@ -47,6 +47,16 @@ const upload = multer({
 function validarDatosUsuario(datos) {
   const errores = [];
   
+  // Validación de identificación
+  if (!datos.identificacion) {
+    errores.push('La identificación es obligatoria.');
+  } else {
+    const identificacionRegex = /^\d{8,15}$/;
+    if (!identificacionRegex.test(datos.identificacion)) {
+      errores.push('La identificación debe contener solo números (8-15 dígitos).');
+    }
+  }
+  
   if (!datos.nombre || datos.nombre.length < 2) {
     errores.push('El nombre debe tener al menos 2 caracteres.');
   }

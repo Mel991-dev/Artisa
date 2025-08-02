@@ -3,37 +3,48 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { sql, poolPromise } = require('../db');
+const { verificarUnicidad } = require('../models/usuario.model');
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-  const { nombre, apellido, correo, direccion, pais, contraseña, rol, especialidad, biografia, historia } = req.body;
+  const { nombre, apellido, correo, identificacion, direccion, pais, contraseña, rol, especialidad, biografia, historia } = req.body;
   try {
     // LOG: Verifica qué datos llegan al backend
     console.log("Datos recibidos en /register:", req.body);
 
-    // Verifica si el usuario ya existe
-    const pool = await poolPromise;
-    const userExists = await pool.request()
-      .input('correo', sql.NVarChar, correo)
-      .query('SELECT * FROM Usuario WHERE correo = @correo');
-    if (userExists.recordset.length > 0) {
-      return res.status(400).json({ msg: 'El correo ya está registrado.' });
+    // Verificar unicidad de correo e identificación
+    const camposDuplicados = await verificarUnicidad(correo, identificacion);
+    
+    if (camposDuplicados.length > 0) {
+      const mensajes = {
+        'correo': 'El correo ya está registrado.',
+        'identificacion': 'La identificación ya está registrada.'
+      };
+      
+      const errores = camposDuplicados.map(campo => mensajes[campo]);
+      return res.status(400).json({ 
+        msg: 'Datos duplicados encontrados.',
+        errores: errores,
+        campos_duplicados: camposDuplicados
+      });
     }
     // Hashea la contraseña
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(contraseña, salt);
     // Inserta el usuario y obtiene el id insertado
+    const pool = await poolPromise;
     const result = await pool.request()
       .input('nombre', sql.NVarChar, nombre)
       .input('apellido', sql.NVarChar, apellido)
       .input('correo', sql.NVarChar, correo)
+      .input('identificacion', sql.NVarChar, identificacion)
       .input('direccion', sql.NVarChar, direccion)
       .input('pais', sql.NVarChar, pais)
       .input('contraseña', sql.NVarChar, hashedPassword)
       .input('rol', sql.NVarChar, rol)
-      .query(`INSERT INTO Usuario (nombre, apellido, correo, direccion, pais, contraseña, rol)
+      .query(`INSERT INTO Usuario (nombre, apellido, correo, identificacion, direccion, pais, contraseña, rol)
               OUTPUT INSERTED.id_usuario
-              VALUES (@nombre, @apellido, @correo, @direccion, @pais, @contraseña, @rol)`);
+              VALUES (@nombre, @apellido, @correo, @identificacion, @direccion, @pais, @contraseña, @rol)`);
     const id_usuario = result.recordset[0].id_usuario;
 
     // Si el rol es artesano, inserta en la tabla Artesano
@@ -66,7 +77,7 @@ router.post('/login', async (req, res) => {
     const pool = await poolPromise;
     const user = await pool.request()
       .input('correo', sql.NVarChar, correo)
-      .query('SELECT * FROM Usuario WHERE correo = @correo');
+      .query('SELECT id_usuario, nombre, apellido, correo, identificacion, contraseña, rol FROM Usuario WHERE correo = @correo');
     
     console.log('Usuario encontrado:', user.recordset[0] ? 'Sí' : 'No');
     if (user.recordset.length === 0) {
@@ -85,6 +96,7 @@ router.post('/login', async (req, res) => {
       nombre: usuario.nombre,
       apellido: usuario.apellido,
       correo: usuario.correo,
+      identificacion: usuario.identificacion,
       rol: usuario.rol,
       foto: usuario.foto || null
     };

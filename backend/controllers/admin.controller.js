@@ -15,6 +15,7 @@ async function obtenerTodosUsuarios(req, res) {
           u.nombre,
           u.apellido,
           u.correo,
+          u.identificacion,
           u.direccion,
           u.pais,
           u.rol,
@@ -49,6 +50,7 @@ async function obtenerUsuario(req, res) {
           u.nombre,
           u.apellido,
           u.correo,
+          u.identificacion,
           u.direccion,
           u.pais,
           u.rol,
@@ -86,6 +88,7 @@ async function obtenerArtesanoCompleto(req, res) {
           u.nombre,
           u.apellido,
           u.correo,
+          u.identificacion,
           u.direccion,
           u.pais,
           u.rol,
@@ -115,12 +118,12 @@ async function obtenerArtesanoCompleto(req, res) {
 async function actualizarUsuario(req, res) {
   try {
     const { id_usuario } = req.params;
-    const { nombre, apellido, correo, direccion, pais, rol, especialidad, biografia, historia } = req.body;
+    const { nombre, apellido, correo, identificacion, direccion, pais, rol, especialidad, biografia, historia } = req.body;
     const archivo = req.file; // Nueva foto si se subió
     
     console.log('=== ACTUALIZAR USUARIO ===');
     console.log('ID Usuario:', id_usuario);
-    console.log('Datos a actualizar:', { nombre, apellido, correo, direccion, pais, rol, especialidad, biografia, historia });
+    console.log('Datos a actualizar:', { nombre, apellido, correo, identificacion, direccion, pais, rol, especialidad, biografia, historia });
     console.log('Archivo recibido:', archivo ? 'Sí' : 'No');
     
     const pool = await poolPromise;
@@ -143,13 +146,14 @@ async function actualizarUsuario(req, res) {
       .input('nombre', sql.NVarChar, nombre)
       .input('apellido', sql.NVarChar, apellido)
       .input('correo', sql.NVarChar, correo)
+      .input('identificacion', sql.NVarChar, identificacion)
       .input('direccion', sql.NVarChar, direccion)
       .input('pais', sql.NVarChar, pais)
       .input('rol', sql.NVarChar, rol)
       .query(`
         UPDATE Usuario 
         SET nombre = @nombre, apellido = @apellido, correo = @correo, 
-            direccion = @direccion, pais = @pais, rol = @rol
+            identificacion = @identificacion, direccion = @direccion, pais = @pais, rol = @rol
         WHERE id_usuario = @id_usuario
       `);
     

@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Artisa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Comic Sans MS", cursive, system-ui;
+            background: linear-gradient(135deg, #fed7aa 0%, #fde68a 50%, #fef3c7 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(90deg, #8B4513 0%, #A0522D 50%, #f0650e 100%);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            color: white;
+            padding: 1.25rem 0;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo {
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, #fed7aa 0%, #fde68a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-text {
+            font-size: 2.25rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #ffffff 0%, #fed7aa 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .header-login {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .header-login span {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .login-btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            font-size: 1.25rem;
+            font-weight: 900;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: white;
+            color: #A0522D;
+            transform: scale(1.05);
+        }
+
+        /* Main Container */
+        .main-container {
+            min-height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .unified-container {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            transition: all 0.5s ease;
+            max-width: 72rem;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 700px;
+        }
+
+        .unified-container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Left Column */
+        .left-column {
+            position: relative;
+            background: linear-gradient(135deg, #8B4513 0%, #f0650e 50%, #d4540a 100%);
+            color: white;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .decorative-patterns {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+        }
+
+        .pattern-circle-1 {
+            position: absolute;
+            top: 2.5rem;
+            left: 2.5rem;
+            width: 8rem;
+            height: 8rem;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .pattern-circle-2 {
+            position: absolute;
+            bottom: 5rem;
+            right: 2.5rem;
+            width: 6rem;
+            height: 6rem;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .pattern-circle-3 {
+            position: absolute;
+            top: 50%;
+            left: 25%;
+            width: 4rem;
+            height: 4rem;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .pattern-square {
+            position: absolute;
+            top: 25%;
+            right: 25%;
+            width: 5rem;
+            height: 5rem;
+            border: 2px solid white;
+            transform: rotate(45deg);
+        }
+
+        .info-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .welcome-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-icon {
+            width: 4rem;
+            height: 4rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 2rem;
+        }
+
+        .welcome-title {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.2;
+        }
+
+        .welcome-description {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Progress Section */
+        .progress-section {
+            margin-bottom: 2rem;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .progress-step {
+            font-size: 1.25rem;
+            font-weight: 900;
+        }
+
+        .progress-percentage {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            height: 0.75rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 0.375rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #10b981;
+            transition: width 0.3s ease;
+        }
+
+        .progress-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            color: #fed7aa;
+        }
+
+        /* Steps List */
+        .steps-list {
+            margin-bottom: 2rem;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 900;
+            margin-right: 1rem;
+        }
+
+        .step-completed {
+            background: #10b981;
+            color: white;
+        }
+
+        .step-current {
+            background: white;
+            color: #8B4513;
+        }
+
+        .step-pending {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .step-text {
+            font-size: 1.125rem;
+        }
+
+        .step-text-current {
+            font-weight: 900;
+            color: #fed7aa;
+        }
+
+        .step-text-normal {
+            opacity: 0.7;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .contact-label {
+            font-weight: 900;
+        }
+
+        .contact-value {
+            opacity: 0.9;
+        }
+
+        /* Social Section */
+        .social-section {
+            margin-bottom: 2rem;
+        }
+
+        .social-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .social-link {
+            width: 3rem;
+            height: 3rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Right Column */
+        .right-column {
+            background: white;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 28rem;
+            margin: 0 auto;
+        }
+
+        /* Step Header */
+        .step-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            color: white;
+            background-color: #f0650e;
+        }
+
+        .step-title {
+            font-size: 1.875rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-subtitle {
+            font-size: 1.125rem;
+            font-weight: 700;
+            opacity: 0.9;
+        }
+
+        /* Step Content */
+        .step-content {
+            margin-bottom: 2rem;
+        }
+
+        .step-content h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .step-content p {
+            font-size: 1.125rem;
+            color: #666;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Form Fields */
+        .form-field {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-size: 1.125rem;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.125rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #f0650e;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1.5rem;
+        }
+
+        .input-with-icon {
+            padding-left: 3rem;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .password-toggle:hover {
+            color: #666;
+        }
+
+        /* Radio Options */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .radio-option:hover {
+            background: #fed7aa;
+            border-color: #f0650e;
+        }
+
+        .radio-option.selected {
+            background: #fed7aa;
+            border-color: #f0650e;
+        }
+
+        .radio-button {
+            width: 1.5rem;
+            height: 1.5rem;
+            border: 2px solid #f0650e;
+            border-radius: 50%;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .radio-button::after {
+            content: '';
+            width: 0.75rem;
+            height: 0.75rem;
+            border-radius: 50%;
+            background: #f0650e;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .radio-option.selected .radio-button::after {
+            opacity: 1;
+        }
+
+        .radio-content {
+            flex: 1;
+        }
+
+        .radio-title {
+            font-weight: 900;
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .radio-title::before {
+            font-size: 2rem;
+        }
+
+        .radio-description {
+            color: #6b7280;
+            font-size: 1.125rem;
+        }
+
+        /* Textarea */
+        .form-textarea {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.125rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            min-height: 8rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #f0650e;
+        }
+
+        /* Select */
+        .form-select {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.125rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 0.75rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #f0650e;
+        }
+
+        /* Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* Navigation */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .nav-button {
+            flex: 1;
+            padding: 1rem;
+            font-size: 1.125rem;
+            font-weight: 900;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+            font-family: inherit;
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-button-prev {
+            border: 2px solid #d1d5db;
+            background: transparent;
+            color: #374151;
+        }
+
+        .nav-button-prev:hover:not(:disabled) {
+            background: #f9fafb;
+        }
+
+        .nav-button-next {
+            background-color: #f0650e;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button-next:hover:not(:disabled) {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-button-next:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px #fed7aa;
+        }
+
+        /* Summary */
+        .summary {
+            background: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            border: 2px solid #e5e7eb;
+            margin-bottom: 2rem;
+        }
+
+        .summary-title {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .summary-item {
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+
+        .summary-label {
+            font-weight: 700;
+        }
+
+        /* Checkboxes */
+        .checkbox-group {
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #f0650e;
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+            cursor: pointer;
+            appearance: none;
+            border-radius: 0.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .checkbox:checked::after {
+            content: '✓';
+            color: #f0650e;
+            font-weight: bold;
+        }
+
+        .checkbox-label {
+            font-size: 1.125rem;
+            cursor: pointer;
+            line-height: 1.6;
+        }
+
+        .checkbox-link {
+            color: #f0650e;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .checkbox-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Login Link */
+        .login-link {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .login-text {
+            font-size: 1.125rem;
+            color: #6b7280;
+            font-weight: 700;
+        }
+
+        .login-anchor {
+            font-weight: 900;
+            font-size: 1.125rem;
+            color: #f0650e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .login-anchor:hover {
+            color: #d4540a;
+        }
+
+        /* Success State */
+        .success-state {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-icon {
+            width: 6rem;
+            height: 6rem;
+            background: #dcfce7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: #10b981;
+        }
+
+        .success-title {
+            font-size: 1.875rem;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .success-description {
+            font-size: 1.25rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* Error Messages */
+        .error-message {
+            color: #dc2626;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid white;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hidden */
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .unified-container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-column {
+                min-height: 500px;
+            }
+
+            .welcome-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1.5rem;
+            }
+
+            .left-column,
+            .right-column {
+                padding: 2rem;
+            }
+
+            .welcome-title {
+                font-size: 2rem;
+            }
+
+            .step-title {
+                font-size: 1.5rem;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .nav-button {
+                width: 100%;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="#" class="logo-container">
+                <div class="logo">🎨</div>
+                <h1 class="logo-text">Artisa</h1>
+            </a>
+            <div class="header-login">
+                <span>¿Ya tienes cuenta?</span>
+                <a href="#" class="login-btn">Iniciar Sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="unified-container">
+            <!-- Left Column -->
+            <div class="left-column">
+                <!-- Decorative Patterns -->
+                <div class="decorative-patterns">
+                    <div class="pattern-circle-1"></div>
+                    <div class="pattern-circle-2"></div>
+                    <div class="pattern-circle-3"></div>
+                    <div class="pattern-square"></div>
+                </div>
+
+                <!-- Content -->
+                <div class="info-content">
+                    <div class="welcome-header">
+                        <div class="welcome-icon">👋</div>
+                        <h2 class="welcome-title">¡Únete a<br>Artisa!</h2>
+                    </div>
+
+                    <p class="welcome-description">
+                        Estás a solo unos pasos de formar parte de nuestra comunidad artesanal.
+                    </p>
+
+                    <!-- Progress -->
+                    <div class="progress-section">
+                        <div class="progress-header">
+                            <span class="progress-step">Paso <span id="current-step">1</span> de 5</span>
+                            <span class="progress-percentage"><span id="progress-percent">20</span>%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill" style="width: 20%"></div>
+                        </div>
+                        <p class="progress-title" id="progress-title">Tipo de Usuario</p>
+                    </div>
+
+                    <!-- Steps -->
+                    <div class="steps-list">
+                        <div class="step-item">
+                            <div class="step-number step-current" id="step-indicator-1">1</div>
+                            <span class="step-text step-text-current" id="step-text-1">Tipo de Usuario</span>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number step-pending" id="step-indicator-2">2</div>
+                            <span class="step-text step-text-normal" id="step-text-2">Información Personal</span>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number step-pending" id="step-indicator-3">3</div>
+                            <span class="step-text step-text-normal" id="step-text-3">Detalles Adicionales</span>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number step-pending" id="step-indicator-4">4</div>
+                            <span class="step-text step-text-normal" id="step-text-4">Seguridad</span>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number step-pending" id="step-indicator-5">5</div>
+                            <span class="step-text step-text-normal" id="step-text-5">Confirmación</span>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="contact-section">
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <p class="contact-label">¿Necesitas ayuda?</p>
+                                <p class="contact-value">+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">✉️</div>
+                            <div>
+                                <p class="contact-label">Soporte</p>
+                                <p class="contact-value">registro@artisa.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="social-section">
+                        <h3 class="social-title">Síguenos</h3>
+                        <div class="social-links">
+                            <a href="#" class="social-link">📘</a>
+                            <a href="#" class="social-link">📷</a>
+                            <a href="#" class="social-link">🐦</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="right-column">
+                <div class="form-container">
+                    <!-- Step Header -->
+                    <div class="step-header">
+                        <h2 class="step-title">Paso <span id="step-number">1</span></h2>
+                        <p class="step-subtitle" id="step-subtitle">Tipo de Usuario</p>
+                    </div>
+
+                    <!-- Form -->
+                    <form id="registration-form">
+                        <!-- Step 1: User Type -->
+                        <div class="step-content" id="step-1">
+                            <h3>¿Cómo quieres usar Artisa?</h3>
+                            <p>Selecciona el tipo de cuenta que mejor se adapte a ti</p>
+                            
+                            <div class="radio-group">
+                                <div class="radio-option" data-value="comprador">
+                                    <div class="radio-button"></div>
+                                    <div class="radio-content">
+                                        <div class="radio-title">👤 Comprador</div>
+                                        <div class="radio-description">Quiero comprar productos artesanales únicos</div>
+                                    </div>
+                                </div>
+                                <div class="radio-option" data-value="artesano">
+                                    <div class="radio-button"></div>
+                                    <div class="radio-content">
+                                        <div class="radio-title">💼 Artesano</div>
+                                        <div class="radio-description">Quiero vender mis productos artesanales</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Personal Info -->
+                        <div class="step-content hidden" id="step-2">
+                            <h3>Información Personal</h3>
+                            <p>Cuéntanos un poco sobre ti</p>
+
+                            <div class="grid-2">
+                                <div class="form-field">
+                                    <label class="form-label" for="firstName">Nombre *</label>
+                                    <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Tu nombre">
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label" for="lastName">Apellido *</label>
+                                    <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Tu apellido">
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label class="form-label" for="email">Correo Electrónico *</label>
+                                <div class="input-group">
+                                    <span class="input-icon">✉️</span>
+                                    <input type="email" id="email" name="email" class="form-input input-with-icon" placeholder="tu@email.com">
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label class="form-label" for="phone">Teléfono *</label>
+                                <div class="input-group">
+                                    <span class="input-icon">📞</span>
+                                    <input type="tel" id="phone" name="phone" class="form-input input-with-icon" placeholder="+57 300 123 4567">
+                                </div>
+                            </div>
+
+                            <div class="grid-2">
+                                <div class="form-field">
+                                    <label class="form-label" for="city">Ciudad *</label>
+                                    <select id="city" name="city" class="form-select">
+                                        <option value="">Selecciona tu ciudad</option>
+                                        <option value="bogota">Bogotá</option>
+                                        <option value="medellin">Medellín</option>
+                                        <option value="cali">Cali</option>
+                                        <option value="barranquilla">Barranquilla</option>
+                                        <option value="cartagena">Cartagena</option>
+                                        <option value="bucaramanga">Bucaramanga</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label class="form-label" for="region">Departamento *</label>
+                                    <select id="region" name="region" class="form-select">
+                                        <option value="">Selecciona tu departamento</option>
+                                        <option value="cundinamarca">Cundinamarca</option>
+                                        <option value="antioquia">Antioquia</option>
+                                        <option value="valle">Valle del Cauca</option>
+                                        <option value="atlantico">Atlántico</option>
+                                        <option value="bolivar">Bolívar</option>
+                                        <option value="santander">Santander</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Additional Details -->
+                        <div class="step-content hidden" id="step-3">
+                            <div id="artesano-fields">
+                                <h3>Información de Artesano</h3>
+                                <p>Cuéntanos sobre tu arte y experiencia</p>
+
+                                <div class="form-field">
+                                    <label class="form-label" for="specialty">Especialidad Artesanal *</label>
+                                    <select id="specialty" name="specialty" class="form-select">
+                                        <option value="">¿En qué te especializas?</option>
+                                        <option value="joyeria">Joyería</option>
+                                        <option value="ceramica">Cerámica</option>
+                                        <option value="textiles">Textiles</option>
+                                        <option value="cuero">Trabajo en Cuero</option>
+                                        <option value="madera">Trabajo en Madera</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-field">
+                                    <label class="form-label" for="experience">Años de Experiencia *</label>
+                                    <select id="experience" name="experience" class="form-select">
+                                        <option value="">¿Cuántos años de experiencia tienes?</option>
+                                        <option value="1-2">1-2 años</option>
+                                        <option value="3-5">3-5 años</option>
+                                        <option value="6-10">6-10 años</option>
+                                        <option value="11-20">11-20 años</option>
+                                        <option value="20+">Más de 20 años</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-field">
+                                    <label class="form-label" for="bio">Cuéntanos tu historia *</label>
+                                    <textarea id="bio" name="bio" class="form-textarea" placeholder="Comparte tu historia como artesano, tus técnicas, inspiraciones..."></textarea>
+                                </div>
+                            </div>
+
+                            <div id="comprador-message" class="success-state hidden">
+                                <div class="success-icon">✅</div>
+                                <div>
+                                    <h3 class="success-title">¡Perfecto!</h3>
+                                    <p class="success-description">
+                                        Como comprador, ya tienes toda la información necesaria.<br>
+                                        Continuemos con la configuración de seguridad.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Security -->
+                        <div class="step-content hidden" id="step-4">
+                            <h3>Configuración de Seguridad</h3>
+                            <p>Crea una contraseña segura para tu cuenta</p>
+
+                            <div class="form-field">
+                                <label class="form-label" for="password">Contraseña *</label>
+                                <div class="input-group">
+                                    <input type="password" id="password" name="password" class="form-input" placeholder="Mínimo 8 caracteres">
+                                    <button type="button" class="password-toggle" id="toggle-password">👁️</button>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label class="form-label" for="confirmPassword">Confirmar Contraseña *</label>
+                                <div class="input-group">
+                                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Repite tu contraseña">
+                                    <button type="button" class="password-toggle" id="toggle-confirm-password">👁️</button>
+                                </div>
+                            </div>
+
+                            <div id="password-error" class="error-message hidden">
+                                Las contraseñas no coinciden
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Confirmation -->
+                        <div class="step-content hidden" id="step-5">
+                            <h3>¡Casi terminamos!</h3>
+                            <p>Revisa y acepta nuestros términos</p>
+
+                            <div class="summary">
+                                <h4 class="summary-title">Resumen de tu cuenta:</h4>
+                                <div id="summary-content">
+                                    <!-- Will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="acceptTerms" name="acceptTerms" class="checkbox">
+                                    <label for="acceptTerms" class="checkbox-label">
+                                        Acepto los <a href="#" class="checkbox-link">términos y condiciones</a> 
+                                        y la <a href="#" class="checkbox-link">política de privacidad</a> de Artisa *
+                                    </label>
+                                </div>
+
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="newsletter" name="newsletter" class="checkbox">
+                                    <label for="newsletter" class="checkbox-label">
+                                        Quiero recibir noticias sobre nuevos productos, historias de artesanos y ofertas especiales
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Navigation -->
+                    <div class="navigation">
+                        <button type="button" class="nav-button nav-button-prev" id="prev-btn" disabled>
+                            ⬅️ Anterior
+                        </button>
+                        <button type="button" class="nav-button nav-button-next" id="next-btn">
+                            Siguiente ➡️
+                        </button>
+                    </div>
+
+                    <!-- Login Link -->
+                    <div class="login-link">
+                        <p class="login-text">
+                            ¿Ya tienes cuenta? 
+                            <a href="#" class="login-anchor">¡Inicia sesión aquí!</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form state
+        let currentStep = 1;
+        const totalSteps = 5;
+        const formData = {
+            userType: '',
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            city: '',
+            region: '',
+            specialty: '',
+            experience: '',
+            bio: '',
+            password: '',
+            confirmPassword: '',
+            acceptTerms: false,
+            newsletter: false
+        };
+
+        const stepTitles = [
+            'Tipo de Usuario',
+            'Información Personal', 
+            'Detalles Adicionales',
+            'Seguridad',
+            'Confirmación'
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            updateProgress();
+        });
+
+        function setupEventListeners() {
+            // Navigation buttons
+            document.getElementById('prev-btn').addEventListener('click', prevStep);
+            document.getElementById('next-btn').addEventListener('click', nextStep);
+
+            // Radio buttons for user type
+            document.querySelectorAll('.radio-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    selectUserType(this.dataset.value);
+                });
+            });
+
+            // Form inputs
+            document.querySelectorAll('input, select, textarea').forEach(input => {
+                input.addEventListener('change', updateFormData);
+                input.addEventListener('input', updateFormData);
+            });
+
+            // Password toggles
+            document.getElementById('toggle-password').addEventListener('click', function() {
+                togglePassword('password');
+            });
+            document.getElementById('toggle-confirm-password').addEventListener('click', function() {
+                togglePassword('confirmPassword');
+            });
+
+            // Password validation
+            document.getElementById('confirmPassword').addEventListener('input', validatePasswords);
+        }
+
+        function selectUserType(type) {
+            formData.userType = type;
+            
+            // Update UI
+            document.querySelectorAll('.radio-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.querySelector(`[data-value="${type}"]`).classList.add('selected');
+            
+            updateNextButton();
+        }
+
+        function updateFormData() {
+            const inputs = document.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    formData[input.name] = input.checked;
+                } else {
+                    formData[input.name] = input.value;
+                }
+            });
+            updateNextButton();
+        }
+
+        function nextStep() {
+            if (!canProceed()) return;
+
+            if (currentStep === totalSteps) {
+                handleSubmit();
+                return;
+            }
+
+            currentStep++;
+            showStep(currentStep);
+            updateProgress();
+            updateStepIndicators();
+        }
+
+        function prevStep() {
+            if (currentStep === 1) return;
+            
+            currentStep--;
+            showStep(currentStep);
+            updateProgress();
+            updateStepIndicators();
+        }
+
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Show current step
+            document.getElementById(`step-${step}`).classList.remove('hidden');
+
+            // Handle step 3 special case (artesano vs comprador)
+            if (step === 3) {
+                if (formData.userType === 'artesano') {
+                    document.getElementById('artesano-fields').classList.remove('hidden');
+                    document.getElementById('comprador-message').classList.add('hidden');
+                } else {
+                    document.getElementById('artesano-fields').classList.add('hidden');
+                    document.getElementById('comprador-message').classList.remove('hidden');
+                }
+            }
+
+            // Update step 5 summary
+            if (step === 5) {
+                updateSummary();
+            }
+
+            updateNextButton();
+        }
+
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            
+            document.getElementById('current-step').textContent = currentStep;
+            document.getElementById('progress-percent').textContent = Math.round(progress);
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-title').textContent = stepTitles[currentStep - 1];
+            
+            document.getElementById('step-number').textContent = currentStep;
+            document.getElementById('step-subtitle').textContent = stepTitles[currentStep - 1];
+        }
+
+        function updateStepIndicators() {
+            for (let i = 1; i <= totalSteps; i++) {
+                const indicator = document.getElementById(`step-indicator-${i}`);
+                const text = document.getElementById(`step-text-${i}`);
+                
+                if (i < currentStep) {
+                    indicator.className = 'step-number step-completed';
+                    indicator.textContent = '✓';
+                    text.className = 'step-text step-text-normal';
+                } else if (i === currentStep) {
+                    indicator.className = 'step-number step-current';
+                    indicator.textContent = i;
+                    text.className = 'step-text step-text-current';
+                } else {
+                    indicator.className = 'step-number step-pending';
+                    indicator.textContent = i;
+                    text.className = 'step-text step-text-normal';
+                }
+            }
+
+            // Update prev button
+            document.getElementById('prev-btn').disabled = currentStep === 1;
+        }
+
+        function canProceed() {
+            switch (currentStep) {
+                case 1:
+                    return formData.userType !== '';
+                case 2:
+                    return formData.firstName && formData.lastName && formData.email && 
+                           formData.phone && formData.city && formData.region;
+                case 3:
+                    if (formData.userType === 'artesano') {
+                        return formData.specialty && formData.experience && formData.bio;
+                    }
+                    return true;
+                case 4:
+                    return formData.password && formData.confirmPassword && 
+                           formData.password === formData.confirmPassword;
+                case 5:
+                    return formData.acceptTerms;
+                default:
+                    return false;
+            }
+        }
+
+        function updateNextButton() {
+            const nextBtn = document.getElementById('next-btn');
+            const canContinue = canProceed();
+            
+            nextBtn.disabled = !canContinue;
+            
+            if (currentStep === totalSteps) {
+                nextBtn.innerHTML = '<span class="loading-spinner hidden"></span> ✅ ¡Crear Mi Cuenta!';
+            } else {
+                nextBtn.innerHTML = 'Siguiente ➡️';
+            }
+        }
+
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const toggle = field.nextElementSibling;
+            
+            if (field.type === 'password') {
+                field.type = 'text';
+                toggle.textContent = '🙈';
+            } else {
+                field.type = 'password';
+                toggle.textContent = '👁️';
+            }
+        }
+
+        function validatePasswords() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorDiv = document.getElementById('password-error');
+            
+            if (password && confirmPassword && password !== confirmPassword) {
+                errorDiv.classList.remove('hidden');
+            } else {
+                errorDiv.classList.add('hidden');
+            }
+        }
+
+        function updateSummary() {
+            const summaryContent = document.getElementById('summary-content');
+            let html = `
+                <div class="summary-item">
+                    <span class="summary-label">Tipo:</span> 
+                    ${formData.userType === 'comprador' ? 'Comprador' : 'Artesano'}
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Nombre:</span> 
+                    ${formData.firstName} ${formData.lastName}
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Email:</span> 
+                    ${formData.email}
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Ubicación:</span> 
+                    ${formData.city}, ${formData.region}
+                </div>
+            `;
+            
+            if (formData.userType === 'artesano') {
+                html += `
+                    <div class="summary-item">
+                        <span class="summary-label">Especialidad:</span> 
+                        ${formData.specialty}
+                    </div>
+                `;
+            }
+            
+            summaryContent.innerHTML = html;
+        }
+
+        async function handleSubmit() {
+            const nextBtn = document.getElementById('next-btn');
+            const spinner = nextBtn.querySelector('.loading-spinner');
+            
+            // Show loading
+            nextBtn.disabled = true;
+            nextBtn.innerHTML = '<span class="loading-spinner"></span> Creando cuenta...';
+            
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Success - redirect or show success message
+                alert('¡Cuenta creada exitosamente! Redirigiendo al login...');
+                // window.location.href = '/login';
+                
+            } catch (error) {
+                alert('Error al crear la cuenta. Por favor intenta nuevamente.');
+                nextBtn.disabled = false;
+                nextBtn.innerHTML = '✅ ¡Crear Mi Cuenta!';
+            }
+        }
+
+        // Initialize the form
+        updateStepIndicators();
+    </script>
+</body>
+</html>
